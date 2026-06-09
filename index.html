@@ -194,39 +194,38 @@
   .tag-b2b { background: var(--sakura-bg); color: #A8547A; }
   .tag-both { background: var(--grey-bg); color: var(--grey-2); }
 
-  /* ── DESTINATIONS (bento) ── */
-  .dest-bento {
-    display: grid; margin-top: 36px; gap: 16px;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: 280px 240px;
-  }
+  /* ── DESTINATIONS ── */
+  .dest-top { display: grid; grid-template-columns: 3fr 2fr; gap: 16px; margin-top: 36px; }
+  .dest-bottom { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 16px; }
   .dest-card {
     border-radius: 14px; overflow: hidden; position: relative; cursor: pointer;
     background: var(--charcoal);
   }
-  .dest-card:nth-child(1) { grid-column: 1 / 3; }
-  .dest-card:nth-child(4) { grid-column: 3 / 5; }
+  .dest-top .dest-card { height: 380px; }
+  .dest-bottom .dest-card { height: 260px; }
   .dest-card img {
     width: 100%; height: 100%; object-fit: cover;
     transition: transform 0.7s cubic-bezier(.25,.46,.45,.94), filter 0.5s;
-    filter: brightness(0.85);
+    filter: brightness(0.82);
   }
   .dest-card:hover img { transform: scale(1.06); filter: brightness(1); }
   .dest-overlay {
     position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end;
-    padding: 22px; color: #fff;
-    background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 55%);
+    padding: 24px; color: #fff;
+    background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.1) 50%, transparent 100%);
     transition: background 0.4s;
   }
-  .dest-card:hover .dest-overlay { background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 60%); }
+  .dest-card:hover .dest-overlay { background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.15) 55%, transparent 100%); }
   .dest-tag {
     font-size: 9px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
-    background: var(--crimson); color: #fff; padding: 3px 10px; border-radius: 20px;
-    width: fit-content; margin-bottom: 8px;
+    background: rgba(255,255,255,0.2); backdrop-filter: blur(8px);
+    color: #fff; padding: 4px 12px; border-radius: 20px;
+    width: fit-content; margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.25);
   }
-  .dest-name { font-family: var(--serif); font-size: 22px; font-weight: 400; margin-bottom: 4px; }
+  .dest-name { font-family: var(--serif); font-size: 24px; font-weight: 400; margin-bottom: 4px; text-shadow: 0 1px 6px rgba(0,0,0,0.4); }
+  .dest-bottom .dest-name { font-size: 20px; }
   .dest-info {
-    font-size: 11.5px; color: rgba(255,255,255,0.75); line-height: 1.55;
+    font-size: 12px; color: rgba(255,255,255,0.8); line-height: 1.6;
     max-height: 0; overflow: hidden; transition: max-height 0.4s ease, opacity 0.3s; opacity: 0;
   }
   .dest-card:hover .dest-info { max-height: 60px; opacity: 1; }
@@ -319,9 +318,10 @@
     .trust-item:nth-child(4) { border-top: 0.5px solid var(--grey-line); border-right: none; }
     .services-split { grid-template-columns: 1fr; gap: 32px; }
     .about-inner { grid-template-columns: 1fr; gap: 28px; }
-    .dest-bento { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
-    .dest-card:nth-child(1), .dest-card:nth-child(4) { grid-column: auto; }
-    .dest-card { min-height: 220px; }
+    .dest-top { grid-template-columns: 1fr 1fr; }
+    .dest-top .dest-card { height: 280px; }
+    .dest-bottom { grid-template-columns: 1fr 1fr; }
+    .dest-bottom .dest-card { height: 220px; }
     .clients-grid { grid-template-columns: 1fr 1fr; }
     .footer-inner { grid-template-columns: 1fr 1fr; gap: 28px; }
     .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
@@ -334,8 +334,8 @@
     .trust-item { border-right: none; border-top: 0.5px solid var(--grey-line); }
     .trust-item:first-child { border-top: none; }
     .clients-grid { grid-template-columns: 1fr; }
-    .dest-bento { grid-template-columns: 1fr; }
-    .dest-card { min-height: 200px; }
+    .dest-top, .dest-bottom { grid-template-columns: 1fr; }
+    .dest-top .dest-card, .dest-bottom .dest-card { height: 220px; }
     .footer-inner { grid-template-columns: 1fr; }
     h1 { font-size: 34px; }
     h2 { font-size: 26px; }
@@ -538,9 +538,9 @@
       <div class="rule rule-center"></div>
       <p style="max-width:500px; margin:0 auto;" data-i18n="dest_intro">Discover the most captivating destinations Japan has to offer — from ancient temples to neon-lit cityscapes.</p>
     </div>
-    <div class="dest-bento fade-in">
+    <div class="dest-top fade-in">
       <div class="dest-card">
-        <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=900&h=600&fit=crop&q=85" alt="Kyoto" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=1200&h=800&fit=crop&q=85" alt="Kyoto" loading="lazy">
         <div class="dest-overlay">
           <div class="dest-tag" data-i18n="dest_tag_culture">Culture</div>
           <div class="dest-name">Kyoto</div>
@@ -548,15 +548,17 @@
         </div>
       </div>
       <div class="dest-card">
-        <img src="https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?w=600&h=500&fit=crop&q=85" alt="Shizuoka" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?w=900&h=800&fit=crop&q=85" alt="Shizuoka" loading="lazy">
         <div class="dest-overlay">
           <div class="dest-tag" data-i18n="dest_tag_nature">Nature</div>
           <div class="dest-name">Shizuoka</div>
           <div class="dest-info" data-i18n="dest_shizuoka">Home to Mt. Fuji — Japan's iconic peak, tea plantations, hot springs and coastal scenery.</div>
         </div>
       </div>
+    </div>
+    <div class="dest-bottom fade-in">
       <div class="dest-card">
-        <img src="https://images.unsplash.com/photo-1624601573012-efb68931cc8f?w=600&h=500&fit=crop&q=85" alt="Nara" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1624601573012-efb68931cc8f?w=800&h=600&fit=crop&q=85" alt="Nara" loading="lazy">
         <div class="dest-overlay">
           <div class="dest-tag" data-i18n="dest_tag_heritage">Heritage</div>
           <div class="dest-name">Nara</div>
@@ -564,7 +566,7 @@
         </div>
       </div>
       <div class="dest-card">
-        <img src="https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=900&h=600&fit=crop&q=85" alt="Akihabara" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=800&h=600&fit=crop&q=85" alt="Akihabara" loading="lazy">
         <div class="dest-overlay">
           <div class="dest-tag" data-i18n="dest_tag_tech">Technology</div>
           <div class="dest-name">Akihabara</div>
@@ -572,7 +574,7 @@
         </div>
       </div>
       <div class="dest-card">
-        <img src="https://images.unsplash.com/photo-1528164344705-47542687000d?w=600&h=500&fit=crop&q=85" alt="Gotemba" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&h=600&fit=crop&q=85" alt="Gotemba" loading="lazy">
         <div class="dest-overlay">
           <div class="dest-tag" data-i18n="dest_tag_shopping">Shopping</div>
           <div class="dest-name">Gotemba</div>
