@@ -3,413 +3,373 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kizuna — Japan Travel & Consulting</title>
+<title>Kizuna — Connecting Cultures, Building Lasting Bonds</title>
 <link rel="icon" type="image/png" href="kizunamainlogo.png">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
 <style>
-  /* ── RESET & BASE ── */
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body { font-family: 'DM Sans', sans-serif; background: #fff; color: #3D3D3D; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:#0a0a0a;color:#3D3D3D;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 
-  /* ── BRAND TOKENS ── */
-  :root {
-    --crimson:   #C0392B;
-    --dark-red:  #922B21;
-    --sakura:    #D4789A;
-    --sakura-lt: #F5D0DC;
-    --sakura-bg: #FDF5F7;
-    --red-tint:  #FAF2F2;
-    --red-lt:    #EDCFCF;
-    --charcoal:  #3D3D3D;
-    --grey-2:    #666666;
-    --grey-3:    #AAAAAA;
-    --grey-line: #E8E8E8;
-    --grey-bg:   #F5F5F5;
-    --white:     #FFFFFF;
-    --serif:     'Cormorant Garamond', Georgia, serif;
-    --sans:      'DM Sans', system-ui, sans-serif;
-  }
+:root{
+  --crimson:#C0392B;--dark-red:#922B21;--sakura:#D4789A;--soft-red:#D9776E;
+  --blush:#EDCFCF;--petal:#F5D0DC;--charcoal:#3D3D3D;--grey:#AAAAAA;
+  --grey-line:#E8E8E8;--grey-bg:#F7F6F4;--cream:#FAF9F7;--white:#FFFFFF;
+  --black:#0a0a0a;--gold:#C4A265;--gold-light:#D4B87A;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'DM Sans',system-ui,sans-serif;
+}
 
-  /* ── TYPOGRAPHY ── */
-  h1, h2, h3 { font-family: var(--serif); font-weight: 300; line-height: 1.15; color: var(--charcoal); }
-  h1 { font-size: clamp(36px, 6vw, 58px); }
-  h2 { font-size: clamp(26px, 4vw, 38px); }
-  h3 { font-size: clamp(18px, 2.5vw, 22px); }
-  p  { font-size: 15px; color: var(--grey-2); line-height: 1.8; }
-  a  { color: inherit; text-decoration: none; }
+h1,h2,h3,h4{font-family:var(--serif);font-weight:300;line-height:1.15;color:var(--charcoal)}
+h1{font-size:clamp(38px,5.5vw,64px)}
+h2{font-size:clamp(28px,4vw,44px)}
+h3{font-size:clamp(18px,2.5vw,24px)}
+p{font-size:15px;color:#666;line-height:1.85}
+a{color:inherit;text-decoration:none}
 
-  /* ── LAYOUT HELPERS ── */
-  .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
-  .section { padding: 80px 0; }
-  .eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--crimson); margin-bottom: 12px; font-family: var(--sans); }
-  .rule { width: 40px; height: 2px; background: var(--crimson); margin: 18px 0; }
-  .rule-center { margin: 18px auto; }
+.container{max-width:1200px;margin:0 auto;padding:0 32px}
+.section{padding:100px 0}
+.eyebrow{font-size:11px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--crimson);margin-bottom:14px;font-family:var(--sans)}
+.rule{width:48px;height:2px;background:var(--crimson);margin:20px 0}
+.rule-center{margin:20px auto}
+.rule-gold{background:var(--gold)}
 
-  /* ── FADE-IN ── */
-  .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
-  .fade-in.visible { opacity: 1; transform: translateY(0); }
+/* ── NOISE TEXTURE ── */
+body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:0.018;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
 
-  /* ── NAV ── */
-  nav {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 32px; height: 68px;
-    border-bottom: 0.5px solid var(--grey-line);
-    background: #fff; position: sticky; top: 0; z-index: 100;
-  }
-  .nav-logo { display: flex; align-items: center; gap: 10px; }
-  .nav-logo-img { height: 44px; width: auto; }
-  .nav-logo-text { font-family: var(--serif); font-size: 22px; font-weight: 300; letter-spacing: 2px; color: var(--charcoal); }
-  .nav-links { display: flex; gap: 28px; align-items: center; }
-  .nav-links a {
-    font-size: 13px; color: var(--grey-2); letter-spacing: 0.02em;
-    transition: color 0.2s; position: relative;
-  }
-  .nav-links a::after {
-    content: ''; position: absolute; bottom: -4px; left: 0;
-    width: 0; height: 1.5px; background: var(--crimson); transition: width 0.3s ease;
-  }
-  .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
-  .nav-links a:hover, .nav-links a.active { color: var(--crimson); }
-  .nav-cta-btn {
-    background: var(--crimson); color: #fff !important;
-    padding: 9px 20px; border-radius: 4px;
-    font-size: 12px; font-weight: 500; letter-spacing: 0.06em;
-    transition: background 0.2s, transform 0.2s;
-  }
-  .nav-cta-btn::after { display: none !important; }
-  .nav-cta-btn:hover { background: var(--dark-red) !important; transform: translateY(-1px); }
-  .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
-  .nav-hamburger span { width: 22px; height: 1.5px; background: var(--charcoal); display: block; transition: all 0.3s; }
-  .mobile-menu {
-    position: fixed; top: 0; right: 0; width: 280px; height: 100vh;
-    background: #fff; z-index: 200; padding: 0;
-    display: flex; flex-direction: column;
-    transform: translateX(100%); transition: transform 0.35s cubic-bezier(.4,0,.2,1);
-    box-shadow: -4px 0 24px rgba(0,0,0,0.1);
-    overflow-y: auto;
-  }
-  .mobile-menu.open { transform: translateX(0); }
-  .mobile-menu-header {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 16px 20px; border-bottom: 1px solid var(--grey-line);
-  }
-  .mobile-menu-header img { height: 36px; }
-  .mobile-menu-close {
-    width: 32px; height: 32px; border: none; background: none; cursor: pointer;
-    font-size: 20px; color: var(--grey-2); display: flex; align-items: center; justify-content: center;
-    border-radius: 6px; transition: background 0.2s;
-  }
-  .mobile-menu-close:hover { background: var(--grey-bg); }
-  .mobile-menu a { padding: 16px 24px; font-size: 14px; color: var(--grey-2); border-bottom: 0.5px solid var(--grey-line); transition: background 0.2s, color 0.2s; }
-  .mobile-menu a:hover { background: var(--red-tint); color: var(--crimson); }
-  .mobile-menu a.cta-m { color: var(--crimson); font-weight: 500; }
-  .mobile-overlay {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 199;
-    opacity: 0; pointer-events: none; transition: opacity 0.35s;
-  }
-  .mobile-overlay.open { opacity: 1; pointer-events: auto; }
+/* ── FADE-IN ── */
+.fade-in{opacity:0;transform:translateY(32px);transition:opacity 0.8s cubic-bezier(.4,0,.2,1),transform 0.8s cubic-bezier(.4,0,.2,1)}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+.fade-in-delay-1{transition-delay:0.1s}
+.fade-in-delay-2{transition-delay:0.2s}
+.fade-in-delay-3{transition-delay:0.3s}
 
-  /* ── LANGUAGE TOGGLE ── */
-  .lang-toggle { display: flex; border: 1px solid var(--grey-line); border-radius: 4px; overflow: hidden; margin-left: 8px; height: 32px; }
-  .lang-btn {
-    background: none; border: none; cursor: pointer;
-    font-size: 11px; font-weight: 500; letter-spacing: 0.06em;
-    padding: 6px 12px; color: var(--grey-3); font-family: var(--sans); transition: all 0.2s;
-  }
-  .lang-btn.active { background: var(--crimson); color: #fff; }
-  .lang-btn:hover:not(.active) { color: var(--charcoal); }
+/* ── NAV ── */
+nav{display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:72px;
+  background:rgba(255,255,255,0.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(0,0,0,0.06);
+  transition:box-shadow 0.3s}
+nav.scrolled{box-shadow:0 1px 24px rgba(0,0,0,0.08)}
 
-  /* ── HERO ── */
-  .hero { display: grid; grid-template-columns: 1fr 1fr; min-height: 560px; }
-  .hero-left { padding: 64px 48px 64px 32px; display: flex; flex-direction: column; justify-content: center; }
-  .hero-h1 em { font-style: italic; color: var(--crimson); }
-  .hero-sub { font-size: 15px; color: var(--grey-2); line-height: 1.85; margin-bottom: 28px; max-width: 420px; }
-  .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
-  .btn-primary {
-    background: var(--crimson); color: #fff; padding: 13px 26px; border-radius: 4px;
-    font-size: 13px; font-weight: 500; letter-spacing: 0.04em;
-    transition: background 0.2s, transform 0.2s, box-shadow 0.2s; display: inline-block;
-  }
-  .btn-primary:hover { background: var(--dark-red); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(192,57,43,0.3); }
-  .btn-outline {
-    border: 1px solid var(--charcoal); color: var(--charcoal); padding: 13px 26px; border-radius: 4px;
-    font-size: 13px; font-weight: 400; letter-spacing: 0.04em; transition: all 0.2s; display: inline-block;
-  }
-  .btn-outline:hover { border-color: var(--crimson); color: var(--crimson); transform: translateY(-2px); }
+.nav-brand{display:flex;align-items:center;gap:14px}
+.nav-logo-svg{height:42px;width:auto;transition:transform 0.3s}
+.nav-brand:hover .nav-logo-svg{transform:scale(1.04)}
+.nav-brand-text{display:flex;flex-direction:column}
+.nav-brand-name{font-family:var(--serif);font-size:24px;font-weight:400;letter-spacing:3px;color:var(--charcoal);line-height:1.1}
+.nav-brand-sub{font-size:8px;font-weight:600;letter-spacing:0.28em;color:var(--grey);text-transform:uppercase;margin-top:2px}
 
-  /* ── EXPERIENCE BADGE ── */
-  .exp-badge {
-    display: inline-flex; align-items: center; gap: 10px;
-    background: var(--red-tint); border: 1px solid var(--red-lt);
-    border-radius: 50px; padding: 8px 18px 8px 12px; margin-bottom: 20px; width: fit-content;
-  }
-  .exp-badge-num {
-    background: var(--crimson); color: #fff; font-family: var(--serif);
-    font-size: 18px; font-weight: 500; width: 38px; height: 38px;
-    border-radius: 50%; display: flex; align-items: center; justify-content: center;
-  }
-  .exp-badge-text { font-size: 12px; font-weight: 500; color: var(--dark-red); letter-spacing: 0.04em; line-height: 1.3; }
+.nav-links{display:flex;gap:32px;align-items:center}
+.nav-links a{font-size:13px;color:#666;letter-spacing:0.03em;transition:color 0.3s;position:relative;font-weight:400}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1.5px;background:var(--crimson);transition:width 0.3s ease}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.nav-links a:hover,.nav-links a.active{color:var(--crimson)}
+.nav-cta{background:var(--charcoal);color:#fff !important;padding:10px 22px;border-radius:4px;font-size:12px;font-weight:500;letter-spacing:0.06em;transition:all 0.3s}
+.nav-cta::after{display:none !important}
+.nav-cta:hover{background:var(--crimson) !important;transform:translateY(-1px)}
 
-  /* ── CAROUSEL ── */
-  .hero-right { position: relative; overflow: hidden; background: var(--charcoal); }
-  .carousel { position: relative; width: 100%; height: 100%; min-height: 480px; }
-  .carousel-slide {
-    position: absolute; inset: 0; opacity: 0;
-    transition: opacity 1.2s ease, transform 6s ease;
-    background-size: cover; background-position: center;
-    transform: scale(1.05);
-  }
-  .carousel-slide.active { opacity: 1; transform: scale(1); }
-  .carousel-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.1) 100%);
-  }
-  .carousel-content {
-    position: absolute; bottom: 40px; left: 28px; right: 28px; z-index: 5;
-    display: flex; justify-content: space-between; align-items: flex-end;
-  }
-  .carousel-label { color: #fff; }
-  .carousel-label-place {
-    font-family: var(--serif); font-size: 26px; font-weight: 300;
-    text-shadow: 0 2px 12px rgba(0,0,0,0.5); margin-bottom: 2px;
-  }
-  .carousel-label-sub {
-    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
-    color: rgba(255,255,255,0.7);
-  }
-  .carousel-dots { display: flex; gap: 8px; z-index: 5; }
-  .carousel-dot {
-    width: 28px; height: 3px; border-radius: 2px;
-    background: rgba(255,255,255,0.3); cursor: pointer;
-    transition: all 0.4s;
-  }
-  .carousel-dot.active { background: #fff; width: 40px; }
+.lang-toggle{display:flex;border:1px solid var(--grey-line);border-radius:4px;overflow:hidden;height:32px;margin-left:8px}
+.lang-btn{background:none;border:none;cursor:pointer;font-size:11px;font-weight:600;letter-spacing:0.06em;padding:6px 14px;color:var(--grey);font-family:var(--sans);transition:all 0.2s}
+.lang-btn.active{background:var(--charcoal);color:#fff}
+.lang-btn:hover:not(.active){color:var(--charcoal)}
 
-  /* ── TRUST BAR ── */
-  .trust-bar { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 0.5px solid var(--grey-line); border-bottom: 0.5px solid var(--grey-line); }
-  .trust-item { padding: 20px; border-right: 0.5px solid var(--grey-line); display: flex; align-items: center; gap: 12px; transition: background 0.3s; }
-  .trust-item:last-child { border-right: none; }
-  .trust-item:hover { background: var(--red-tint); }
-  .trust-icon { font-size: 20px; color: var(--crimson); flex-shrink: 0; }
-  .trust-title { font-size: 13px; font-weight: 500; color: var(--charcoal); margin-bottom: 2px; }
-  .trust-sub { font-size: 11px; color: var(--grey-3); }
+.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.nav-hamburger span{width:22px;height:1.5px;background:var(--charcoal);display:block;transition:all 0.3s}
 
-  /* ── SERVICES SPLIT ── */
-  .services-split { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
-  .services-split > div { display: flex; flex-direction: column; }
-  .services-col-header { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--crimson); }
-  .services-col-header.pink { border-bottom-color: var(--sakura); }
-  .services-col-title { font-family: var(--serif); font-size: 22px; font-weight: 400; color: var(--charcoal); }
-  .services-col-icon { font-size: 20px; }
-  .svc-card {
-    border: 0.5px solid var(--grey-line); border-radius: 10px; padding: 22px 20px; margin-bottom: 12px;
-    transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s; flex: 1;
-  }
-  .svc-card:hover { border-color: var(--crimson); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
-  .svc-card.b2b:hover { border-color: var(--sakura); }
-  .svc-card.b2b { border-left: 3px solid var(--sakura); border-radius: 0 10px 10px 0; }
-  .svc-icon { font-size: 18px; color: var(--crimson); margin-bottom: 8px; }
-  .svc-icon.pink { color: var(--sakura); }
-  .svc-title { font-family: var(--serif); font-size: 17px; font-weight: 400; color: var(--charcoal); margin-bottom: 6px; }
-  .svc-desc { font-size: 12.5px; color: var(--grey-2); line-height: 1.75; }
-  .svc-tags { display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap; }
-  .tag { font-size: 10px; font-weight: 500; padding: 3px 10px; border-radius: 20px; letter-spacing: 0.06em; }
-  .tag-b2c { background: var(--red-tint); color: var(--dark-red); }
-  .tag-b2b { background: var(--sakura-bg); color: #A8547A; }
-  .tag-both { background: var(--grey-bg); color: var(--grey-2); }
+/* ── MOBILE MENU ── */
+.mobile-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:199;opacity:0;pointer-events:none;transition:opacity 0.35s}
+.mobile-overlay.open{opacity:1;pointer-events:auto}
+.mobile-menu{position:fixed;top:0;right:0;width:300px;height:100vh;background:#fff;z-index:200;
+  transform:translateX(100%);transition:transform 0.4s cubic-bezier(.4,0,.2,1);
+  box-shadow:-8px 0 40px rgba(0,0,0,0.12);overflow-y:auto;display:flex;flex-direction:column}
+.mobile-menu.open{transform:translateX(0)}
+.mobile-menu-header{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;border-bottom:1px solid var(--grey-line)}
+.mobile-menu-header svg{height:32px}
+.mobile-menu-close{width:36px;height:36px;border:none;background:none;cursor:pointer;font-size:22px;color:#666;display:flex;align-items:center;justify-content:center;border-radius:8px;transition:background 0.2s}
+.mobile-menu-close:hover{background:var(--grey-bg)}
+.mobile-menu a{padding:18px 28px;font-size:14px;color:#666;border-bottom:0.5px solid var(--grey-line);transition:all 0.2s;letter-spacing:0.02em}
+.mobile-menu a:hover{background:rgba(192,57,43,0.04);color:var(--crimson)}
+.mobile-menu a.cta-m{color:var(--crimson);font-weight:600}
 
-  /* ── DESTINATIONS ── */
-  .dest-top { display: grid; grid-template-columns: 3fr 2fr; gap: 16px; margin-top: 36px; }
-  .dest-bottom { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 16px; }
-  .dest-card {
-    border-radius: 14px; overflow: hidden; position: relative; cursor: pointer;
-    background: var(--charcoal);
-  }
-  .dest-top .dest-card { height: 380px; }
-  .dest-bottom .dest-card { height: 260px; }
-  .dest-card img {
-    width: 100%; height: 100%; object-fit: cover;
-    transition: transform 0.7s cubic-bezier(.25,.46,.45,.94), filter 0.5s;
-    filter: brightness(0.82);
-  }
-  .dest-card:hover img { transform: scale(1.06); filter: brightness(1); }
-  .dest-overlay {
-    position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end;
-    padding: 24px; color: #fff;
-    background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.1) 50%, transparent 100%);
-    transition: background 0.4s;
-  }
-  .dest-card:hover .dest-overlay { background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.15) 55%, transparent 100%); }
-  .dest-tag {
-    font-size: 9px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
-    background: rgba(255,255,255,0.2); backdrop-filter: blur(8px);
-    color: #fff; padding: 4px 12px; border-radius: 20px;
-    width: fit-content; margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.25);
-  }
-  .dest-name { font-family: var(--serif); font-size: 24px; font-weight: 400; margin-bottom: 4px; text-shadow: 0 1px 6px rgba(0,0,0,0.4); }
-  .dest-bottom .dest-name { font-size: 20px; }
-  .dest-info {
-    font-size: 12px; color: rgba(255,255,255,0.8); line-height: 1.6;
-    max-height: 0; overflow: hidden; transition: max-height 0.4s ease, opacity 0.3s; opacity: 0;
-  }
-  .dest-card:hover .dest-info { max-height: 60px; opacity: 1; }
+/* ── HERO ── */
+.hero{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 72px);background:var(--cream)}
+.hero-left{padding:80px 64px 80px 40px;display:flex;flex-direction:column;justify-content:center;position:relative}
+.hero-left::after{content:'';position:absolute;right:0;top:10%;bottom:10%;width:1px;background:linear-gradient(to bottom,transparent,var(--grey-line),transparent)}
 
-  /* ── ABOUT ── */
-  .about-strip { background: var(--grey-bg); }
-  .about-inner { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center; }
-  .about-h2 { margin-bottom: 16px; }
-  .about-body { font-size: 14px; color: var(--grey-2); line-height: 1.85; }
-  .about-quote {
-    font-family: var(--serif); font-size: 20px; font-weight: 300; font-style: italic;
-    color: var(--crimson); border-left: 2px solid var(--crimson); padding-left: 20px; line-height: 1.6;
-  }
-  .about-attr { font-size: 11px; color: var(--grey-3); margin-top: 10px; letter-spacing: 0.08em; }
-  .about-exp {
-    display: flex; align-items: center; gap: 14px;
-    background: #fff; border-radius: 10px; padding: 16px 20px; margin-top: 20px; border: 1px solid var(--grey-line);
-  }
-  .about-exp-num { font-family: var(--serif); font-size: 36px; font-weight: 400; color: var(--crimson); line-height: 1; }
-  .about-exp-label { font-size: 12px; color: var(--grey-2); line-height: 1.4; }
+.hero-badge{display:inline-flex;align-items:center;gap:10px;margin-bottom:28px;width:fit-content}
+.hero-badge-line{width:32px;height:1px;background:var(--crimson)}
+.hero-badge-text{font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--crimson)}
 
-  /* ── CLIENTS ── */
-  .clients-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 36px; }
-  .client-card {
-    padding: 22px 18px; border-radius: 10px; background: var(--grey-bg);
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-  .client-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.07); }
-  .client-card.red { border-top: 3px solid var(--crimson); }
-  .client-card.pink { border-top: 3px solid var(--sakura); }
-  .client-icon { margin-bottom: 10px; }
-  .client-icon svg { width: 28px; height: 28px; }
-  .client-icon.red svg { color: var(--crimson); }
-  .client-icon.pink svg { color: var(--sakura); }
-  .client-title { font-family: var(--serif); font-size: 16px; font-weight: 400; color: var(--charcoal); margin-bottom: 6px; }
-  .client-desc { font-size: 12px; color: var(--grey-2); line-height: 1.7; }
+.hero h1{color:var(--charcoal);margin-bottom:20px;font-weight:300;letter-spacing:-0.5px}
+.hero h1 em{font-style:italic;color:var(--crimson);font-weight:300}
+.hero-sub{font-size:15px;color:#777;line-height:1.9;margin-bottom:36px;max-width:440px}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap}
 
-  /* ── CONTACT FORM ── */
-  .contact-section { background: var(--charcoal); color: #fff; padding: 72px 24px; }
-  .contact-inner { max-width: 640px; margin: 0 auto; text-align: center; }
-  .contact-section h2 { color: #fff; margin-bottom: 14px; }
-  .contact-section > .contact-inner > p { color: rgba(255,255,255,0.6); max-width: 480px; margin: 0 auto 32px; font-size: 14px; }
-  .contact-form { display: flex; flex-direction: column; gap: 14px; text-align: left; }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  .form-input, .form-textarea {
-    width: 100%; padding: 14px 16px; border-radius: 6px;
-    border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06);
-    color: #fff; font-family: var(--sans); font-size: 14px;
-    transition: border-color 0.3s, background 0.3s; outline: none;
-  }
-  .form-input::placeholder, .form-textarea::placeholder { color: rgba(255,255,255,0.35); }
-  .form-input:focus, .form-textarea:focus { border-color: var(--crimson); background: rgba(255,255,255,0.1); }
-  .form-textarea { resize: vertical; min-height: 120px; }
-  .form-submit {
-    background: var(--crimson); color: #fff; border: none; padding: 14px 32px; border-radius: 6px;
-    cursor: pointer; font-family: var(--sans); font-size: 14px; font-weight: 500;
-    letter-spacing: 0.04em; transition: background 0.2s, transform 0.2s; align-self: center;
-  }
-  .form-submit:hover { background: var(--dark-red); transform: translateY(-2px); }
-  .form-success { display: none; padding: 16px; border-radius: 8px; background: rgba(46,204,113,0.15); border: 1px solid rgba(46,204,113,0.3); color: #2ecc71; text-align: center; font-size: 14px; }
-  .form-success.show { display: block; }
-  .form-social { margin-top: 24px; }
-  .form-social a { color: rgba(255,255,255,0.6); font-size: 13px; transition: color 0.2s; }
-  .form-social a:hover { color: var(--sakura); }
+.btn-primary{background:var(--charcoal);color:#fff;padding:15px 30px;border-radius:4px;font-size:13px;font-weight:500;letter-spacing:0.05em;transition:all 0.3s;display:inline-block;position:relative;overflow:hidden}
+.btn-primary::before{content:'';position:absolute;inset:0;background:var(--crimson);transform:translateX(-101%);transition:transform 0.4s cubic-bezier(.4,0,.2,1)}
+.btn-primary:hover::before{transform:translateX(0)}
+.btn-primary span{position:relative;z-index:1}
 
-  /* ── FOOTER ── */
-  footer { background: var(--charcoal); border-top: 0.5px solid rgba(255,255,255,0.08); }
-  .footer-inner { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 40px; padding: 48px 0 36px; }
-  .footer-link-icon { width: 14px; height: 14px; vertical-align: -2px; margin-right: 8px; opacity: 0.5; transition: opacity 0.2s; }
-  .footer-links a:hover .footer-link-icon { opacity: 0.9; }
-  .footer-logo { font-family: var(--serif); font-size: 22px; font-weight: 300; color: #fff; letter-spacing: 2px; margin-bottom: 12px; }
-  .footer-desc { font-size: 12px; color: rgba(255,255,255,0.4); line-height: 1.8; }
-  .footer-col-title { font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.6); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 14px; }
-  .footer-links { display: flex; flex-direction: column; gap: 9px; }
-  .footer-links a { font-size: 12.5px; color: rgba(255,255,255,0.4); transition: color 0.2s; }
-  .footer-links a:hover { color: rgba(255,255,255,0.9); }
-  .footer-bottom { border-top: 0.5px solid rgba(255,255,255,0.08); padding: 16px 0; display: flex; justify-content: space-between; align-items: center; }
-  .footer-bottom p { font-size: 11px; color: rgba(255,255,255,0.28); }
+.btn-outline{border:1px solid var(--charcoal);color:var(--charcoal);padding:15px 30px;border-radius:4px;font-size:13px;font-weight:400;letter-spacing:0.05em;transition:all 0.3s;display:inline-block}
+.btn-outline:hover{border-color:var(--crimson);color:var(--crimson);transform:translateY(-2px)}
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 900px) {
-    nav { padding: 0 20px; }
-    .nav-links { display: none; }
-    .nav-hamburger { display: flex; }
-    .mobile-menu.open { display: flex; }
-    .hero { grid-template-columns: 1fr; min-height: auto; }
-    .hero-left { padding: 48px 20px 32px; }
-    .hero-right { height: 320px; }
-    .trust-bar { grid-template-columns: 1fr 1fr; }
-    .trust-item:nth-child(2) { border-right: none; }
-    .trust-item:nth-child(3) { border-top: 0.5px solid var(--grey-line); }
-    .trust-item:nth-child(4) { border-top: 0.5px solid var(--grey-line); border-right: none; }
-    .services-split { grid-template-columns: 1fr; gap: 32px; }
-    .about-inner { grid-template-columns: 1fr; gap: 28px; }
-    .dest-top { grid-template-columns: 1fr 1fr; }
-    .dest-top .dest-card { height: 280px; }
-    .dest-bottom { grid-template-columns: 1fr 1fr; }
-    .dest-bottom .dest-card { height: 220px; }
-    .clients-grid { grid-template-columns: 1fr 1fr; }
-    .footer-inner { grid-template-columns: 1fr 1fr; gap: 28px; }
-    .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
-    .section { padding: 52px 0; }
-    .contact-section { padding: 52px 20px; }
-    .form-row { grid-template-columns: 1fr; }
-  }
-  @media (max-width: 560px) {
-    .trust-bar { grid-template-columns: 1fr; }
-    .trust-item { border-right: none; border-top: 0.5px solid var(--grey-line); }
-    .trust-item:first-child { border-top: none; }
-    .clients-grid { grid-template-columns: 1fr; }
-    .dest-top, .dest-bottom { grid-template-columns: 1fr; }
-    .dest-top .dest-card, .dest-bottom .dest-card { height: 220px; }
-    .footer-inner { grid-template-columns: 1fr; }
-    h1 { font-size: 34px; }
-    h2 { font-size: 26px; }
-    .hero-btns { flex-direction: column; }
-    .btn-primary, .btn-outline { width: 100%; text-align: center; }
-  }
+.hero-exp{display:flex;align-items:center;gap:16px;margin-top:48px;padding-top:32px;border-top:1px solid var(--grey-line)}
+.hero-exp-num{font-family:var(--serif);font-size:48px;font-weight:300;color:var(--crimson);line-height:1}
+.hero-exp-label{font-size:12px;color:#999;line-height:1.5;letter-spacing:0.03em}
+.hero-exp-label strong{color:var(--charcoal);font-weight:500}
+
+/* ── CAROUSEL ── */
+.hero-right{position:relative;overflow:hidden;background:var(--charcoal)}
+.carousel{position:relative;width:100%;height:100%;min-height:500px}
+.carousel-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.4s ease,transform 8s ease;background-size:cover;background-position:center;transform:scale(1.08)}
+.carousel-slide.active{opacity:1;transform:scale(1)}
+.carousel-overlay{position:absolute;inset:0;background:linear-gradient(160deg,rgba(10,10,10,0.1) 0%,rgba(10,10,10,0.3) 50%,rgba(10,10,10,0.6) 100%)}
+.carousel-content{position:absolute;bottom:44px;left:32px;right:32px;z-index:5;display:flex;justify-content:space-between;align-items:flex-end}
+.carousel-label{color:#fff}
+.carousel-label-place{font-family:var(--serif);font-size:30px;font-weight:300;text-shadow:0 2px 16px rgba(0,0,0,0.5);margin-bottom:4px;letter-spacing:1px}
+.carousel-label-sub{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.6)}
+.carousel-dots{display:flex;gap:8px;z-index:5}
+.carousel-dot{width:28px;height:2px;border-radius:1px;background:rgba(255,255,255,0.25);cursor:pointer;transition:all 0.5s}
+.carousel-dot.active{background:var(--crimson);width:44px}
+
+/* ── TRUST BAR ── */
+.trust-bar{display:grid;grid-template-columns:repeat(4,1fr);background:var(--white);border-bottom:1px solid var(--grey-line)}
+.trust-item{padding:24px 28px;border-right:1px solid var(--grey-line);display:flex;align-items:center;gap:14px;transition:background 0.3s}
+.trust-item:last-child{border-right:none}
+.trust-item:hover{background:rgba(192,57,43,0.03)}
+.trust-icon{width:36px;height:36px;border-radius:50%;background:rgba(192,57,43,0.08);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.trust-icon svg{width:16px;height:16px;color:var(--crimson)}
+.trust-title{font-size:13px;font-weight:600;color:var(--charcoal);margin-bottom:2px;letter-spacing:0.01em}
+.trust-sub{font-size:11px;color:var(--grey)}
+
+/* ── SERVICES ── */
+.services-section{background:var(--white)}
+.services-header{text-align:center;max-width:560px;margin:0 auto 56px}
+.services-header p{margin-top:16px}
+.services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.svc-card{border:1px solid var(--grey-line);border-radius:12px;padding:32px 26px;transition:all 0.4s;position:relative;overflow:hidden;background:var(--white)}
+.svc-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--crimson);transform:scaleX(0);transition:transform 0.4s;transform-origin:left}
+.svc-card:hover::before{transform:scaleX(1)}
+.svc-card:hover{transform:translateY(-6px);box-shadow:0 16px 48px rgba(0,0,0,0.08);border-color:transparent}
+.svc-card.b2b::before{background:var(--sakura)}
+.svc-num{font-family:var(--serif);font-size:42px;font-weight:300;color:rgba(192,57,43,0.1);line-height:1;margin-bottom:12px}
+.svc-card.b2b .svc-num{color:rgba(212,120,154,0.15)}
+.svc-title{font-family:var(--serif);font-size:20px;font-weight:400;color:var(--charcoal);margin-bottom:10px}
+.svc-desc{font-size:13px;color:#888;line-height:1.8}
+.svc-tag{display:inline-block;font-size:10px;font-weight:600;padding:4px 12px;border-radius:20px;letter-spacing:0.08em;margin-top:16px}
+.tag-b2c{background:rgba(192,57,43,0.08);color:var(--crimson)}
+.tag-b2b{background:rgba(212,120,154,0.12);color:#A8547A}
+.tag-both{background:var(--grey-bg);color:#888}
+
+/* ── DESTINATIONS ── */
+.dest-section{background:var(--black);padding:100px 0;position:relative}
+.dest-section .eyebrow{color:var(--gold)}
+.dest-section h2{color:#fff}
+.dest-section .rule{background:var(--gold)}
+.dest-section p{color:rgba(255,255,255,0.5)}
+.dest-header{text-align:center;margin-bottom:48px}
+
+.dest-top{display:grid;grid-template-columns:3fr 2fr;gap:16px;margin-bottom:16px}
+.dest-bottom{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.dest-card{border-radius:12px;overflow:hidden;position:relative;cursor:pointer;background:var(--charcoal)}
+.dest-top .dest-card{height:400px}
+.dest-bottom .dest-card{height:280px}
+.dest-card img{width:100%;height:100%;object-fit:cover;transition:transform 0.8s cubic-bezier(.25,.46,.45,.94),filter 0.5s;filter:brightness(0.75) saturate(0.9)}
+.dest-card:hover img{transform:scale(1.08);filter:brightness(0.9) saturate(1.1)}
+.dest-overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:28px;color:#fff;
+  background:linear-gradient(to top,rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.1) 50%,transparent 100%);transition:background 0.4s}
+.dest-card:hover .dest-overlay{background:linear-gradient(to top,rgba(0,0,0,0.8) 0%,rgba(0,0,0,0.2) 55%,transparent 100%)}
+.dest-tag{font-size:9px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;background:rgba(255,255,255,0.12);backdrop-filter:blur(12px);
+  color:rgba(255,255,255,0.85);padding:5px 14px;border-radius:20px;width:fit-content;margin-bottom:12px;border:1px solid rgba(255,255,255,0.15)}
+.dest-name{font-family:var(--serif);font-size:26px;font-weight:400;text-shadow:0 2px 8px rgba(0,0,0,0.4);letter-spacing:0.5px}
+.dest-bottom .dest-name{font-size:22px}
+.dest-info{font-size:12px;color:rgba(255,255,255,0.7);line-height:1.7;max-height:0;overflow:hidden;transition:max-height 0.5s,opacity 0.4s,margin 0.4s;opacity:0;margin-top:0}
+.dest-card:hover .dest-info{max-height:70px;opacity:1;margin-top:8px}
+
+/* ── ABOUT ── */
+.about-section{background:var(--cream)}
+.about-inner{display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:center}
+.about-quote{font-family:var(--serif);font-size:28px;font-weight:300;font-style:italic;color:var(--charcoal);line-height:1.5;margin-bottom:28px;position:relative;padding-left:24px}
+.about-quote::before{content:'';position:absolute;left:0;top:4px;bottom:4px;width:3px;background:linear-gradient(to bottom,var(--crimson),var(--sakura))}
+.about-body{font-size:14px;color:#777;line-height:1.9}
+.about-right{background:var(--white);border-radius:16px;padding:40px;border:1px solid var(--grey-line)}
+.about-mission{margin-bottom:28px;padding-bottom:28px;border-bottom:1px solid var(--grey-line)}
+.about-mission-label{font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--crimson);margin-bottom:8px}
+.about-mission-text{font-size:14px;color:#666;line-height:1.8}
+.about-exp-row{display:flex;gap:20px;margin-top:24px}
+.about-exp-card{flex:1;background:var(--cream);border-radius:10px;padding:20px;text-align:center}
+.about-exp-card .num{font-family:var(--serif);font-size:36px;font-weight:300;color:var(--crimson);line-height:1}
+.about-exp-card .label{font-size:11px;color:#999;margin-top:6px;letter-spacing:0.04em}
+
+/* ── WHAT SETS US APART ── */
+.apart-section{background:var(--white)}
+.apart-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:48px}
+.apart-card{padding:32px 24px;border-radius:12px;background:var(--cream);transition:all 0.4s;position:relative}
+.apart-card::after{content:'';position:absolute;bottom:0;left:24px;right:24px;height:2px;background:var(--crimson);transform:scaleX(0);transition:transform 0.4s;transform-origin:left}
+.apart-card:hover::after{transform:scaleX(1)}
+.apart-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,0.06)}
+.apart-icon{width:44px;height:44px;border-radius:10px;background:rgba(192,57,43,0.08);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.apart-icon svg{width:20px;height:20px;color:var(--crimson)}
+.apart-title{font-family:var(--serif);font-size:18px;font-weight:400;color:var(--charcoal);margin-bottom:8px}
+.apart-desc{font-size:12.5px;color:#999;line-height:1.75}
+
+/* ── WHO WE SERVE ── */
+.serve-section{background:var(--black);position:relative;overflow:hidden}
+.serve-section::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(192,57,43,0.06) 0%,transparent 70%)}
+.serve-section .eyebrow{color:var(--gold)}
+.serve-section h2{color:#fff}
+.serve-section .rule{background:var(--gold)}
+.serve-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:48px}
+.serve-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:32px 24px;transition:all 0.4s}
+.serve-card:hover{background:rgba(255,255,255,0.07);border-color:rgba(255,255,255,0.15);transform:translateY(-4px)}
+.serve-card:nth-child(odd){border-top:2px solid var(--crimson)}
+.serve-card:nth-child(even){border-top:2px solid var(--sakura)}
+.serve-card-title{font-family:var(--serif);font-size:18px;font-weight:400;color:#fff;margin-bottom:10px}
+.serve-card-desc{font-size:12.5px;color:rgba(255,255,255,0.45);line-height:1.8}
+
+/* ── CONTACT ── */
+.contact-section{background:var(--charcoal);padding:100px 0;position:relative;overflow:hidden}
+.contact-section::before{content:'';position:absolute;bottom:-100px;left:-100px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(192,57,43,0.08) 0%,transparent 70%)}
+.contact-inner{max-width:640px;margin:0 auto;text-align:center;position:relative}
+.contact-section h2{color:#fff;margin-bottom:16px}
+.contact-section>div>p{color:rgba(255,255,255,0.45);max-width:480px;margin:0 auto 40px;font-size:14px}
+.contact-form{display:flex;flex-direction:column;gap:16px;text-align:left}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-input,.form-textarea{width:100%;padding:16px 18px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04);
+  color:#fff;font-family:var(--sans);font-size:14px;transition:all 0.3s;outline:none}
+.form-input::placeholder,.form-textarea::placeholder{color:rgba(255,255,255,0.25)}
+.form-input:focus,.form-textarea:focus{border-color:var(--crimson);background:rgba(255,255,255,0.07);box-shadow:0 0 0 3px rgba(192,57,43,0.1)}
+.form-textarea{resize:vertical;min-height:130px}
+.form-submit{background:var(--crimson);color:#fff;border:none;padding:16px 36px;border-radius:8px;cursor:pointer;font-family:var(--sans);font-size:14px;font-weight:500;
+  letter-spacing:0.05em;transition:all 0.3s;align-self:center}
+.form-submit:hover{background:var(--dark-red);transform:translateY(-2px);box-shadow:0 8px 24px rgba(192,57,43,0.3)}
+.form-success{display:none;padding:18px;border-radius:10px;background:rgba(46,204,113,0.12);border:1px solid rgba(46,204,113,0.25);color:#2ecc71;text-align:center;font-size:14px}
+.form-success.show{display:block}
+.contact-social{display:flex;justify-content:center;gap:24px;margin-top:32px}
+.contact-social a{color:rgba(255,255,255,0.4);font-size:12px;display:flex;align-items:center;gap:6px;transition:color 0.3s}
+.contact-social a:hover{color:var(--sakura)}
+.contact-social svg{width:16px;height:16px}
+
+/* ── FOOTER ── */
+footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06)}
+.footer-inner{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:48px;padding:56px 0 40px}
+.footer-logo{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.footer-logo svg{height:28px;width:auto;opacity:0.7}
+.footer-logo-text{font-family:var(--serif);font-size:22px;font-weight:300;color:#fff;letter-spacing:2px}
+.footer-desc{font-size:12px;color:rgba(255,255,255,0.3);line-height:1.9}
+.footer-col-title{font-size:10px;font-weight:600;color:rgba(255,255,255,0.5);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:18px}
+.footer-links{display:flex;flex-direction:column;gap:10px}
+.footer-links a{font-size:13px;color:rgba(255,255,255,0.35);transition:color 0.2s;display:flex;align-items:center;gap:8px}
+.footer-links a:hover{color:rgba(255,255,255,0.85)}
+.footer-links svg{width:14px;height:14px;opacity:0.4;transition:opacity 0.2s}
+.footer-links a:hover svg{opacity:0.8}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.06);padding:20px 0;display:flex;justify-content:space-between;align-items:center}
+.footer-bottom p{font-size:11px;color:rgba(255,255,255,0.2)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .services-grid{grid-template-columns:repeat(2,1fr)}
+  .apart-grid{grid-template-columns:repeat(2,1fr)}
+  .serve-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:900px){
+  nav{padding:0 20px}
+  .nav-links{display:none}
+  .nav-hamburger{display:flex}
+  .hero{grid-template-columns:1fr;min-height:auto}
+  .hero-left{padding:48px 24px 36px;text-align:left}
+  .hero-left::after{display:none}
+  .hero-right{height:360px}
+  .trust-bar{grid-template-columns:1fr 1fr}
+  .trust-item:nth-child(2){border-right:none}
+  .trust-item:nth-child(3),.trust-item:nth-child(4){border-top:1px solid var(--grey-line)}
+  .trust-item:nth-child(4){border-right:none}
+  .about-inner{grid-template-columns:1fr;gap:36px}
+  .dest-top{grid-template-columns:1fr 1fr}
+  .dest-top .dest-card{height:300px}
+  .dest-bottom{grid-template-columns:1fr 1fr}
+  .dest-bottom .dest-card{height:240px}
+  .footer-inner{grid-template-columns:1fr 1fr;gap:32px}
+  .footer-bottom{flex-direction:column;gap:10px;text-align:center}
+  .section{padding:72px 0}
+  .form-row{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .hero-left{padding:36px 20px 28px}
+  .trust-bar{grid-template-columns:1fr}
+  .trust-item{border-right:none !important;border-top:1px solid var(--grey-line)}
+  .trust-item:first-child{border-top:none}
+  .services-grid{grid-template-columns:1fr}
+  .apart-grid{grid-template-columns:1fr}
+  .serve-grid{grid-template-columns:1fr}
+  .dest-top,.dest-bottom{grid-template-columns:1fr}
+  .dest-top .dest-card,.dest-bottom .dest-card{height:240px}
+  .footer-inner{grid-template-columns:1fr}
+  h1{font-size:32px}
+  h2{font-size:26px}
+  .hero-btns{flex-direction:column}
+  .btn-primary,.btn-outline{width:100%;text-align:center}
+  .about-exp-row{flex-direction:column}
+  .contact-social{flex-wrap:wrap;gap:16px}
+}
 </style>
 </head>
 <body>
 
 <!-- ── NAV ── -->
 <nav id="navbar">
-  <a href="#" class="nav-logo">
-    <img src="kizunamainlogo.png" alt="Kizuna" class="nav-logo-img">
-    <span class="nav-logo-text">Kizuna</span>
+  <a href="#" class="nav-brand">
+    <svg class="nav-logo-svg" viewBox="0 0 80 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M40 2C40 2 20 20 14 40C8 60 16 78 40 94C64 78 72 60 66 40C60 20 40 2 40 2Z" stroke="#3D3D3D" stroke-width="2.5" fill="none"/>
+      <circle cx="40" cy="46" r="14" stroke="#3D3D3D" stroke-width="1.5" fill="none"/>
+      <path d="M40 32C40 32 44.5 38.5 44.5 46C44.5 53.5 40 60 40 60C40 60 35.5 53.5 35.5 46C35.5 38.5 40 32 40 32Z" fill="#3D3D3D" opacity="0.9"/>
+      <path d="M28.5 41C28.5 41 36 41.5 41 46C46 50.5 48.5 58 48.5 58" stroke="#3D3D3D" stroke-width="1.2" fill="none" opacity="0.7"/>
+      <path d="M51.5 41C51.5 41 44 41.5 39 46C34 50.5 31.5 58 31.5 58" stroke="#3D3D3D" stroke-width="1.2" fill="none" opacity="0.7"/>
+      <circle cx="40" cy="46" r="4" fill="#3D3D3D" opacity="0.3"/>
+      <line x1="40" y1="34" x2="40" y2="58" stroke="#3D3D3D" stroke-width="0.8" opacity="0.4"/>
+      <line x1="28" y1="46" x2="52" y2="46" stroke="#3D3D3D" stroke-width="0.8" opacity="0.4"/>
+    </svg>
+    <div class="nav-brand-text">
+      <span class="nav-brand-name">Kizuna</span>
+      <span class="nav-brand-sub">Turizm &middot; Danışmanlık &middot; Kültür</span>
+    </div>
   </a>
   <div class="nav-links">
     <a href="#travel" class="active" data-i18n="nav_travel">Japan Travel</a>
     <a href="#services" data-i18n="nav_services">Services</a>
-    <a href="#destinations" data-i18n="nav_destinations">Destinations</a>
+    <a href="#destinations" data-i18n="nav_dest">Destinations</a>
     <a href="#about" data-i18n="nav_about">About</a>
-    <a href="#consulting" data-i18n="nav_consulting">Consulting</a>
-    <a href="#contact" class="nav-cta-btn" data-i18n="nav_contact">Contact</a>
+    <a href="#contact" class="nav-cta" data-i18n="nav_contact">Contact</a>
     <div class="lang-toggle">
       <button class="lang-btn active" onclick="setLang('en')">EN</button>
       <button class="lang-btn" onclick="setLang('tr')">TR</button>
     </div>
   </div>
-  <div class="nav-hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Open menu">
+  <div class="nav-hamburger" onclick="toggleMenu()" aria-label="Open menu">
     <span></span><span></span><span></span>
   </div>
 </nav>
+
 <div class="mobile-overlay" id="mobileOverlay" onclick="toggleMenu()"></div>
 <div class="mobile-menu" id="mobileMenu">
   <div class="mobile-menu-header">
-    <img src="kizunamainlogo.png" alt="Kizuna">
+    <svg viewBox="0 0 80 96" fill="none" xmlns="http://www.w3.org/2000/svg" style="height:32px">
+      <path d="M40 2C40 2 20 20 14 40C8 60 16 78 40 94C64 78 72 60 66 40C60 20 40 2 40 2Z" stroke="#3D3D3D" stroke-width="2.5" fill="none"/>
+      <circle cx="40" cy="46" r="14" stroke="#3D3D3D" stroke-width="1.5" fill="none"/>
+      <path d="M40 32C40 32 44.5 38.5 44.5 46C44.5 53.5 40 60 40 60C40 60 35.5 53.5 35.5 46C35.5 38.5 40 32 40 32Z" fill="#3D3D3D" opacity="0.9"/>
+      <circle cx="40" cy="46" r="4" fill="#3D3D3D" opacity="0.3"/>
+    </svg>
     <button class="mobile-menu-close" onclick="toggleMenu()" aria-label="Close menu">&times;</button>
   </div>
   <a href="#travel" onclick="toggleMenu()" data-i18n="nav_travel">Japan Travel</a>
   <a href="#services" onclick="toggleMenu()" data-i18n="nav_services">Services</a>
-  <a href="#destinations" onclick="toggleMenu()" data-i18n="nav_destinations">Destinations</a>
+  <a href="#destinations" onclick="toggleMenu()" data-i18n="nav_dest">Destinations</a>
   <a href="#about" onclick="toggleMenu()" data-i18n="nav_about">About</a>
-  <a href="#consulting" onclick="toggleMenu()" data-i18n="nav_consulting">Consulting</a>
   <a href="#contact" class="cta-m" onclick="toggleMenu()" data-i18n="nav_contact">Contact</a>
-  <div style="padding:16px 24px; display:flex; gap:8px;">
-    <button class="lang-btn active" onclick="setLang('en')" style="border:1px solid var(--grey-line); border-radius:4px; padding:8px 16px;">EN</button>
-    <button class="lang-btn" onclick="setLang('tr')" style="border:1px solid var(--grey-line); border-radius:4px; padding:8px 16px;">TR</button>
+  <div style="padding:18px 28px;display:flex;gap:8px">
+    <button class="lang-btn active" onclick="setLang('en')" style="border:1px solid var(--grey-line);border-radius:4px;padding:10px 18px">EN</button>
+    <button class="lang-btn" onclick="setLang('tr')" style="border:1px solid var(--grey-line);border-radius:4px;padding:10px 18px">TR</button>
   </div>
 </div>
 
@@ -417,17 +377,20 @@
 <section id="travel">
   <div class="hero">
     <div class="hero-left">
-      <div class="exp-badge">
-        <div class="exp-badge-num">12+</div>
-        <div class="exp-badge-text" data-i18n-html="hero_exp_badge">Years of<br>Experience</div>
+      <div class="hero-badge fade-in">
+        <span class="hero-badge-line"></span>
+        <span class="hero-badge-text" data-i18n="hero_badge">Turkey &middot; Japan &middot; The World</span>
       </div>
-      <div class="eyebrow" data-i18n="hero_eyebrow">Turkey · Japan · The World</div>
-      <h1 data-i18n-html="hero_title">Discover Japan<br>with <em>trust</em> &amp;<br>purpose.</h1>
-      <div class="rule"></div>
-      <p class="hero-sub" data-i18n="hero_sub">With over 12 years of expertise, we deliver bespoke travel experiences and cross-border consulting for curious travellers and ambitious businesses alike. Your bond with Japan starts here.</p>
-      <div class="hero-btns">
-        <a href="#destinations" class="btn-primary" data-i18n="hero_btn_explore">Explore Japan trips</a>
-        <a href="#consulting" class="btn-outline" data-i18n="hero_btn_business">Business services</a>
+      <h1 class="fade-in fade-in-delay-1" data-i18n-html="hero_title">Connecting cultures,<br>building <em>lasting</em><br>bonds.</h1>
+      <div class="rule fade-in fade-in-delay-2"></div>
+      <p class="hero-sub fade-in fade-in-delay-2" data-i18n="hero_sub">With over 12 years of expertise, we craft meaningful travel experiences and cross-border partnerships across Japan, Turkey, the Middle East and beyond. Your bond with Japan starts here.</p>
+      <div class="hero-btns fade-in fade-in-delay-3">
+        <a href="#destinations" class="btn-primary"><span data-i18n="hero_btn_explore">Explore Japan</span></a>
+        <a href="#services" class="btn-outline" data-i18n="hero_btn_biz">Business Services</a>
+      </div>
+      <div class="hero-exp fade-in fade-in-delay-3">
+        <div class="hero-exp-num">12+</div>
+        <div class="hero-exp-label"><strong data-i18n="hero_exp_strong">Years of Experience</strong><br><span data-i18n="hero_exp_sub">Bridging Turkey, Japan &amp; the World</span></div>
       </div>
     </div>
     <div class="hero-right">
@@ -435,7 +398,7 @@
         <div class="carousel-slide active" data-place="Kyoto" data-sub="Cultural Capital" style="background-image:url('https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=1200&h=900&fit=crop&q=85')"><div class="carousel-overlay"></div></div>
         <div class="carousel-slide" data-place="Tokyo" data-sub="City of the Future" style="background-image:url('https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?w=1200&h=900&fit=crop&q=85')"><div class="carousel-overlay"></div></div>
         <div class="carousel-slide" data-place="Mt. Fuji" data-sub="Shizuoka Prefecture" style="background-image:url('https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?w=1200&h=900&fit=crop&q=85')"><div class="carousel-overlay"></div></div>
-        <div class="carousel-slide" data-place="Nara" data-sub="Deer Land" style="background-image:url('https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=1200&h=900&fit=crop&q=85')"><div class="carousel-overlay"></div></div>
+        <div class="carousel-slide" data-place="Nara" data-sub="Ancient Capital" style="background-image:url('https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=1200&h=900&fit=crop&q=85')"><div class="carousel-overlay"></div></div>
         <div class="carousel-content">
           <div class="carousel-label">
             <div class="carousel-label-place" id="carouselPlace">Kyoto</div>
@@ -456,119 +419,81 @@
 <!-- ── TRUST BAR ── -->
 <div class="trust-bar">
   <div class="trust-item">
-    <span class="trust-icon">&#9670;</span>
+    <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
     <div>
-      <div class="trust-title" data-i18n="trust_1_title">Japan specialists</div>
+      <div class="trust-title" data-i18n="trust_1_title">Japan Specialists</div>
       <div class="trust-sub" data-i18n="trust_1_sub">Local knowledge, global service</div>
     </div>
   </div>
   <div class="trust-item">
-    <span class="trust-icon">&#9670;</span>
+    <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/></svg></div>
     <div>
-      <div class="trust-title" data-i18n="trust_2_title">Turkish · Japanese · English</div>
+      <div class="trust-title" data-i18n="trust_2_title">Turkish &middot; Japanese &middot; English</div>
       <div class="trust-sub" data-i18n="trust_2_sub">Seamless multilingual support</div>
     </div>
   </div>
   <div class="trust-item">
-    <span class="trust-icon">&#9670;</span>
+    <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
     <div>
-      <div class="trust-title" data-i18n="trust_3_title">B2C &amp; B2B ready</div>
+      <div class="trust-title" data-i18n="trust_3_title">B2C &amp; B2B Ready</div>
       <div class="trust-sub" data-i18n="trust_3_sub">Individuals and organisations</div>
     </div>
   </div>
   <div class="trust-item">
-    <span class="trust-icon">&#9670;</span>
+    <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
     <div>
-      <div class="trust-title" data-i18n="trust_4_title">12+ years experience</div>
+      <div class="trust-title" data-i18n="trust_4_title">12+ Years Experience</div>
       <div class="trust-sub" data-i18n="trust_4_sub">Trust-first approach</div>
     </div>
   </div>
 </div>
 
-<!-- ── SERVICES (SPLIT) ── -->
-<section class="section" id="services">
+<!-- ── SERVICES ── -->
+<section class="section services-section" id="services">
   <div class="container">
-    <div class="fade-in">
-      <div class="eyebrow" data-i18n="svc_eyebrow">What we do</div>
+    <div class="services-header fade-in">
+      <div class="eyebrow" data-i18n="svc_eyebrow">Our Services</div>
       <h2 data-i18n="svc_title">Travel, consulting &amp; beyond.</h2>
-      <div class="rule"></div>
-      <p style="max-width:560px; margin-bottom:36px;" data-i18n="svc_intro">From bespoke Japan itineraries to cross-border business strategy — we deliver personalised experiences and professional solutions for both consumers and organisations.</p>
+      <div class="rule rule-center"></div>
+      <p data-i18n="svc_intro">From bespoke Japan itineraries to cross-border business strategy — we deliver personalised experiences and professional solutions.</p>
     </div>
-    <div class="services-split fade-in">
-      <!-- TRAVEL -->
-      <div>
-        <div class="services-col-header">
-          <span class="services-col-icon">&#10022;</span>
-          <span class="services-col-title" data-i18n="svc_col_travel">Travel &amp; Experiences</span>
-        </div>
-        <div class="svc-card">
-          <div class="svc-icon">&#10022;</div>
-          <div class="svc-title" data-i18n="svc_t1_title">Group Tours</div>
-          <p class="svc-desc" data-i18n="svc_t1_desc">Fully organised group travel, Hajj, Umrah and cultural tours. Complete logistics, guidance, accommodation and cultural briefing — for communities and tour operators alike.</p>
-          <div class="svc-tags"><span class="tag tag-b2c">B2C</span><span class="tag tag-b2b">B2B</span></div>
-        </div>
-        <div class="svc-card">
-          <div class="svc-icon">&#10022;</div>
-          <div class="svc-title" data-i18n="svc_t2_title">VIP Private Tours</div>
-          <p class="svc-desc" data-i18n="svc_t2_desc">Exclusive, tailor-made itineraries for discerning travellers. Private guides, luxury accommodation, and curated cultural encounters — from cherry blossom season to hidden Japan.</p>
-          <div class="svc-tags"><span class="tag tag-b2c">B2C</span></div>
-        </div>
-        <div class="svc-card">
-          <div class="svc-icon">&#10022;</div>
-          <div class="svc-title" data-i18n="svc_t3_title">Event Organisation</div>
-          <p class="svc-desc" data-i18n="svc_t3_desc">Corporate events, cultural exchanges, MICE travel and institutional delegations. Seamlessly managed from Istanbul to Tokyo and beyond.</p>
-          <div class="svc-tags"><span class="tag tag-both">B2C · B2B</span></div>
-        </div>
-        <div class="svc-card">
-          <div class="svc-icon">&#10022;</div>
-          <div class="svc-title" data-i18n="svc_t4_title">Cultural Partnerships</div>
-          <p class="svc-desc" data-i18n="svc_t4_desc">Long-term institutional and corporate partnerships bridging Turkish and Japanese organisations — embassies, foundations, universities and corporations.</p>
-          <div class="svc-tags"><span class="tag tag-b2b">B2B</span></div>
-        </div>
+    <div class="services-grid">
+      <div class="svc-card fade-in">
+        <div class="svc-num">01</div>
+        <div class="svc-title" data-i18n="svc_1_title">Japan Travel</div>
+        <p class="svc-desc" data-i18n="svc_1_desc">Bespoke itineraries, group tours, cultural immersion and guided experiences across Japan.</p>
+        <span class="svc-tag tag-b2c">B2C</span>
       </div>
-      <!-- BUSINESS -->
-      <div id="consulting">
-        <div class="services-col-header pink">
-          <span class="services-col-icon" style="color:var(--sakura)">&#10022;</span>
-          <span class="services-col-title" data-i18n="svc_col_biz">Business &amp; Consulting</span>
-        </div>
-        <div class="svc-card b2b">
-          <div class="svc-icon pink">&#10022;</div>
-          <div class="svc-title" data-i18n="svc_b1_title">Market Entry &amp; Business Development</div>
-          <p class="svc-desc" data-i18n="svc_b1_desc">Gateway service for Japan market entry — market research, partner identification, business meetings, and delegation management through a specialist network.</p>
-          <div class="svc-tags"><span class="tag tag-b2b">B2B</span></div>
-        </div>
-        <div class="svc-card b2b">
-          <div class="svc-icon pink">&#10022;</div>
-          <div class="svc-title" data-i18n="svc_b2_title">Strategy &amp; Advisory</div>
-          <p class="svc-desc" data-i18n="svc_b2_desc">Commercial strategy and operational performance improvement focused on measurable results — from market entry planning to CEO-level guidance using proven methodology.</p>
-          <div class="svc-tags"><span class="tag tag-b2b">B2B</span></div>
-        </div>
-        <div class="svc-card b2b">
-          <div class="svc-icon pink">&#10022;</div>
-          <div class="svc-title" data-i18n="svc_b3_title">AI Integration</div>
-          <p class="svc-desc" data-i18n="svc_b3_desc">Process optimisation preceding technology adoption — identifying where AI generates genuine business leverage for organisations, from initial sprint to ongoing transformation.</p>
-          <div class="svc-tags"><span class="tag tag-b2b">B2B</span></div>
-        </div>
-        <div class="svc-card b2b">
-          <div class="svc-icon pink">&#10022;</div>
-          <div class="svc-title" data-i18n="svc_b4_title">Speaking, Coaching &amp; Workshops</div>
-          <p class="svc-desc" data-i18n="svc_b4_desc">Leadership development through keynotes and personalised coaching on AI in business, cross-cultural communication, and professional growth across multiple languages.</p>
-          <div class="svc-tags"><span class="tag tag-b2b">B2B</span></div>
-        </div>
+      <div class="svc-card b2b fade-in fade-in-delay-1">
+        <div class="svc-num">02</div>
+        <div class="svc-title" data-i18n="svc_2_title">Consulting</div>
+        <p class="svc-desc" data-i18n="svc_2_desc">Cross-border strategy, market entry support and partnership facilitation between Turkey, Japan and the Middle East.</p>
+        <span class="svc-tag tag-b2b">B2B</span>
+      </div>
+      <div class="svc-card fade-in fade-in-delay-2">
+        <div class="svc-num">03</div>
+        <div class="svc-title" data-i18n="svc_3_title">Organisation</div>
+        <p class="svc-desc" data-i18n="svc_3_desc">Corporate events, cultural exchanges, pilgrimages (Hajj/Umrah) and MICE travel — fully managed end to end.</p>
+        <span class="svc-tag tag-both">B2C &middot; B2B</span>
+      </div>
+      <div class="svc-card b2b fade-in fade-in-delay-3">
+        <div class="svc-num">04</div>
+        <div class="svc-title" data-i18n="svc_4_title">International Trade</div>
+        <p class="svc-desc" data-i18n="svc_4_desc">Turkey-Japan trade facilitation, supplier matching and sourcing support for globally expanding businesses.</p>
+        <span class="svc-tag tag-b2b">B2B</span>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ── DESTINATIONS ── -->
-<section class="section" id="destinations" style="background:var(--grey-bg);">
+<section class="dest-section" id="destinations">
   <div class="container">
-    <div class="fade-in" style="text-align:center; margin-bottom:8px;">
+    <div class="dest-header fade-in">
       <div class="eyebrow" data-i18n="dest_eyebrow">Explore Japan</div>
       <h2 data-i18n="dest_title">Popular Destinations</h2>
-      <div class="rule rule-center"></div>
-      <p style="max-width:500px; margin:0 auto;" data-i18n="dest_intro">Discover the most captivating destinations Japan has to offer — from ancient temples to neon-lit cityscapes.</p>
+      <div class="rule rule-center rule-gold"></div>
+      <p data-i18n="dest_intro">Discover the most captivating destinations Japan has to offer — from ancient temples to neon-lit cityscapes.</p>
     </div>
     <div class="dest-top fade-in">
       <div class="dest-card">
@@ -594,7 +519,7 @@
         <div class="dest-overlay">
           <div class="dest-tag" data-i18n="dest_tag_heritage">Heritage</div>
           <div class="dest-name">Nara</div>
-          <div class="dest-info" data-i18n="dest_nara">Deer Land — friendly deer roam freely among UNESCO World Heritage temples and the great bronze Buddha.</div>
+          <div class="dest-info" data-i18n="dest_nara">Ancient capital — friendly deer roam freely among UNESCO World Heritage temples and the great bronze Buddha.</div>
         </div>
       </div>
       <div class="dest-card">
@@ -618,62 +543,103 @@
 </section>
 
 <!-- ── ABOUT ── -->
-<section class="section" id="about">
+<section class="section about-section" id="about">
   <div class="container">
-    <div class="about-inner fade-in">
-      <div>
-        <div class="eyebrow" data-i18n="about_eyebrow">Our story</div>
-        <h2 class="about-h2" data-i18n="about_title">What does Kizuna mean?</h2>
+    <div class="about-inner">
+      <div class="fade-in">
+        <div class="eyebrow" data-i18n="about_eyebrow">Our Story</div>
+        <h2 style="margin-bottom:20px" data-i18n="about_h2">What does Kizuna mean?</h2>
         <div class="rule"></div>
-        <p class="about-body" data-i18n-html="about_body1">Kizuna (&#32070;) is the Japanese word for <em>bond</em>. We chose this name not as a brand, but as our purpose — to bring people, cultures and opportunities closer together. Whether you are planning your first trip to Japan or expanding your business across borders, Kizuna is your trusted bridge.</p>
+        <blockquote class="about-quote" data-i18n="about_quote">"Every journey begins with a bond."</blockquote>
+        <p class="about-body" data-i18n-html="about_body1">Kizuna (&#32070;) is the Japanese word for <em>bond</em>. We chose this name not as a brand, but as our purpose — to bring people, cultures and opportunities closer together.</p>
         <br>
         <p class="about-body" data-i18n="about_body2">Founded in Istanbul with deep roots in Japanese culture and business, we have spent over 12 years operating at the intersection of travel, consulting, culture and international trade — serving individuals, families, businesses and institutions across Turkey, Japan, the Middle East and beyond.</p>
       </div>
-      <div>
-        <blockquote class="about-quote" data-i18n="about_quote">"Strong bonds dissolve distances and reveal real opportunities."</blockquote>
-        <p class="about-attr">Kizuna · Istanbul, Turkey · www.kizuna.tr</p>
-        <div class="about-exp">
-          <div class="about-exp-num">12+</div>
-          <div>
-            <div class="about-exp-label" data-i18n-html="about_exp_label"><strong>Years of Experience</strong><br>Bridging Turkey, Japan &amp; the World</div>
+      <div class="about-right fade-in fade-in-delay-1">
+        <div class="about-mission">
+          <div class="about-mission-label" data-i18n="about_mission_label">Mission</div>
+          <p class="about-mission-text" data-i18n="about_mission">To bring people, cultures and opportunities together by building trust-based, lasting relationships — delivering high-standard service and sustainable value in every field we operate.</p>
+        </div>
+        <div>
+          <div class="about-mission-label" data-i18n="about_vision_label">Vision</div>
+          <p class="about-mission-text" data-i18n="about_vision">To become a pioneering global brand that represents trust, cooperation and cultural exchange — connecting people and institutions across borders.</p>
+        </div>
+        <div class="about-exp-row">
+          <div class="about-exp-card">
+            <div class="num">12+</div>
+            <div class="label" data-i18n="about_exp_years">Years</div>
+          </div>
+          <div class="about-exp-card">
+            <div class="num">3</div>
+            <div class="label" data-i18n="about_exp_lang">Languages</div>
+          </div>
+          <div class="about-exp-card">
+            <div class="num">4</div>
+            <div class="label" data-i18n="about_exp_svc">Service Lines</div>
           </div>
         </div>
-        <br>
-        <p style="font-size:13px; color:var(--grey-2); line-height:1.8;" data-i18n-html="about_mission_vision">
-          <strong style="color:var(--charcoal);">Mission:</strong> To bring people, cultures and opportunities together by building trust-based, lasting relationships — delivering high-standard service and sustainable value in every field we operate.<br><br>
-          <strong style="color:var(--charcoal);">Vision:</strong> To become a pioneering global brand that represents trust, cooperation and cultural exchange — connecting people and institutions across borders.
-        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHAT SETS US APART ── -->
+<section class="section apart-section">
+  <div class="container">
+    <div class="fade-in" style="text-align:center;max-width:500px;margin:0 auto">
+      <div class="eyebrow" data-i18n="apart_eyebrow">Why Kizuna</div>
+      <h2 data-i18n="apart_title">What sets us apart</h2>
+      <div class="rule rule-center"></div>
+    </div>
+    <div class="apart-grid">
+      <div class="apart-card fade-in">
+        <div class="apart-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/></svg></div>
+        <div class="apart-title" data-i18n="apart_1_title">Cultural Fluency</div>
+        <p class="apart-desc" data-i18n="apart_1_desc">We speak Turkish, Japanese and English — and understand the cultural nuances that matter in business and travel.</p>
+      </div>
+      <div class="apart-card fade-in fade-in-delay-1">
+        <div class="apart-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="apart-title" data-i18n="apart_2_title">Trust-First Approach</div>
+        <p class="apart-desc" data-i18n="apart_2_desc">Every engagement is built on transparency, reliability and genuine care for our clients' outcomes.</p>
+      </div>
+      <div class="apart-card fade-in fade-in-delay-2">
+        <div class="apart-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+        <div class="apart-title" data-i18n="apart_3_title">B2C &amp; B2B Breadth</div>
+        <p class="apart-desc" data-i18n="apart_3_desc">From solo travellers to corporate clients — we serve individuals and organisations with equal depth.</p>
+      </div>
+      <div class="apart-card fade-in fade-in-delay-3">
+        <div class="apart-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
+        <div class="apart-title" data-i18n="apart_4_title">Global Reach</div>
+        <p class="apart-desc" data-i18n="apart_4_desc">Based in Istanbul with deep roots in Japan and the Middle East — we are truly cross-cultural.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ── WHO WE SERVE ── -->
-<section class="section" style="background:var(--grey-bg);">
-  <div class="container fade-in">
-    <div class="eyebrow" data-i18n="clients_eyebrow">Our clients</div>
-    <h2 data-i18n="clients_title">Who we serve</h2>
-    <div class="rule"></div>
-    <div class="clients-grid">
-      <div class="client-card red">
-        <div class="client-icon red"><svg viewBox="0 0 32 32" fill="none"><g fill="currentColor"><ellipse cx="16" cy="7" rx="3.5" ry="7.5" opacity=".8"/><ellipse cx="16" cy="7" rx="3.5" ry="7.5" opacity=".8" transform="rotate(72 16 16)"/><ellipse cx="16" cy="7" rx="3.5" ry="7.5" opacity=".8" transform="rotate(144 16 16)"/><ellipse cx="16" cy="7" rx="3.5" ry="7.5" opacity=".8" transform="rotate(216 16 16)"/><ellipse cx="16" cy="7" rx="3.5" ry="7.5" opacity=".8" transform="rotate(288 16 16)"/><circle cx="16" cy="16" r="3" opacity=".35"/></g></svg></div>
-        <div class="client-title" data-i18n="client_1_title">Individual Travellers</div>
-        <p class="client-desc" data-i18n="client_1_desc">Japan culture enthusiasts, first-time visitors, adventure seekers and solo explorers from Turkey and beyond.</p>
+<section class="section serve-section">
+  <div class="container">
+    <div class="fade-in" style="text-align:center;max-width:500px;margin:0 auto">
+      <div class="eyebrow" data-i18n="serve_eyebrow">Our Clients</div>
+      <h2 data-i18n="serve_title">Who we serve</h2>
+      <div class="rule rule-center rule-gold"></div>
+    </div>
+    <div class="serve-grid">
+      <div class="serve-card fade-in">
+        <div class="serve-card-title" data-i18n="serve_1_title">Individual Travellers</div>
+        <p class="serve-card-desc" data-i18n="serve_1_desc">Japan culture enthusiasts, first-time visitors, adventure seekers and solo explorers from Turkey and beyond.</p>
       </div>
-      <div class="client-card pink">
-        <div class="client-icon pink"><svg viewBox="0 0 32 32" fill="none"><g fill="currentColor"><ellipse cx="16" cy="7" rx="3.5" ry="7.5" opacity=".8"/><ellipse cx="16" cy="7" rx="3.5" ry="7.5" opacity=".8" transform="rotate(72 16 16)"/><ellipse cx="16" cy="7" rx="3.5" ry="7.5" opacity=".8" transform="rotate(144 16 16)"/><ellipse cx="16" cy="7" rx="3.5" ry="7.5" opacity=".8" transform="rotate(216 16 16)"/><ellipse cx="16" cy="7" rx="3.5" ry="7.5" opacity=".8" transform="rotate(288 16 16)"/><circle cx="16" cy="16" r="3" opacity=".35"/></g></svg></div>
-        <div class="client-title" data-i18n="client_2_title">Groups &amp; Communities</div>
-        <p class="client-desc" data-i18n="client_2_desc">Tour groups, school trips, pilgrimage organisations and community cultural tours with full logistics support.</p>
+      <div class="serve-card fade-in fade-in-delay-1">
+        <div class="serve-card-title" data-i18n="serve_2_title">Groups &amp; Communities</div>
+        <p class="serve-card-desc" data-i18n="serve_2_desc">Tour groups, school trips, pilgrimage organisations and community cultural tours with full logistics support.</p>
       </div>
-      <div class="client-card red">
-        <div class="client-icon red"><svg viewBox="0 0 32 32" fill="none"><g fill="currentColor"><ellipse cx="16" cy="7" rx="3.5" ry="7.5" opacity=".8"/><ellipse cx="16" cy="7" rx="3.5" ry="7.5" opacity=".8" transform="rotate(72 16 16)"/><ellipse cx="16" cy="7" rx="3.5" ry="7.5" opacity=".8" transform="rotate(144 16 16)"/><ellipse cx="16" cy="7" rx="3.5" ry="7.5" opacity=".8" transform="rotate(216 16 16)"/><ellipse cx="16" cy="7" rx="3.5" ry="7.5" opacity=".8" transform="rotate(288 16 16)"/><circle cx="16" cy="16" r="3" opacity=".35"/></g></svg></div>
-        <div class="client-title" data-i18n="client_3_title">Businesses</div>
-        <p class="client-desc" data-i18n="client_3_desc">Turkish companies entering Japan, Japanese firms seeking Turkish partners, and cross-border traders needing expert facilitation.</p>
+      <div class="serve-card fade-in fade-in-delay-2">
+        <div class="serve-card-title" data-i18n="serve_3_title">Businesses</div>
+        <p class="serve-card-desc" data-i18n="serve_3_desc">Turkish companies entering Japan, Japanese firms seeking Turkish partners, and cross-border traders needing expert facilitation.</p>
       </div>
-      <div class="client-card pink">
-        <div class="client-icon pink"><svg viewBox="0 0 32 32" fill="none"><g fill="currentColor"><ellipse cx="16" cy="7" rx="3.5" ry="7.5" opacity=".8"/><ellipse cx="16" cy="7" rx="3.5" ry="7.5" opacity=".8" transform="rotate(72 16 16)"/><ellipse cx="16" cy="7" rx="3.5" ry="7.5" opacity=".8" transform="rotate(144 16 16)"/><ellipse cx="16" cy="7" rx="3.5" ry="7.5" opacity=".8" transform="rotate(216 16 16)"/><ellipse cx="16" cy="7" rx="3.5" ry="7.5" opacity=".8" transform="rotate(288 16 16)"/><circle cx="16" cy="16" r="3" opacity=".35"/></g></svg></div>
-        <div class="client-title" data-i18n="client_4_title">Institutions &amp; NGOs</div>
-        <p class="client-desc" data-i18n="client_4_desc">Cultural organisations, embassies, foundations and non-profits seeking Japan-Turkey collaboration and event support.</p>
+      <div class="serve-card fade-in fade-in-delay-3">
+        <div class="serve-card-title" data-i18n="serve_4_title">Institutions &amp; NGOs</div>
+        <p class="serve-card-desc" data-i18n="serve_4_desc">Cultural organisations, embassies, foundations and non-profits seeking Japan-Turkey collaboration and event support.</p>
       </div>
     </div>
   </div>
@@ -682,8 +648,9 @@
 <!-- ── CONTACT ── -->
 <section class="contact-section" id="contact">
   <div class="contact-inner fade-in">
-    <h2 data-i18n="cta_title">Ready to build your bond with Japan?</h2>
-    <p data-i18n="cta_desc">Whether you are planning a personal journey or a business expansion — we are here to make it happen. Send us a message and let us craft something meaningful together.</p>
+    <div class="eyebrow" style="color:var(--gold)" data-i18n="cta_eyebrow">Get in Touch</div>
+    <h2 data-i18n="cta_title">Ready to build your bond?</h2>
+    <p data-i18n="cta_desc">Whether you are planning a personal journey or a business expansion — we are here to make it happen.</p>
     <form class="contact-form" id="contactForm" action="https://formsubmit.co/ajax/hilal.jpn@gmail.com" method="POST">
       <input type="hidden" name="_subject" value="New message from Kizuna website">
       <input type="hidden" name="_template" value="table">
@@ -695,8 +662,11 @@
       <button type="submit" class="form-submit" data-i18n="form_send">Send Message</button>
     </form>
     <div class="form-success" id="formSuccess" data-i18n="form_success">Thank you! Your message has been sent successfully.</div>
-    <div class="form-social">
-      <a href="https://www.instagram.com/kizunatr" data-i18n="cta_instagram">@kizunatr on Instagram</a>
+    <div class="contact-social">
+      <a href="https://wa.me/905551234567"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>WhatsApp</a>
+      <a href="tel:+905551234567"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg><span data-i18n="cta_phone">Phone</span></a>
+      <a href="https://www.instagram.com/kizunatr"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>@kizunatr</a>
+      <a href="mailto:info@kizuna.tr"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>info@kizuna.tr</a>
     </div>
   </div>
 </section>
@@ -706,164 +676,188 @@
   <div class="container">
     <div class="footer-inner">
       <div>
-        <div class="footer-logo">Kizuna</div>
-        <p class="footer-desc">Kizuna Turizm ve Danışmanlık Ltd. Şti.<br>Istanbul, Turkey<br><br>&#32070; · Bond · Bağ</p>
+        <div class="footer-logo">
+          <svg viewBox="0 0 80 96" fill="none" xmlns="http://www.w3.org/2000/svg" style="height:28px">
+            <path d="M40 2C40 2 20 20 14 40C8 60 16 78 40 94C64 78 72 60 66 40C60 20 40 2 40 2Z" stroke="rgba(255,255,255,0.5)" stroke-width="2.5" fill="none"/>
+            <circle cx="40" cy="46" r="14" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" fill="none"/>
+            <path d="M40 32C40 32 44.5 38.5 44.5 46C44.5 53.5 40 60 40 60C40 60 35.5 53.5 35.5 46C35.5 38.5 40 32 40 32Z" fill="rgba(255,255,255,0.5)" opacity="0.9"/>
+            <circle cx="40" cy="46" r="4" fill="rgba(255,255,255,0.3)"/>
+          </svg>
+          <span class="footer-logo-text">Kizuna</span>
+        </div>
+        <p class="footer-desc">Kizuna Turizm ve Danışmanlık Ltd. Şti.<br>Istanbul, Turkey<br><br>&#32070; &middot; Bond &middot; Bağ<br><br><span style="color:rgba(255,255,255,0.2)">www.kizuna.com.tr</span></p>
       </div>
       <div>
         <div class="footer-col-title" data-i18n="footer_company">Company</div>
         <div class="footer-links">
           <a href="#about" data-i18n="footer_about">About Kizuna</a>
           <a href="#about" data-i18n="footer_mission">Mission &amp; Vision</a>
-          <a href="#services" data-i18n="footer_who">Who We Serve</a>
+          <a href="#services" data-i18n="footer_services">Our Services</a>
           <a href="#contact" data-i18n="footer_contact">Contact Us</a>
         </div>
       </div>
       <div>
         <div class="footer-col-title" data-i18n="footer_connect">Connect</div>
         <div class="footer-links">
-          <a href="https://wa.me/905551234567"><svg class="footer-link-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>WhatsApp</a>
-          <a href="tel:+905551234567"><svg class="footer-link-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg><span data-i18n="footer_phone">Phone</span></a>
-          <a href="https://www.instagram.com/kizunatr"><svg class="footer-link-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>@kizunatr</a>
-          <a href="mailto:info@kizuna.tr"><svg class="footer-link-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>info@kizuna.tr</a>
+          <a href="https://wa.me/905551234567"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>WhatsApp</a>
+          <a href="tel:+905551234567"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg><span data-i18n="footer_phone">Phone</span></a>
+          <a href="https://www.instagram.com/kizunatr"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>@kizunatr</a>
+          <a href="mailto:info@kizuna.tr"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>info@kizuna.tr</a>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
-      <p data-i18n="footer_copy">&copy; 2025 Kizuna Turizm ve Danışmanlık Ltd. Şti. · All rights reserved.</p>
-      <p data-i18n="footer_tags">Turizm · Danışmanlık · Organizasyon · Dış Ticaret · Kültür</p>
+      <p data-i18n="footer_copy">&copy; 2025 Kizuna Turizm ve Danışmanlık Ltd. Şti. &middot; All rights reserved.</p>
+      <p data-i18n="footer_tags">Turizm &middot; Danışmanlık &middot; Organizasyon &middot; Dış Ticaret &middot; Kültür</p>
     </div>
   </div>
 </footer>
 
 <script>
-  function toggleMenu() {
-    document.getElementById('mobileMenu').classList.toggle('open');
-    document.getElementById('mobileOverlay').classList.toggle('open');
-  }
-  document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(a => {
-    a.addEventListener('click', function() {
-      document.querySelectorAll('.nav-links a').forEach(x => x.classList.remove('active'));
-      if (!this.classList.contains('nav-cta-btn')) this.classList.add('active');
-    });
+/* ── MOBILE MENU ── */
+function toggleMenu(){
+  document.getElementById('mobileMenu').classList.toggle('open');
+  document.getElementById('mobileOverlay').classList.toggle('open');
+}
+
+/* ── NAV SCROLL ── */
+window.addEventListener('scroll',()=>{
+  document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>10);
+});
+
+/* ── ACTIVE NAV ── */
+document.querySelectorAll('.nav-links a,.mobile-menu a').forEach(a=>{
+  a.addEventListener('click',function(){
+    document.querySelectorAll('.nav-links a').forEach(x=>x.classList.remove('active'));
+    if(!this.classList.contains('nav-cta'))this.classList.add('active');
   });
+});
 
-  let currentSlide = 0;
-  const slides = document.querySelectorAll('.carousel-slide');
-  const dots = document.querySelectorAll('.carousel-dot');
-  const placeEl = document.getElementById('carouselPlace');
-  const subEl = document.getElementById('carouselSub');
-  function goToSlide(n) {
-    slides[currentSlide].classList.remove('active');
-    dots[currentSlide].classList.remove('active');
-    currentSlide = n;
-    slides[currentSlide].classList.add('active');
-    dots[currentSlide].classList.add('active');
-    placeEl.textContent = slides[n].dataset.place;
-    subEl.textContent = slides[n].dataset.sub;
+/* ── CAROUSEL ── */
+let currentSlide=0;
+const slides=document.querySelectorAll('.carousel-slide');
+const dots=document.querySelectorAll('.carousel-dot');
+const placeEl=document.getElementById('carouselPlace');
+const subEl=document.getElementById('carouselSub');
+function goToSlide(n){
+  slides[currentSlide].classList.remove('active');
+  dots[currentSlide].classList.remove('active');
+  currentSlide=n;
+  slides[currentSlide].classList.add('active');
+  dots[currentSlide].classList.add('active');
+  placeEl.textContent=slides[n].dataset.place;
+  subEl.textContent=slides[n].dataset.sub;
+}
+setInterval(()=>{goToSlide((currentSlide+1)%slides.length)},5000);
+
+/* ── INTERSECTION OBSERVER ── */
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:0.12});
+document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+
+/* ── CONTACT FORM ── */
+document.getElementById('contactForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  const form=this,btn=form.querySelector('.form-submit'),orig=btn.textContent;
+  btn.textContent='...';btn.disabled=true;
+  fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}})
+    .then(r=>r.json()).then(data=>{
+      if(data.success){form.style.display='none';document.getElementById('formSuccess').classList.add('show')}
+      else{btn.textContent=orig;btn.disabled=false}
+    }).catch(()=>{btn.textContent=orig;btn.disabled=false});
+});
+
+/* ── i18n ── */
+const translations={
+  tr:{
+    nav_travel:'Japonya Seyahati',nav_services:'Hizmetler',nav_dest:'Destinasyonlar',
+    nav_about:'Hakkımızda',nav_contact:'İletişim',
+    hero_badge:'Türkiye · Japonya · Dünya',
+    hero_title:'Kültürleri birleştiriyor,<br>kalıcı <em>bağlar</em><br>kuruyoruz.',
+    hero_sub:'12 yılı aşkın uzmanlığımızla, Japonya, Türkiye, Orta Doğu ve ötesinde anlamlı seyahat deneyimleri ve sınır ötesi ortaklıklar yaratıyoruz. Japonya ile bağınız burada başlıyor.',
+    hero_btn_explore:'Japonya\'yı Keşfet',hero_btn_biz:'İş Hizmetleri',
+    hero_exp_strong:'Yıllık Deneyim',hero_exp_sub:'Türkiye, Japonya ve Dünya Arasında Köprü',
+    trust_1_title:'Japonya Uzmanları',trust_1_sub:'Yerel bilgi, küresel hizmet',
+    trust_2_title:'Türkçe · Japonca · İngilizce',trust_2_sub:'Kesintisiz çok dilli destek',
+    trust_3_title:'B2C ve B2B Hazır',trust_3_sub:'Bireyler ve kurumlar',
+    trust_4_title:'12+ Yıllık Deneyim',trust_4_sub:'Güven odaklı yaklaşım',
+    svc_eyebrow:'Hizmetlerimiz',svc_title:'Seyahat, danışmanlık ve ötesi.',
+    svc_intro:'Özel Japonya güzergahlarından sınır ötesi iş stratejisine — kişiselleştirilmiş deneyimler ve profesyonel çözümler sunuyoruz.',
+    svc_1_title:'Japonya Seyahatleri',svc_1_desc:'Bireysel, çift ve grup için özel güzergahlar, kültür turları ve rehberli Japonya deneyimleri.',
+    svc_2_title:'Danışmanlık',svc_2_desc:'Türkiye, Japonya ve Orta Doğu arasında sınır ötesi strateji, pazar girişi ve iş birliği danışmanlığı.',
+    svc_3_title:'Organizasyon',svc_3_desc:'Kurumsal etkinlikler, kültürel değişimler, hac/umre organizasyonları ve MICE seyahatleri — uçtan uca yönetim.',
+    svc_4_title:'Dış Ticaret',svc_4_desc:'Türkiye-Japonya ticaret kolaylaştırma, tedarikçi eşleştirme ve küresel büyüme desteği.',
+    dest_eyebrow:'Japonya\'yı Keşfedin',dest_title:'Popüler Destinasyonlar',
+    dest_intro:'Japonya\'nın sunduğu en büyüleyici destinasyonları keşfedin — antik tapınaklardan neon ışıklı şehir manzaralarına.',
+    dest_tag_culture:'Kültür',dest_tag_nature:'Doğa',dest_tag_heritage:'Miras',dest_tag_tech:'Teknoloji',dest_tag_shopping:'Alışveriş',
+    dest_kyoto:'Japonya\'nın kültürel başkenti — 2.000+ tapınak, geyşa mahalleleri, bambu koruları ve ikonik Fushimi Inari.',
+    dest_shizuoka:'Fuji Dağı\'nın evi — Japonya\'nın ikonik zirvesi, çay tarlaları, kaplıcalar ve kıyı manzaraları.',
+    dest_nara:'Antik başkent — dost canlısı geyiklerin UNESCO Dünya Mirası tapınakları arasında serbestçe dolaştığı şehir.',
+    dest_akihabara:'Elektrik Kasabası — Tokyo\'nun efsanevi teknoloji merkezi, anime kültürü, oyun salonları ve fütüristik deneyimler.',
+    dest_gotemba:'Japonya\'nın en büyük premium outlet\'i — Fuji Dağı manzarasıyla 290+ lüks marka.',
+    about_eyebrow:'Hikayemiz',about_h2:'Kizuna ne demek?',
+    about_quote:'"Her yolculuk bir bağla başlar."',
+    about_body1:'Kizuna (絆), Japonca\'da <em>bağ</em> anlamına gelir. Bu ismi bir marka olarak değil, amacımız olarak seçtik — insanları, kültürleri ve fırsatları birbirine yakınlaştırmak.',
+    about_body2:'İstanbul\'da kurulmuş, Japon kültürü ve iş dünyasında derin köklere sahip olan şirketimiz; 12 yılı aşkın süredir seyahat, danışmanlık, kültür ve uluslararası ticaretin kesişim noktasında faaliyet göstermektedir.',
+    about_mission_label:'Misyon',about_mission:'İnsanları, kültürleri ve fırsatları bir araya getirerek güvene dayalı kalıcı ilişkiler oluşturmak; faaliyet gösterdiğimiz her alanda yüksek standartlarda hizmet ve sürdürülebilir değer sunmak.',
+    about_vision_label:'Vizyon',about_vision:'Küresel ölçekte güvenin, iş birliğinin ve kültürel etkileşimin temsilcisi olan; insanları ve kurumları birbirine bağlayan öncü bir marka haline gelmek.',
+    about_exp_years:'Yıl',about_exp_lang:'Dil',about_exp_svc:'Hizmet Alanı',
+    apart_eyebrow:'Neden Kizuna',apart_title:'Farkımız',
+    apart_1_title:'Kültürel Yetkinlik',apart_1_desc:'Türkçe, Japonca ve İngilizce konuşuyor; iş ve seyahatte önem taşıyan kültürel nüansları anlıyoruz.',
+    apart_2_title:'Önce Güven',apart_2_desc:'Her ilişkimizi şeffaflık, güvenilirlik ve müşterilerimizin çıkarlarına gerçek bir özen üzerine inşa ediyoruz.',
+    apart_3_title:'B2C ve B2B Genişliği',apart_3_desc:'Bireysel gezginlerden kurumsal müşterilere — herkese aynı derinlikte hizmet sunuyoruz.',
+    apart_4_title:'Küresel Ağ',apart_4_desc:'İstanbul merkezli, Japonya ve Orta Doğu\'da derin köklere sahip gerçek anlamda çok kültürlü bir ekibiz.',
+    serve_eyebrow:'Müşterilerimiz',serve_title:'Kime hizmet veriyoruz',
+    serve_1_title:'Bireysel Gezginler',serve_1_desc:'Japonya kültürü meraklıları, ilk kez ziyaret edenler, macera arayanlar ve Türkiye\'den dünyaya açılan keşifçiler.',
+    serve_2_title:'Grup ve Topluluklar',serve_2_desc:'Tur grupları, okul gezileri, hac/umre organizasyonları ve kültürel topluluk turları.',
+    serve_3_title:'İşletmeler',serve_3_desc:'Japonya\'ya girmek isteyen Türk şirketleri, Türk ortaklar arayan Japon firmalar ve sınır ötesi ticaret yapanlar.',
+    serve_4_title:'Kurumlar ve STK\'lar',serve_4_desc:'Kültürel kuruluşlar, büyükelçilikler, vakıflar ve Japonya-Türkiye iş birliği arayan sivil toplum kuruluşları.',
+    cta_eyebrow:'İletişim',cta_title:'Bağınızı kurmaya hazır mısınız?',
+    cta_desc:'İster kişisel bir yolculuk ister bir iş genişlemesi planlıyor olun — bunu gerçekleştirmek için buradayız.',
+    form_name:'Adınız',form_email:'E-posta adresiniz',form_message:'Mesajınız...',
+    form_send:'Mesaj Gönder',form_success:'Teşekkürler! Mesajınız başarıyla gönderildi.',
+    cta_phone:'Telefon',
+    footer_company:'Şirket',footer_about:'Kizuna Hakkında',footer_mission:'Misyon ve Vizyon',
+    footer_services:'Hizmetlerimiz',footer_contact:'İletişim',footer_connect:'Bağlantı',
+    footer_phone:'Telefon',
+    footer_copy:'© 2025 Kizuna Turizm ve Danışmanlık Ltd. Şti. · Tüm hakları saklıdır.',
+    footer_tags:'Turizm · Danışmanlık · Organizasyon · Dış Ticaret · Kültür'
   }
-  setInterval(() => { goToSlide((currentSlide + 1) % slides.length); }, 5000);
+};
 
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.15 });
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+const enCache={};
+let currentLang='en';
 
-  document.getElementById('contactForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const form = this, btn = form.querySelector('.form-submit'), orig = btn.textContent;
-    btn.textContent = '...'; btn.disabled = true;
-    fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } })
-      .then(r => r.json()).then(data => {
-        if (data.success) { form.style.display = 'none'; document.getElementById('formSuccess').classList.add('show'); }
-        else { btn.textContent = orig; btn.disabled = false; }
-      }).catch(() => { btn.textContent = orig; btn.disabled = false; });
+function cacheEnglish(){
+  document.querySelectorAll('[data-i18n]').forEach(el=>{enCache[el.getAttribute('data-i18n')]=el.textContent});
+  document.querySelectorAll('[data-i18n-html]').forEach(el=>{enCache[el.getAttribute('data-i18n-html')]=el.innerHTML});
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{enCache[el.getAttribute('data-i18n-placeholder')]=el.placeholder});
+}
+
+function setLang(lang){
+  if(lang===currentLang)return;
+  currentLang=lang;
+  document.getElementById('root').setAttribute('lang',lang);
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const k=el.getAttribute('data-i18n');
+    el.textContent=lang==='tr'?(translations.tr[k]||enCache[k]):enCache[k];
   });
+  document.querySelectorAll('[data-i18n-html]').forEach(el=>{
+    const k=el.getAttribute('data-i18n-html');
+    el.innerHTML=lang==='tr'?(translations.tr[k]||enCache[k]):enCache[k];
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
+    const k=el.getAttribute('data-i18n-placeholder');
+    el.placeholder=lang==='tr'?(translations.tr[k]||enCache[k]):enCache[k];
+  });
+  document.querySelectorAll('.lang-btn').forEach(btn=>{
+    btn.classList.toggle('active',btn.textContent.trim()===lang.toUpperCase());
+  });
+  document.title=lang==='tr'?'Kizuna — Kültürleri Birleştiriyor, Kalıcı Bağlar Kuruyor':'Kizuna — Connecting Cultures, Building Lasting Bonds';
+}
 
-  const translations = {
-    tr: {
-      nav_travel:'Japonya Seyahati', nav_services:'Hizmetler', nav_destinations:'Destinasyonlar',
-      nav_about:'Hakkımızda', nav_consulting:'Danışmanlık', nav_contact:'İletişim',
-      hero_exp_badge:'Yıllık<br>Deneyim',
-      hero_eyebrow:'Türkiye · Japonya · Dünya',
-      hero_title:'Japonya\'yı<br><em>güven</em> ve<br>amaçla keşfedin.',
-      hero_sub:'12 yılı aşkın uzmanlığımızla, meraklı gezginler ve hırslı işletmeler için özel seyahat deneyimleri ve sınır ötesi danışmanlık sunuyoruz. Japonya ile bağınız burada başlıyor.',
-      hero_btn_explore:'Japonya turlarını keşfet', hero_btn_business:'İş hizmetleri',
-      trust_1_title:'Japonya uzmanları', trust_1_sub:'Yerel bilgi, küresel hizmet',
-      trust_2_title:'Türkçe · Japonca · İngilizce', trust_2_sub:'Kesintisiz çok dilli destek',
-      trust_3_title:'B2C & B2B hazır', trust_3_sub:'Bireyler ve kurumlar',
-      trust_4_title:'12+ yıllık deneyim', trust_4_sub:'Güven odaklı yaklaşım',
-      svc_eyebrow:'Ne yapıyoruz', svc_title:'Seyahat, danışmanlık ve ötesi.',
-      svc_intro:'Özel Japonya rotalarından sınır ötesi iş stratejisine — hem bireyler hem de kurumlar için kişiselleştirilmiş deneyimler ve profesyonel çözümler sunuyoruz.',
-      svc_col_travel:'Seyahat & Deneyimler', svc_col_biz:'İş & Danışmanlık',
-      svc_t1_title:'Grup Turları', svc_t1_desc:'Tam organize grup seyahatleri, Hac, Umre ve kültürel turlar. Eksiksiz lojistik, rehberlik, konaklama ve kültürel bilgilendirme — topluluklar ve tur operatörleri için.',
-      svc_t2_title:'VIP Özel Turlar', svc_t2_desc:'Seçici gezginler için özel hazırlanmış rotalar. Özel rehberler, lüks konaklama ve küratörlüğünde kültürel deneyimler — kiraz çiçeği sezonundan gizli Japonya\'ya.',
-      svc_t3_title:'Etkinlik Organizasyonu', svc_t3_desc:'Kurumsal etkinlikler, kültürel değişimler, MICE seyahati ve kurumsal delegasyonlar. İstanbul\'dan Tokyo\'ya ve ötesine kusursuz yönetim.',
-      svc_t4_title:'Kültürel Ortaklıklar', svc_t4_desc:'Türk ve Japon kuruluşlarını bir araya getiren uzun vadeli kurumsal ve şirket ortaklıkları — elçilikler, vakıflar, üniversiteler ve şirketler.',
-      svc_b1_title:'Pazar Girişi & İş Geliştirme', svc_b1_desc:'Japonya pazarına giriş hizmeti — pazar araştırması, ortak belirleme, iş toplantıları ve uzman ağı aracılığıyla heyet yönetimi.',
-      svc_b2_title:'Strateji & Danışmanlık', svc_b2_desc:'Ölçülebilir sonuçlara odaklanan ticari strateji ve operasyonel performans iyileştirme — pazar giriş planlamasından CEO düzeyinde rehberliğe.',
-      svc_b3_title:'Yapay Zeka Entegrasyonu', svc_b3_desc:'Teknoloji benimsemesinden önce süreç optimizasyonu — yapay zekanın kuruluşlar için gerçek iş kaldıracı oluşturduğu yerleri belirleme.',
-      svc_b4_title:'Konuşmalar, Koçluk & Atölyeler', svc_b4_desc:'İş dünyasında yapay zeka, kültürler arası iletişim ve çok dilde profesyonel gelişim konularında açılış konuşmaları ve kişiselleştirilmiş koçluk.',
-      dest_eyebrow:'Japonya\'yı Keşfedin', dest_title:'Popüler Destinasyonlar',
-      dest_intro:'Japonya\'nın sunduğu en büyüleyici destinasyonları keşfedin — antik tapınaklardan neon ışıklı şehir manzaralarına.',
-      dest_tag_culture:'Kültür', dest_tag_nature:'Doğa', dest_tag_heritage:'Miras', dest_tag_tech:'Teknoloji', dest_tag_shopping:'Alışveriş',
-      dest_kyoto:'Japonya\'nın kültürel başkenti — 2.000+ tapınak, geyşa mahalleleri, bambu koruları ve ikonik Fushimi Inari.',
-      dest_shizuoka:'Fuji Dağı\'nın evi — Japonya\'nın ikonik zirvesi, çay tarlaları, kaplıcalar ve kıyı manzaraları.',
-      dest_nara:'Geyik Diyarı — dost canlısı geyiklerin UNESCO Dünya Mirası tapınakları arasında serbestçe dolaştığı antik başkent.',
-      dest_akihabara:'Elektrik Kasabası — Tokyo\'nun efsanevi teknoloji merkezi, anime kültürü, oyun salonları ve fütüristik deneyimler.',
-      dest_gotemba:'Japonya\'nın en büyük premium outlet\'i — Fuji Dağı manzarasıyla 290+ lüks marka.',
-      about_eyebrow:'Hikayemiz', about_title:'Kizuna ne demek?',
-      about_body1:'Kizuna (絆), Japonca\'da <em>bağ</em> anlamına gelir. Bu ismi bir marka olarak değil, amacımız olarak seçtik — insanları, kültürleri ve fırsatları birbirine yakınlaştırmak. İster Japonya\'ya ilk seyahatinizi planlıyor olun, ister işinizi sınır ötesine genişletiyor olun, Kizuna güvenilir köprünüzdür.',
-      about_body2:'İstanbul\'da kurulmuş, Japon kültürü ve iş dünyasında derin köklere sahip olan şirketimiz; 12 yılı aşkın süredir seyahat, danışmanlık, kültür ve uluslararası ticaretin kesişim noktasında faaliyet göstermektedir — Türkiye, Japonya, Orta Doğu ve ötesinde bireylere, ailelere, işletmelere ve kurumlara hizmet vermektedir.',
-      about_quote:'"Güçlü bağlar mesafeleri eritir ve gerçek fırsatları ortaya çıkarır."',
-      about_exp_label:'<strong>Yıllık Deneyim</strong><br>Türkiye, Japonya ve Dünya Arasında Köprü',
-      about_mission_vision:'<strong style="color:var(--charcoal);">Misyon:</strong> İnsanları, kültürleri ve fırsatları bir araya getirmek; güvene dayalı, kalıcı ilişkiler kurarak — faaliyet gösterdiğimiz her alanda yüksek standartlı hizmet ve sürdürülebilir değer sunmak.<br><br><strong style="color:var(--charcoal);">Vizyon:</strong> Güven, iş birliği ve kültürel değişimi temsil eden öncü bir küresel marka olmak — insanları ve kurumları sınırlar ötesinde birbirine bağlamak.',
-      clients_eyebrow:'Müşterilerimiz', clients_title:'Kime hizmet ediyoruz',
-      client_1_title:'Bireysel Gezginler', client_1_desc:'Türkiye ve ötesinden Japonya kültürü meraklıları, ilk kez ziyaret edenler, macera arayanlar ve solo kaşifler.',
-      client_2_title:'Gruplar ve Topluluklar', client_2_desc:'Tur grupları, okul gezileri, hac organizasyonları ve tam lojistik destekli topluluk kültür turları.',
-      client_3_title:'İşletmeler', client_3_desc:'Japonya\'ya giren Türk şirketleri, Türk ortaklar arayan Japon firmaları ve uzman kolaylaştırıcılığa ihtiyaç duyan sınır ötesi tüccarlar.',
-      client_4_title:'Kurumlar ve STK\'lar', client_4_desc:'Japonya-Türkiye iş birliği ve etkinlik desteği arayan kültürel kuruluşlar, elçilikler, vakıflar ve sivil toplum kuruluşları.',
-      cta_title:'Japonya ile bağınızı kurmaya hazır mısınız?',
-      cta_desc:'İster kişisel bir yolculuk ister bir iş genişlemesi planlıyor olun — bunu gerçekleştirmek için buradayız. Bize mesaj gönderin ve birlikte anlamlı bir şey yaratalım.',
-      form_name:'Adınız', form_email:'E-posta adresiniz', form_message:'Mesajınız...',
-      form_send:'Mesaj Gönder', form_success:'Teşekkürler! Mesajınız başarıyla gönderildi.',
-      cta_instagram:'Instagram\'da @kizunatr',
-      footer_services:'Hizmetler', footer_japan_travel:'Japonya Seyahati', footer_group_tours:'Grup Turları',
-      footer_vip_tours:'VIP Özel Turlar', footer_consulting:'Danışmanlık', footer_trade:'Yapay Zeka Entegrasyonu',
-      footer_company:'Şirket', footer_about:'Kizuna Hakkında', footer_mission:'Misyon ve Vizyon',
-      footer_who:'Kime Hizmet Ediyoruz', footer_contact:'İletişim', footer_connect:'Bağlantı',
-      footer_copy:'© 2025 Kizuna Turizm ve Danışmanlık Ltd. Şti. · Tüm hakları saklıdır.',
-      footer_tags:'Turizm · Danışmanlık · Organizasyon · Dış Ticaret · Kültür'
-    }
-  };
-  const enCache = {};
-  let currentLang = 'en';
-  function cacheEnglish() {
-    document.querySelectorAll('[data-i18n]').forEach(el => { enCache[el.getAttribute('data-i18n')] = el.textContent; });
-    document.querySelectorAll('[data-i18n-html]').forEach(el => { enCache[el.getAttribute('data-i18n-html')] = el.innerHTML; });
-    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => { enCache[el.getAttribute('data-i18n-placeholder')] = el.placeholder; });
-  }
-  function setLang(lang) {
-    if (lang === currentLang) return;
-    currentLang = lang;
-    document.getElementById('root').setAttribute('lang', lang);
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      const k = el.getAttribute('data-i18n');
-      el.textContent = lang === 'tr' ? (translations.tr[k] || enCache[k]) : enCache[k];
-    });
-    document.querySelectorAll('[data-i18n-html]').forEach(el => {
-      const k = el.getAttribute('data-i18n-html');
-      el.innerHTML = lang === 'tr' ? (translations.tr[k] || enCache[k]) : enCache[k];
-    });
-    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-      const k = el.getAttribute('data-i18n-placeholder');
-      el.placeholder = lang === 'tr' ? (translations.tr[k] || enCache[k]) : enCache[k];
-    });
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-      btn.classList.toggle('active', btn.textContent.trim() === lang.toUpperCase());
-    });
-    document.title = lang === 'tr' ? 'Kizuna — Japonya Seyahat ve Danışmanlık' : 'Kizuna — Japan Travel & Consulting';
-  }
-  cacheEnglish();
+cacheEnglish();
 </script>
 </body>
 </html>
