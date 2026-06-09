@@ -81,10 +81,34 @@
   .nav-cta-btn:hover { background: var(--dark-red) !important; transform: translateY(-1px); }
   .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
   .nav-hamburger span { width: 22px; height: 1.5px; background: var(--charcoal); display: block; transition: all 0.3s; }
-  .mobile-menu { display: none; flex-direction: column; background: #fff; border-bottom: 0.5px solid var(--grey-line); padding: 8px 0; position: sticky; top: 68px; z-index: 99; }
-  .mobile-menu a { padding: 14px 32px; font-size: 14px; color: var(--grey-2); border-bottom: 0.5px solid var(--grey-line); }
-  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu {
+    position: fixed; top: 0; left: 0; width: 280px; height: 100vh;
+    background: #fff; z-index: 200; padding: 0;
+    display: flex; flex-direction: column;
+    transform: translateX(-100%); transition: transform 0.35s cubic-bezier(.4,0,.2,1);
+    box-shadow: 4px 0 24px rgba(0,0,0,0.1);
+    overflow-y: auto;
+  }
+  .mobile-menu.open { transform: translateX(0); }
+  .mobile-menu-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 20px; border-bottom: 1px solid var(--grey-line);
+  }
+  .mobile-menu-header img { height: 36px; }
+  .mobile-menu-close {
+    width: 32px; height: 32px; border: none; background: none; cursor: pointer;
+    font-size: 20px; color: var(--grey-2); display: flex; align-items: center; justify-content: center;
+    border-radius: 6px; transition: background 0.2s;
+  }
+  .mobile-menu-close:hover { background: var(--grey-bg); }
+  .mobile-menu a { padding: 16px 24px; font-size: 14px; color: var(--grey-2); border-bottom: 0.5px solid var(--grey-line); transition: background 0.2s, color 0.2s; }
+  .mobile-menu a:hover { background: var(--red-tint); color: var(--crimson); }
   .mobile-menu a.cta-m { color: var(--crimson); font-weight: 500; }
+  .mobile-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 199;
+    opacity: 0; pointer-events: none; transition: opacity 0.35s;
+  }
+  .mobile-overlay.open { opacity: 1; pointer-events: auto; }
 
   /* ── LANGUAGE TOGGLE ── */
   .lang-toggle { display: flex; border: 1px solid var(--grey-line); border-radius: 4px; overflow: hidden; margin-left: 8px; height: 32px; }
@@ -369,14 +393,19 @@
     <span></span><span></span><span></span>
   </div>
 </nav>
+<div class="mobile-overlay" id="mobileOverlay" onclick="toggleMenu()"></div>
 <div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-header">
+    <img src="kizunamainlogo.png" alt="Kizuna">
+    <button class="mobile-menu-close" onclick="toggleMenu()" aria-label="Close menu">&times;</button>
+  </div>
   <a href="#travel" onclick="toggleMenu()" data-i18n="nav_travel">Japan Travel</a>
   <a href="#services" onclick="toggleMenu()" data-i18n="nav_services">Services</a>
   <a href="#destinations" onclick="toggleMenu()" data-i18n="nav_destinations">Destinations</a>
   <a href="#about" onclick="toggleMenu()" data-i18n="nav_about">About</a>
   <a href="#consulting" onclick="toggleMenu()" data-i18n="nav_consulting">Consulting</a>
   <a href="#contact" class="cta-m" onclick="toggleMenu()" data-i18n="nav_contact">Contact</a>
-  <div style="padding:14px 32px; display:flex; gap:8px;">
+  <div style="padding:16px 24px; display:flex; gap:8px;">
     <button class="lang-btn active" onclick="setLang('en')" style="border:1px solid var(--grey-line); border-radius:4px; padding:8px 16px;">EN</button>
     <button class="lang-btn" onclick="setLang('tr')" style="border:1px solid var(--grey-line); border-radius:4px; padding:8px 16px;">TR</button>
   </div>
@@ -714,7 +743,10 @@
 </footer>
 
 <script>
-  function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+    document.getElementById('mobileOverlay').classList.toggle('open');
+  }
   document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(a => {
     a.addEventListener('click', function() {
       document.querySelectorAll('.nav-links a').forEach(x => x.classList.remove('active'));
