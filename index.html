@@ -56,8 +56,9 @@
     border-bottom: 0.5px solid var(--grey-line);
     background: #fff; position: sticky; top: 0; z-index: 100;
   }
-  .nav-logo { display: flex; align-items: center; }
-  .nav-logo-img { height: 48px; width: auto; }
+  .nav-logo { display: flex; align-items: center; gap: 10px; }
+  .nav-logo-img { height: 44px; width: auto; }
+  .nav-logo-text { font-family: var(--serif); font-size: 22px; font-weight: 300; letter-spacing: 2px; color: var(--charcoal); }
   .nav-links { display: flex; gap: 28px; align-items: center; }
   .nav-links a {
     font-size: 13px; color: var(--grey-2); letter-spacing: 0.02em;
@@ -126,21 +127,39 @@
   .exp-badge-text { font-size: 12px; font-weight: 500; color: var(--dark-red); letter-spacing: 0.04em; line-height: 1.3; }
 
   /* ── CAROUSEL ── */
-  .hero-right { position: relative; overflow: hidden; }
-  .carousel { position: relative; width: 100%; height: 100%; min-height: 400px; }
+  .hero-right { position: relative; overflow: hidden; background: var(--charcoal); }
+  .carousel { position: relative; width: 100%; height: 100%; min-height: 480px; }
   .carousel-slide {
-    position: absolute; inset: 0; opacity: 0; transition: opacity 1s ease;
+    position: absolute; inset: 0; opacity: 0;
+    transition: opacity 1.2s ease, transform 6s ease;
     background-size: cover; background-position: center;
+    transform: scale(1.05);
   }
-  .carousel-slide.active { opacity: 1; }
-  .carousel-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(61,61,61,0.12) 0%, rgba(0,0,0,0.04) 100%); }
-  .carousel-dots { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 5; }
+  .carousel-slide.active { opacity: 1; transform: scale(1); }
+  .carousel-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.1) 100%);
+  }
+  .carousel-content {
+    position: absolute; bottom: 40px; left: 28px; right: 28px; z-index: 5;
+    display: flex; justify-content: space-between; align-items: flex-end;
+  }
+  .carousel-label { color: #fff; }
+  .carousel-label-place {
+    font-family: var(--serif); font-size: 26px; font-weight: 300;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.5); margin-bottom: 2px;
+  }
+  .carousel-label-sub {
+    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+  }
+  .carousel-dots { display: flex; gap: 8px; z-index: 5; }
   .carousel-dot {
-    width: 10px; height: 10px; border-radius: 50%;
-    background: rgba(255,255,255,0.45); border: 1.5px solid rgba(255,255,255,0.8);
-    cursor: pointer; transition: all 0.3s;
+    width: 28px; height: 3px; border-radius: 2px;
+    background: rgba(255,255,255,0.3); cursor: pointer;
+    transition: all 0.4s;
   }
-  .carousel-dot.active { background: #fff; transform: scale(1.2); }
+  .carousel-dot.active { background: #fff; width: 40px; }
 
   /* ── TRUST BAR ── */
   .trust-bar { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 0.5px solid var(--grey-line); border-bottom: 0.5px solid var(--grey-line); }
@@ -152,14 +171,15 @@
   .trust-sub { font-size: 11px; color: var(--grey-3); }
 
   /* ── SERVICES SPLIT ── */
-  .services-split { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .services-split { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+  .services-split > div { display: flex; flex-direction: column; }
   .services-col-header { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--crimson); }
   .services-col-header.pink { border-bottom-color: var(--sakura); }
   .services-col-title { font-family: var(--serif); font-size: 22px; font-weight: 400; color: var(--charcoal); }
   .services-col-icon { font-size: 20px; }
   .svc-card {
     border: 0.5px solid var(--grey-line); border-radius: 10px; padding: 22px 20px; margin-bottom: 12px;
-    transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s; flex: 1;
   }
   .svc-card:hover { border-color: var(--crimson); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
   .svc-card.b2b:hover { border-color: var(--sakura); }
@@ -174,18 +194,42 @@
   .tag-b2b { background: var(--sakura-bg); color: #A8547A; }
   .tag-both { background: var(--grey-bg); color: var(--grey-2); }
 
-  /* ── DESTINATIONS ── */
-  .dest-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 36px; }
-  .dest-card { border-radius: 12px; overflow: hidden; position: relative; height: 300px; cursor: pointer; }
-  .dest-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
-  .dest-card:hover img { transform: scale(1.08); }
-  .dest-overlay {
-    position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; color: #fff;
-    background: linear-gradient(transparent, rgba(0,0,0,0.65)); transition: padding-bottom 0.3s ease;
+  /* ── DESTINATIONS (bento) ── */
+  .dest-bento {
+    display: grid; margin-top: 36px; gap: 16px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 280px 240px;
   }
-  .dest-card:hover .dest-overlay { padding-bottom: 28px; }
-  .dest-name { font-family: var(--serif); font-size: 20px; font-weight: 400; margin-bottom: 4px; }
-  .dest-info { font-size: 11.5px; color: rgba(255,255,255,0.8); line-height: 1.6; }
+  .dest-card {
+    border-radius: 14px; overflow: hidden; position: relative; cursor: pointer;
+    background: var(--charcoal);
+  }
+  .dest-card:nth-child(1) { grid-column: 1 / 3; }
+  .dest-card:nth-child(4) { grid-column: 3 / 5; }
+  .dest-card img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.7s cubic-bezier(.25,.46,.45,.94), filter 0.5s;
+    filter: brightness(0.85);
+  }
+  .dest-card:hover img { transform: scale(1.06); filter: brightness(1); }
+  .dest-overlay {
+    position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 22px; color: #fff;
+    background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 55%);
+    transition: background 0.4s;
+  }
+  .dest-card:hover .dest-overlay { background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 60%); }
+  .dest-tag {
+    font-size: 9px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+    background: var(--crimson); color: #fff; padding: 3px 10px; border-radius: 20px;
+    width: fit-content; margin-bottom: 8px;
+  }
+  .dest-name { font-family: var(--serif); font-size: 22px; font-weight: 400; margin-bottom: 4px; }
+  .dest-info {
+    font-size: 11.5px; color: rgba(255,255,255,0.75); line-height: 1.55;
+    max-height: 0; overflow: hidden; transition: max-height 0.4s ease, opacity 0.3s; opacity: 0;
+  }
+  .dest-card:hover .dest-info { max-height: 60px; opacity: 1; }
 
   /* ── ABOUT ── */
   .about-strip { background: var(--grey-bg); }
@@ -275,7 +319,9 @@
     .trust-item:nth-child(4) { border-top: 0.5px solid var(--grey-line); border-right: none; }
     .services-split { grid-template-columns: 1fr; gap: 32px; }
     .about-inner { grid-template-columns: 1fr; gap: 28px; }
-    .dest-grid { grid-template-columns: 1fr 1fr; }
+    .dest-bento { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+    .dest-card:nth-child(1), .dest-card:nth-child(4) { grid-column: auto; }
+    .dest-card { min-height: 220px; }
     .clients-grid { grid-template-columns: 1fr 1fr; }
     .footer-inner { grid-template-columns: 1fr 1fr; gap: 28px; }
     .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
@@ -288,7 +334,8 @@
     .trust-item { border-right: none; border-top: 0.5px solid var(--grey-line); }
     .trust-item:first-child { border-top: none; }
     .clients-grid { grid-template-columns: 1fr; }
-    .dest-grid { grid-template-columns: 1fr; }
+    .dest-bento { grid-template-columns: 1fr; }
+    .dest-card { min-height: 200px; }
     .footer-inner { grid-template-columns: 1fr; }
     h1 { font-size: 34px; }
     h2 { font-size: 26px; }
@@ -303,6 +350,7 @@
 <nav id="navbar">
   <a href="#" class="nav-logo">
     <img src="kizunamainlogo.png" alt="Kizuna" class="nav-logo-img">
+    <span class="nav-logo-text">Kizuna</span>
   </a>
   <div class="nav-links">
     <a href="#travel" class="active" data-i18n="nav_travel">Japan Travel</a>
@@ -352,15 +400,21 @@
     </div>
     <div class="hero-right">
       <div class="carousel" id="heroCarousel">
-        <div class="carousel-slide active" style="background-image:url('https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800&h=600&fit=crop&q=80')"><div class="carousel-overlay"></div></div>
-        <div class="carousel-slide" style="background-image:url('https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&h=600&fit=crop&q=80')"><div class="carousel-overlay"></div></div>
-        <div class="carousel-slide" style="background-image:url('https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?w=800&h=600&fit=crop&q=80')"><div class="carousel-overlay"></div></div>
-        <div class="carousel-slide" style="background-image:url('https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&h=600&fit=crop&q=80')"><div class="carousel-overlay"></div></div>
-        <div class="carousel-dots">
-          <div class="carousel-dot active" onclick="goToSlide(0)"></div>
-          <div class="carousel-dot" onclick="goToSlide(1)"></div>
-          <div class="carousel-dot" onclick="goToSlide(2)"></div>
-          <div class="carousel-dot" onclick="goToSlide(3)"></div>
+        <div class="carousel-slide active" data-place="Kyoto" data-sub="Cultural Capital" style="background-image:url('https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=1200&h=900&fit=crop&q=85')"><div class="carousel-overlay"></div></div>
+        <div class="carousel-slide" data-place="Tokyo" data-sub="City of the Future" style="background-image:url('https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?w=1200&h=900&fit=crop&q=85')"><div class="carousel-overlay"></div></div>
+        <div class="carousel-slide" data-place="Mt. Fuji" data-sub="Shizuoka Prefecture" style="background-image:url('https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?w=1200&h=900&fit=crop&q=85')"><div class="carousel-overlay"></div></div>
+        <div class="carousel-slide" data-place="Nara" data-sub="Deer Land" style="background-image:url('https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=1200&h=900&fit=crop&q=85')"><div class="carousel-overlay"></div></div>
+        <div class="carousel-content">
+          <div class="carousel-label">
+            <div class="carousel-label-place" id="carouselPlace">Kyoto</div>
+            <div class="carousel-label-sub" id="carouselSub">Cultural Capital</div>
+          </div>
+          <div class="carousel-dots">
+            <div class="carousel-dot active" onclick="goToSlide(0)"></div>
+            <div class="carousel-dot" onclick="goToSlide(1)"></div>
+            <div class="carousel-dot" onclick="goToSlide(2)"></div>
+            <div class="carousel-dot" onclick="goToSlide(3)"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -484,47 +538,45 @@
       <div class="rule rule-center"></div>
       <p style="max-width:500px; margin:0 auto;" data-i18n="dest_intro">Discover the most captivating destinations Japan has to offer — from ancient temples to neon-lit cityscapes.</p>
     </div>
-    <div class="dest-grid fade-in">
+    <div class="dest-bento fade-in">
       <div class="dest-card">
-        <img src="https://images.unsplash.com/photo-1503899036084-c55cdd92da26?w=600&h=400&fit=crop&q=80" alt="Tokyo" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=900&h=600&fit=crop&q=85" alt="Kyoto" loading="lazy">
         <div class="dest-overlay">
-          <div class="dest-name">Tokyo</div>
-          <div class="dest-info" data-i18n="dest_tokyo">Electrifying capital blending ultramodern skyscrapers with historic temples — Shibuya, Senso-ji, Akihabara and beyond.</div>
-        </div>
-      </div>
-      <div class="dest-card">
-        <img src="https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=600&h=400&fit=crop&q=80" alt="Kyoto" loading="lazy">
-        <div class="dest-overlay">
+          <div class="dest-tag" data-i18n="dest_tag_culture">Culture</div>
           <div class="dest-name">Kyoto</div>
-          <div class="dest-info" data-i18n="dest_kyoto">Cultural heart of Japan with over 2,000 temples. Geisha districts, bamboo groves, and the iconic Fushimi Inari.</div>
+          <div class="dest-info" data-i18n="dest_kyoto">Cultural capital of Japan — 2,000+ temples, geisha districts, bamboo groves and the iconic Fushimi Inari.</div>
         </div>
       </div>
       <div class="dest-card">
-        <img src="https://images.unsplash.com/photo-1590559899731-a382839e5549?w=600&h=400&fit=crop&q=80" alt="Osaka" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?w=600&h=500&fit=crop&q=85" alt="Shizuoka" loading="lazy">
         <div class="dest-overlay">
-          <div class="dest-name">Osaka</div>
-          <div class="dest-info" data-i18n="dest_osaka">Japan's kitchen and entertainment capital. Famous street food, Osaka Castle, and the vibrant Dotonbori district.</div>
+          <div class="dest-tag" data-i18n="dest_tag_nature">Nature</div>
+          <div class="dest-name">Shizuoka</div>
+          <div class="dest-info" data-i18n="dest_shizuoka">Home to Mt. Fuji — Japan's iconic peak, tea plantations, hot springs and coastal scenery.</div>
         </div>
       </div>
       <div class="dest-card">
-        <img src="https://images.unsplash.com/photo-1624601573012-efb68931cc8f?w=600&h=400&fit=crop&q=80" alt="Nara" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1624601573012-efb68931cc8f?w=600&h=500&fit=crop&q=85" alt="Nara" loading="lazy">
         <div class="dest-overlay">
+          <div class="dest-tag" data-i18n="dest_tag_heritage">Heritage</div>
           <div class="dest-name">Nara</div>
-          <div class="dest-info" data-i18n="dest_nara">Ancient capital where friendly deer roam freely among UNESCO World Heritage temples and the great bronze Buddha.</div>
+          <div class="dest-info" data-i18n="dest_nara">Deer Land — friendly deer roam freely among UNESCO World Heritage temples and the great bronze Buddha.</div>
         </div>
       </div>
       <div class="dest-card">
-        <img src="https://images.unsplash.com/photo-1492571350019-22de08371fd3?w=600&h=400&fit=crop&q=80" alt="Hakone" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=900&h=600&fit=crop&q=85" alt="Akihabara" loading="lazy">
         <div class="dest-overlay">
-          <div class="dest-name">Hakone</div>
-          <div class="dest-info" data-i18n="dest_hakone">Mountain resort with hot springs, stunning Mt. Fuji views, and the serene beauty of Lake Ashi.</div>
+          <div class="dest-tag" data-i18n="dest_tag_tech">Technology</div>
+          <div class="dest-name">Akihabara</div>
+          <div class="dest-info" data-i18n="dest_akihabara">Electric Town — Tokyo's legendary tech hub, anime culture, gaming arcades and futuristic experiences.</div>
         </div>
       </div>
       <div class="dest-card">
-        <img src="https://images.unsplash.com/photo-1526481280693-3bfa7568e0f8?w=600&h=400&fit=crop&q=80" alt="Hiroshima" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1528164344705-47542687000d?w=600&h=500&fit=crop&q=85" alt="Gotemba" loading="lazy">
         <div class="dest-overlay">
-          <div class="dest-name">Hiroshima</div>
-          <div class="dest-info" data-i18n="dest_hiroshima">A city of resilience and peace. Peace Memorial Park and a ferry ride to the sacred island of Miyajima.</div>
+          <div class="dest-tag" data-i18n="dest_tag_shopping">Shopping</div>
+          <div class="dest-name">Gotemba</div>
+          <div class="dest-info" data-i18n="dest_gotemba">Japan's biggest premium outlet — 290+ luxury brands with Mt. Fuji as your backdrop.</div>
         </div>
       </div>
     </div>
@@ -670,14 +722,18 @@
   let currentSlide = 0;
   const slides = document.querySelectorAll('.carousel-slide');
   const dots = document.querySelectorAll('.carousel-dot');
+  const placeEl = document.getElementById('carouselPlace');
+  const subEl = document.getElementById('carouselSub');
   function goToSlide(n) {
     slides[currentSlide].classList.remove('active');
     dots[currentSlide].classList.remove('active');
     currentSlide = n;
     slides[currentSlide].classList.add('active');
     dots[currentSlide].classList.add('active');
+    placeEl.textContent = slides[n].dataset.place;
+    subEl.textContent = slides[n].dataset.sub;
   }
-  setInterval(() => { goToSlide((currentSlide + 1) % slides.length); }, 4500);
+  setInterval(() => { goToSlide((currentSlide + 1) % slides.length); }, 5000);
 
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
@@ -721,12 +777,12 @@
       svc_b4_title:'Konuşmalar, Koçluk & Atölyeler', svc_b4_desc:'İş dünyasında yapay zeka, kültürler arası iletişim ve çok dilde profesyonel gelişim konularında açılış konuşmaları ve kişiselleştirilmiş koçluk.',
       dest_eyebrow:'Japonya\'yı Keşfedin', dest_title:'Popüler Destinasyonlar',
       dest_intro:'Japonya\'nın sunduğu en büyüleyici destinasyonları keşfedin — antik tapınaklardan neon ışıklı şehir manzaralarına.',
-      dest_tokyo:'Ultramodern gökdelenleri tarihi tapınaklarla harmanlayan elektrikli başkent — Shibuya, Senso-ji, Akihabara ve ötesi.',
-      dest_kyoto:'2.000\'den fazla tapınağıyla Japonya\'nın kültürel kalbi. Geyşa mahalleleri, bambu koruları ve ikonik Fushimi Inari.',
-      dest_osaka:'Japonya\'nın mutfağı ve eğlence başkenti. Ünlü sokak yemekleri, Osaka Kalesi ve canlı Dotonbori bölgesi.',
-      dest_nara:'Dost canlısı geyiklerin UNESCO Dünya Mirası tapınakları arasında serbestçe dolaştığı antik başkent.',
-      dest_hakone:'Kaplıcaları, muhteşem Fuji Dağı manzaraları ve Ashi Gölü\'nün dingin güzelliğiyle dağ tatil beldesi.',
-      dest_hiroshima:'Dayanıklılık ve barış şehri. Barış Anıt Parkı ve kutsal Miyajima adasına feribot yolculuğu.',
+      dest_tag_culture:'Kültür', dest_tag_nature:'Doğa', dest_tag_heritage:'Miras', dest_tag_tech:'Teknoloji', dest_tag_shopping:'Alışveriş',
+      dest_kyoto:'Japonya\'nın kültürel başkenti — 2.000+ tapınak, geyşa mahalleleri, bambu koruları ve ikonik Fushimi Inari.',
+      dest_shizuoka:'Fuji Dağı\'nın evi — Japonya\'nın ikonik zirvesi, çay tarlaları, kaplıcalar ve kıyı manzaraları.',
+      dest_nara:'Geyik Diyarı — dost canlısı geyiklerin UNESCO Dünya Mirası tapınakları arasında serbestçe dolaştığı antik başkent.',
+      dest_akihabara:'Elektrik Kasabası — Tokyo\'nun efsanevi teknoloji merkezi, anime kültürü, oyun salonları ve fütüristik deneyimler.',
+      dest_gotemba:'Japonya\'nın en büyük premium outlet\'i — Fuji Dağı manzarasıyla 290+ lüks marka.',
       about_eyebrow:'Hikayemiz', about_title:'Kizuna ne demek?',
       about_body1:'Kizuna (絆), Japonca\'da <em>bağ</em> anlamına gelir. Bu ismi bir marka olarak değil, amacımız olarak seçtik — insanları, kültürleri ve fırsatları birbirine yakınlaştırmak. İster Japonya\'ya ilk seyahatinizi planlıyor olun, ister işinizi sınır ötesine genişletiyor olun, Kizuna güvenilir köprünüzdür.',
       about_body2:'İstanbul\'da kurulmuş, Japon kültürü ve iş dünyasında derin köklere sahip olan şirketimiz; 12 yılı aşkın süredir seyahat, danışmanlık, kültür ve uluslararası ticaretin kesişim noktasında faaliyet göstermektedir — Türkiye, Japonya, Orta Doğu ve ötesinde bireylere, ailelere, işletmelere ve kurumlara hizmet vermektedir.',
