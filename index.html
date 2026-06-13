@@ -89,7 +89,8 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:0 32px
 nav.scrolled{box-shadow:0 1px 20px rgba(0,0,0,0.15)}
 
 .nav-logo{display:flex;align-items:center;gap:12px}
-.nav-logo-img{height:44px;width:auto}
+.nav-logo-img{height:44px;width:auto;transition:filter 0.4s}
+[data-theme="dark"] .nav-logo-img{filter:invert(1)}
 .nav-logo-text{font-family:var(--serif);font-size:22px;font-weight:300;letter-spacing:2px;color:var(--text)}
 .nav-links{display:flex;gap:28px;align-items:center}
 .nav-links a{font-size:13px;color:var(--nav-link);letter-spacing:0.02em;transition:color 0.2s;position:relative}
