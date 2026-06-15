@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" id="root" data-theme="dark">
+<html lang="tr" id="root" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kizuna — Japan Travel & Consulting</title>
+<title>Kizuna — Japonya Seyahat ve Danışmanlık</title>
 <link rel="icon" type="image/png" href="kizuna logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
 <style>
@@ -350,8 +350,8 @@ footer{background:var(--footer-bg);border-top:1px solid var(--border)}
     <a href="#consulting" data-i18n="nav_consulting">Consulting</a>
     <a href="#contact" class="nav-cta-btn" data-i18n="nav_contact">Contact</a>
     <div class="lang-toggle">
-      <button class="lang-btn active" onclick="setLang('en')">EN</button>
-      <button class="lang-btn" onclick="setLang('tr')">TR</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+      <button class="lang-btn active" onclick="setLang('tr')">TR</button>
     </div>
     <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
       <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
@@ -381,8 +381,8 @@ footer{background:var(--footer-bg);border-top:1px solid var(--border)}
   <a href="#consulting" onclick="toggleMenu()" data-i18n="nav_consulting">Consulting</a>
   <a href="#contact" class="cta-m" onclick="toggleMenu()" data-i18n="nav_contact">Contact</a>
   <div style="padding:16px 24px;display:flex;gap:8px;">
-    <button class="lang-btn active" onclick="setLang('en')" style="border:1px solid var(--border);border-radius:4px;padding:8px 16px;">EN</button>
-    <button class="lang-btn" onclick="setLang('tr')" style="border:1px solid var(--border);border-radius:4px;padding:8px 16px;">TR</button>
+    <button class="lang-btn" onclick="setLang('en')" style="border:1px solid var(--border);border-radius:4px;padding:8px 16px;">EN</button>
+    <button class="lang-btn active" onclick="setLang('tr')" style="border:1px solid var(--border);border-radius:4px;padding:8px 16px;">TR</button>
   </div>
 </div>
 
@@ -652,50 +652,50 @@ const translations={
     nav_travel:'Japonya Seyahati',nav_services:'Hizmetler',nav_destinations:'Destinasyonlar',
     nav_about:'Hakkımızda',nav_consulting:'Danışmanlık',nav_contact:'İletişim',
     hero_exp_badge:'Yıllık<br>Deneyim',hero_eyebrow:'Türkiye · Japonya · Dünya',
-    hero_title:'Japonya\'yı<br><em>güven</em> ve<br>amaçla keşfedin.',
-    hero_sub:'12 yılı aşkın uzmanlığımızla, meraklı gezginler ve hırslı işletmeler için özel seyahat deneyimleri ve sınır ötesi danışmanlık sunuyoruz. Japonya ile bağınız burada başlıyor.',
-    hero_btn_explore:'Japonya turlarını keşfet',hero_btn_business:'İş hizmetleri',
+    hero_title:'Japonya\'yı<br><em>güvenle</em> ve<br>amaçla keşfedin.',
+    hero_sub:'12 yılı aşkın deneyimimizle, meraklı gezginlerden büyümeyi hedefleyen şirketlere kadar herkese kişiye özel seyahat deneyimleri ve sınır ötesi danışmanlık sunuyoruz. Japonya ile kuracağınız bağ burada başlıyor.',
+    hero_btn_explore:'Japonya turlarını keşfedin',hero_btn_business:'Kurumsal hizmetler',
     trust_1_title:'Japonya uzmanları',trust_1_sub:'Yerel bilgi, küresel hizmet',
     trust_2_title:'Türkçe · Japonca · İngilizce',trust_2_sub:'Kesintisiz çok dilli destek',
-    trust_3_title:'B2C & B2B hazır',trust_3_sub:'Bireyler ve kurumlar',
+    trust_3_title:'B2C ve B2B çözümler',trust_3_sub:'Bireyler ve kurumlar için',
     trust_4_title:'12+ yıllık deneyim',trust_4_sub:'Güven odaklı yaklaşım',
-    svc_eyebrow:'Ne yapıyoruz',svc_title:'Seyahat, danışmanlık ve ötesi.',
-    svc_intro:'Özel Japonya rotalarından sınır ötesi iş stratejisine — hem bireyler hem de kurumlar için kişiselleştirilmiş deneyimler ve profesyonel çözümler sunuyoruz.',
-    svc_col_travel:'Seyahat & Deneyimler',svc_col_biz:'İş & Danışmanlık',
-    svc_t1_title:'Grup Turları',svc_t1_desc:'Tam organize grup seyahatleri, Hac, Umre ve kültürel turlar. Eksiksiz lojistik, rehberlik, konaklama ve kültürel bilgilendirme — topluluklar ve tur operatörleri için.',
-    svc_t2_title:'VIP Özel Turlar',svc_t2_desc:'Seçici gezginler için özel hazırlanmış rotalar. Özel rehberler, lüks konaklama ve küratörlüğünde kültürel deneyimler — kiraz çiçeği sezonundan gizli Japonya\'ya.',
-    svc_t3_title:'Etkinlik Organizasyonu',svc_t3_desc:'Kurumsal etkinlikler, kültürel değişimler, MICE seyahati ve kurumsal delegasyonlar. İstanbul\'dan Tokyo\'ya ve ötesine kusursuz yönetim.',
-    svc_t4_title:'Kültürel Ortaklıklar',svc_t4_desc:'Türk ve Japon kuruluşlarını bir araya getiren uzun vadeli kurumsal ve şirket ortaklıkları — elçilikler, vakıflar, üniversiteler ve şirketler.',
-    svc_b1_title:'Pazar Girişi & İş Geliştirme',svc_b1_desc:'Japonya pazarına giriş hizmeti — pazar araştırması, ortak belirleme, iş toplantıları ve uzman ağı aracılığıyla heyet yönetimi.',
-    svc_b2_title:'Strateji & Danışmanlık',svc_b2_desc:'Ölçülebilir sonuçlara odaklanan ticari strateji ve operasyonel performans iyileştirme — pazar giriş planlamasından CEO düzeyinde rehberliğe.',
-    svc_b3_title:'Yapay Zeka Entegrasyonu',svc_b3_desc:'Teknoloji benimsemesinden önce süreç optimizasyonu — yapay zekanın kuruluşlar için gerçek iş kaldıracı oluşturduğu yerleri belirleme.',
-    svc_b4_title:'Konuşmalar, Koçluk & Atölyeler',svc_b4_desc:'İş dünyasında yapay zeka, kültürler arası iletişim ve çok dilde profesyonel gelişim konularında açılış konuşmaları ve kişiselleştirilmiş koçluk.',
+    svc_eyebrow:'Neler yapıyoruz',svc_title:'Seyahat, danışmanlık ve dahası.',
+    svc_intro:'Kişiye özel Japonya rotalarından sınır ötesi iş stratejilerine kadar — hem bireyler hem de kurumlar için kişiselleştirilmiş deneyimler ve profesyonel çözümler sunuyoruz.',
+    svc_col_travel:'Seyahat ve Deneyimler',svc_col_biz:'İş ve Danışmanlık',
+    svc_t1_title:'Grup Turları',svc_t1_desc:'Baştan sona organize grup seyahatleri, Hac, Umre ve kültür turları. Eksiksiz lojistik, rehberlik, konaklama ve kültürel bilgilendirme — hem topluluklar hem de tur operatörleri için.',
+    svc_t2_title:'VIP Özel Turlar',svc_t2_desc:'Seçici gezginler için özel olarak hazırlanan rotalar. Özel rehberler, lüks konaklama ve özenle seçilmiş kültürel deneyimler — kiraz çiçeği mevsiminden Japonya\'nın saklı köşelerine.',
+    svc_t3_title:'Etkinlik Organizasyonu',svc_t3_desc:'Kurumsal etkinlikler, kültürel değişim programları, MICE seyahatleri ve resmi heyet organizasyonları. İstanbul\'dan Tokyo\'ya ve ötesine kusursuz şekilde yönetilir.',
+    svc_t4_title:'Kültürel İş Birlikleri',svc_t4_desc:'Türk ve Japon kurumlarını bir araya getiren uzun vadeli kurumsal iş birlikleri — elçilikler, vakıflar, üniversiteler ve şirketler.',
+    svc_b1_title:'Pazara Giriş ve İş Geliştirme',svc_b1_desc:'Japonya pazarına giriş için kapı hizmeti — pazar araştırması, iş ortağı bulma, iş görüşmeleri ve uzman ağımız aracılığıyla heyet yönetimi.',
+    svc_b2_title:'Strateji ve Danışmanlık',svc_b2_desc:'Ölçülebilir sonuçlara odaklı ticari strateji ve operasyonel performans iyileştirme — pazara giriş planlamasından CEO düzeyinde danışmanlığa kadar, kanıtlanmış yöntemlerle.',
+    svc_b3_title:'Yapay Zeka Entegrasyonu',svc_b3_desc:'Teknolojiye geçmeden önce süreç optimizasyonu — yapay zekanın kurumunuza gerçek katma değer sağlayacağı alanları belirliyoruz; ilk adımdan kapsamlı dönüşüme kadar.',
+    svc_b4_title:'Konuşma, Koçluk ve Atölyeler',svc_b4_desc:'İş dünyasında yapay zeka, kültürler arası iletişim ve profesyonel gelişim üzerine açılış konuşmaları ve birden çok dilde kişiye özel koçlukla liderlik gelişimi.',
     dest_eyebrow:'Japonya\'yı Keşfedin',dest_title:'Popüler Destinasyonlar',
-    dest_intro:'Japonya\'nın sunduğu en büyüleyici destinasyonları keşfedin — antik tapınaklardan neon ışıklı şehir manzaralarına.',
+    dest_intro:'Japonya\'nın sunduğu en büyüleyici destinasyonları keşfedin — kadim tapınaklardan neon ışıklı şehir manzaralarına.',
     dest_tag_culture:'Kültür',dest_tag_nature:'Doğa',dest_tag_heritage:'Miras',dest_tag_tech:'Teknoloji',dest_tag_shopping:'Alışveriş',
-    dest_kyoto:'Japonya\'nın kültürel başkenti — 2.000+ tapınak, geyşa mahalleleri, bambu koruları ve ikonik Fushimi Inari.',
-    dest_shizuoka:'Fuji Dağı\'nın evi — Japonya\'nın ikonik zirvesi, çay tarlaları, kaplıcalar ve kıyı manzaraları.',
-    dest_nara:'Geyik Diyarı — dost canlısı geyiklerin UNESCO Dünya Mirası tapınakları arasında serbestçe dolaştığı antik başkent.',
-    dest_akihabara:'Elektrik Kasabası — Tokyo\'nun efsanevi teknoloji merkezi, anime kültürü, oyun salonları ve fütüristik deneyimler.',
-    dest_gotemba:'Japonya\'nın en büyük premium outlet\'i — Fuji Dağı manzarasıyla 290+ lüks marka.',
+    dest_kyoto:'Japonya\'nın kültür başkenti — 2.000\'den fazla tapınak, geyşa mahalleleri, bambu ormanları ve ikonik Fushimi Inari.',
+    dest_shizuoka:'Fuji Dağı\'na ev sahipliği yapan bölge — Japonya\'nın simge zirvesi, çay bahçeleri, kaplıcalar ve eşsiz kıyı manzaraları.',
+    dest_nara:'Geyik Diyarı — dost canlısı geyiklerin UNESCO Dünya Mirası tapınakları ve dev bronz Buda heykeli arasında özgürce dolaştığı kadim şehir.',
+    dest_akihabara:'Elektronik Şehri — Tokyo\'nun efsanevi teknoloji merkezi, anime kültürü, oyun salonları ve fütüristik deneyimler.',
+    dest_gotemba:'Japonya\'nın en büyük lüks outlet\'i — Fuji Dağı manzarası eşliğinde 290\'dan fazla seçkin marka.',
     about_eyebrow:'Hikayemiz',about_title:'Kizuna ne demek?',
-    about_body1:'Kizuna (絆), Japonca\'da <em>bağ</em> anlamına gelir. Bu ismi bir marka olarak değil, amacımız olarak seçtik — insanları, kültürleri ve fırsatları birbirine yakınlaştırmak. İster Japonya\'ya ilk seyahatinizi planlıyor olun, ister işinizi sınır ötesine genişletiyor olun, Kizuna güvenilir köprünüzdür.',
-    about_body2:'İstanbul\'da kurulmuş, Japon kültürü ve iş dünyasında derin köklere sahip olan şirketimiz; 12 yılı aşkın süredir seyahat, danışmanlık, kültür ve uluslararası ticaretin kesişim noktasında faaliyet göstermektedir — Türkiye, Japonya, Orta Doğu ve ötesinde bireylere, ailelere, işletmelere ve kurumlara hizmet vermektedir.',
-    about_quote:'"Güçlü bağlar mesafeleri eritir ve gerçek fırsatları ortaya çıkarır."',
-    about_exp_label:'<strong>Yıllık Deneyim</strong><br>Türkiye, Japonya ve Dünya Arasında Köprü',
-    about_mission_vision:'<strong>Misyon:</strong> İnsanları, kültürleri ve fırsatları bir araya getirmek; güvene dayalı, kalıcı ilişkiler kurarak — faaliyet gösterdiğimiz her alanda yüksek standartlı hizmet ve sürdürülebilir değer sunmak.<br><br><strong>Vizyon:</strong> Güven, iş birliği ve kültürel değişimi temsil eden öncü bir küresel marka olmak — insanları ve kurumları sınırlar ötesinde birbirine bağlamak.',
-    clients_eyebrow:'Müşterilerimiz',clients_title:'Kime hizmet ediyoruz',
-    client_1_title:'Bireysel Gezginler',client_1_desc:'Türkiye ve ötesinden Japonya kültürü meraklıları, ilk kez ziyaret edenler, macera arayanlar ve solo kaşifler.',
-    client_2_title:'Gruplar ve Topluluklar',client_2_desc:'Tur grupları, okul gezileri, hac organizasyonları ve tam lojistik destekli topluluk kültür turları.',
-    client_3_title:'İşletmeler',client_3_desc:'Japonya\'ya giren Türk şirketleri, Türk ortaklar arayan Japon firmaları ve uzman kolaylaştırıcılığa ihtiyaç duyan sınır ötesi tüccarlar.',
-    client_4_title:'Kurumlar ve STK\'lar',client_4_desc:'Japonya-Türkiye iş birliği ve etkinlik desteği arayan kültürel kuruluşlar, elçilikler, vakıflar ve sivil toplum kuruluşları.',
+    about_body1:'Kizuna (絆), Japonca\'da <em>bağ</em> anlamına gelir. Bu ismi bir marka adı olarak değil, bir amaç olarak seçtik — insanları, kültürleri ve fırsatları birbirine yakınlaştırmak için. İster Japonya\'ya ilk seyahatinizi planlıyor olun, ister işinizi sınır ötesine taşıyor olun, Kizuna güvenilir köprünüzdür.',
+    about_body2:'İstanbul\'da kurulan ve Japon kültürü ile iş dünyasında derin köklere sahip olan şirketimiz; 12 yılı aşkın süredir seyahat, danışmanlık, kültür ve uluslararası ticaretin kesişiminde faaliyet gösteriyor — Türkiye, Japonya, Orta Doğu ve ötesinde bireylere, ailelere, şirketlere ve kurumlara hizmet veriyor.',
+    about_quote:'"Güçlü bağlar mesafeleri eritir ve gerçek fırsatları gün yüzüne çıkarır."',
+    about_exp_label:'<strong>Yıllık Deneyim</strong><br>Türkiye, Japonya ve dünya arasında köprü',
+    about_mission_vision:'<strong>Misyonumuz:</strong> İnsanları, kültürleri ve fırsatları bir araya getirmek; güvene dayalı, kalıcı ilişkiler kurarak faaliyet gösterdiğimiz her alanda yüksek standartlı hizmet ve sürdürülebilir değer sunmak.<br><br><strong>Vizyonumuz:</strong> Güveni, iş birliğini ve kültürel etkileşimi temsil eden öncü bir küresel marka olmak — insanları ve kurumları sınırların ötesinde birbirine bağlamak.',
+    clients_eyebrow:'Müşterilerimiz',clients_title:'Kimlere hizmet veriyoruz',
+    client_1_title:'Bireysel Gezginler',client_1_desc:'Türkiye\'den ve dünyanın dört bir yanından Japon kültürü meraklıları, ilk kez ziyaret edenler, macera arayanlar ve tek başına seyahat edenler.',
+    client_2_title:'Gruplar ve Topluluklar',client_2_desc:'Tur grupları, okul gezileri, hac ve umre organizasyonları ile tam lojistik destekli topluluk kültür turları.',
+    client_3_title:'Şirketler',client_3_desc:'Japonya pazarına açılan Türk şirketleri, Türk iş ortağı arayan Japon firmaları ve uzman desteğine ihtiyaç duyan sınır ötesi ticaret firmaları.',
+    client_4_title:'Kurumlar ve STK\'lar',client_4_desc:'Japonya-Türkiye iş birliği ve etkinlik desteği arayan kültür kuruluşları, elçilikler, vakıflar ve sivil toplum kuruluşları.',
     cta_title:'Japonya ile bağınızı kurmaya hazır mısınız?',
-    cta_desc:'İster kişisel bir yolculuk ister bir iş genişlemesi planlıyor olun — bunu gerçekleştirmek için buradayız. Bize mesaj gönderin ve birlikte anlamlı bir şey yaratalım.',
+    cta_desc:'İster kişisel bir yolculuk ister işinizi büyütmeyi planlıyor olun — bunu gerçeğe dönüştürmek için buradayız. Bize bir mesaj gönderin, birlikte anlamlı bir şeyler yaratalım.',
     form_name:'Adınız',form_email:'E-posta adresiniz',form_message:'Mesajınız...',
     form_send:'Mesaj Gönder',form_success:'Teşekkürler! Mesajınız başarıyla gönderildi.',
     cta_instagram:'Instagram\'da @kizunatr',
     footer_company:'Şirket',footer_about:'Kizuna Hakkında',footer_mission:'Misyon ve Vizyon',
-    footer_who:'Kime Hizmet Ediyoruz',footer_contact:'İletişim',footer_connect:'Bağlantı',footer_phone:'Telefon',
+    footer_who:'Kimlere Hizmet Veriyoruz',footer_contact:'İletişim',footer_connect:'Bize Ulaşın',footer_phone:'Telefon',
     footer_copy:'© 2025 Kizuna Turizm ve Danışmanlık Ltd. Şti. · Tüm hakları saklıdır.',
     footer_tags:'Turizm · Danışmanlık · Organizasyon · Dış Ticaret · Kültür'
   }
@@ -708,6 +708,7 @@ function cacheEnglish(){
 }
 function setLang(lang){
   if(lang===currentLang)return;currentLang=lang;
+  localStorage.setItem('kizuna-lang',lang);
   document.getElementById('root').setAttribute('lang',lang);
   document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');el.textContent=lang==='tr'?(translations.tr[k]||enCache[k]):enCache[k]});
   document.querySelectorAll('[data-i18n-html]').forEach(el=>{const k=el.getAttribute('data-i18n-html');el.innerHTML=lang==='tr'?(translations.tr[k]||enCache[k]):enCache[k]});
@@ -716,6 +717,11 @@ function setLang(lang){
   document.title=lang==='tr'?'Kizuna — Japonya Seyahat ve Danışmanlık':'Kizuna — Japan Travel & Consulting';
 }
 cacheEnglish();
+/* ── DEFAULT LANGUAGE: Turkish (remembers a visitor's later choice) ── */
+(function(){
+  const savedLang=localStorage.getItem('kizuna-lang')||'tr';
+  setLang(savedLang);
+})();
 </script>
 </body>
 </html>
