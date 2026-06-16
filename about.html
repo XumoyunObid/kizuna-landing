@@ -93,7 +93,8 @@ nav.scrolled{box-shadow:0 1px 20px rgba(0,0,0,0.15)}
 .page-hero-overlay .eyebrow{color:var(--accent-light)}
 
 .content{padding:64px 0;position:relative;overflow:hidden}
-.about-deco{position:absolute;right:-20px;top:50%;transform:translateY(-50%);width:300px;height:300px;opacity:0.04;color:var(--accent);pointer-events:none;z-index:0}
+.about-deco{position:absolute;right:-20px;top:50%;transform:translateY(-50%);width:300px;height:300px;opacity:0.06;pointer-events:none;z-index:0;object-fit:contain}
+[data-theme="dark"] .about-deco{filter:invert(1) sepia(1) saturate(3) hue-rotate(10deg) brightness(0.9);opacity:0.08}
 .content .container{position:relative;z-index:1}
 .story-split{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:40px;align-items:start}
 .story-split p+p{margin-top:16px}
@@ -223,13 +224,7 @@ footer{background:var(--footer-bg);border-top:1px solid var(--border)}
 </div>
 
 <section class="content">
-  <svg class="about-deco" viewBox="0 0 200 200" fill="currentColor">
-    <path d="M5 35 Q100 8 195 35 L190 48 Q100 24 10 48 Z"/>
-    <rect x="20" y="52" width="160" height="9" rx="2"/>
-    <rect x="32" y="78" width="136" height="8" rx="1"/>
-    <rect x="38" y="52" width="12" height="140" rx="2"/>
-    <rect x="150" y="52" width="12" height="140" rx="2"/>
-  </svg>
+  <img src="kizuna logo.png" class="about-deco" alt="">
   <div class="container">
     <div class="eyebrow" data-i18n="about_who_eyebrow">Who We Are</div>
     <h2 data-i18n="about_who_title">Bridging Turkey and Japan since 2012</h2>
