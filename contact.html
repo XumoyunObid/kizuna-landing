@@ -87,7 +87,7 @@ nav.scrolled{box-shadow:0 1px 20px rgba(0,0,0,0.15)}
 .mobile-overlay.open{opacity:1;pointer-events:auto}
 
 .page-hero{position:relative;height:340px;overflow:hidden}
-.page-hero img{width:100%;height:100%;object-fit:cover;filter:brightness(0.55)}
+.page-hero img{width:100%;height:120%;object-fit:cover;filter:brightness(0.55);will-change:transform}
 .page-hero-overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:48px}
 .page-hero-overlay h1{color:#fff;text-shadow:0 2px 16px rgba(0,0,0,0.5)}
 .page-hero-overlay .eyebrow{color:var(--accent-light)}
@@ -373,7 +373,7 @@ function toggleMenu(){
 const mq=window.matchMedia('(max-width:900px)');
 function handleMq(e){document.getElementById('mobileThemeBtn').style.display=e.matches?'flex':'none'}
 mq.addEventListener('change',handleMq);handleMq(mq);
-window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>10)});
+window.addEventListener('scroll',function(){document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>10);var h=document.querySelector('.page-hero img');if(h){h.style.transform='translateY('+window.scrollY*0.35+'px)'}},{passive:true});
 
 document.getElementById('contactForm').addEventListener('submit',function(e){
   e.preventDefault();
