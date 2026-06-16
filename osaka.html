@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" id="root" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Osaka — Kizuna</title>
+<link rel="icon" type="image/png" href="kizuna logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:'DM Sans',sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;background:var(--bg);color:var(--text);transition:background 0.4s,color 0.4s}:root{--serif:'Cormorant Garamond',Georgia,serif;--sans:'DM Sans',system-ui,sans-serif}
+[data-theme="dark"]{--accent:#C4A265;--accent-dark:#A8893E;--accent-light:#D4B87A;--bg:#0d0d0d;--bg-alt:#1a1a1a;--bg-card:rgba(255,255,255,0.03);--text:#fff;--text-sub:rgba(255,255,255,0.5);--text-muted:rgba(255,255,255,0.3);--border:rgba(196,162,101,0.12);--border-light:rgba(255,255,255,0.08);--nav-bg:rgba(13,13,13,0.97);--nav-link:rgba(255,255,255,0.55);--cta-btn-text:#0d0d0d;--footer-bg:#0d0d0d;--badge-bg:rgba(196,162,101,0.08);--theme-icon-sun:none;--theme-icon-moon:block}
+[data-theme="light"]{--accent:#C0392B;--accent-dark:#922B21;--accent-light:#D9776E;--bg:#fff;--bg-alt:#FAF9F7;--bg-card:#fff;--text:#3D3D3D;--text-sub:#666;--text-muted:#AAA;--border:#E8E8E8;--border-light:#E8E8E8;--nav-bg:rgba(255,255,255,0.97);--nav-link:#666;--cta-btn-text:#fff;--footer-bg:#3D3D3D;--badge-bg:#FAF2F2;--theme-icon-sun:block;--theme-icon-moon:none}
+h1,h2,h3{font-family:var(--serif);font-weight:300;line-height:1.15;color:var(--text)}h1{font-size:clamp(36px,6vw,52px)}h2{font-size:clamp(24px,4vw,34px)}h3{font-size:clamp(18px,2.5vw,22px)}p{font-size:15px;color:var(--text-sub);line-height:1.8}a{color:inherit;text-decoration:none}.container{max-width:1140px;margin:0 auto;padding:0 24px}.eyebrow{font-size:11px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}.rule{width:40px;height:2px;background:var(--accent);margin:18px 0}
+nav{display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:68px;border-bottom:1px solid var(--border);background:var(--nav-bg);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);position:sticky;top:0;z-index:100;transition:box-shadow 0.3s,background 0.4s}nav.scrolled{box-shadow:0 1px 20px rgba(0,0,0,0.15)}.nav-logo{display:flex;align-items:center;gap:12px}.nav-logo-img{height:52px;width:auto;transition:filter 0.4s}[data-theme="dark"] .nav-logo-img{filter:invert(1) sepia(1) saturate(3) hue-rotate(10deg) brightness(0.9)}.nav-logo-text{font-family:var(--serif);font-size:22px;font-weight:300;letter-spacing:2px;color:var(--text)}[data-theme="dark"] .nav-logo-text{color:var(--accent)}.nav-links{display:flex;gap:28px;align-items:center}.nav-links a{font-size:13px;color:var(--nav-link);letter-spacing:0.02em;transition:color 0.2s;position:relative}.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1.5px;background:var(--accent);transition:width 0.3s ease}.nav-links a:hover::after,.nav-links a.active::after{width:100%}.nav-links a:hover,.nav-links a.active{color:var(--accent)}.nav-cta-btn{background:var(--accent);color:var(--cta-btn-text) !important;padding:9px 20px;border-radius:4px;font-size:12px;font-weight:500;letter-spacing:0.06em;transition:background 0.2s,transform 0.2s}.nav-cta-btn::after{display:none !important}.nav-cta-btn:hover{background:var(--accent-light) !important;transform:translateY(-1px)}.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}.nav-hamburger span{width:22px;height:1.5px;background:var(--text);opacity:0.7;display:block;transition:all 0.3s}.lang-toggle{display:flex;border:1px solid var(--border);border-radius:4px;overflow:hidden;height:32px}.lang-btn{background:none;border:none;cursor:pointer;font-size:11px;font-weight:500;letter-spacing:0.06em;padding:6px 12px;color:var(--text-muted);font-family:var(--sans);transition:all 0.2s}.lang-btn.active{background:var(--accent);color:var(--cta-btn-text)}.lang-btn:hover:not(.active){color:var(--text)}
+.theme-toggle{width:36px;height:36px;border:1px solid var(--border);border-radius:50%;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;margin-left:10px;transition:all 0.3s;flex-shrink:0}.theme-toggle:hover{border-color:var(--accent);background:var(--badge-bg)}.theme-toggle svg{width:16px;height:16px;color:var(--accent)}.theme-toggle .sun{display:var(--theme-icon-sun)}.theme-toggle .moon{display:var(--theme-icon-moon)}
+.mobile-menu{position:fixed;top:0;right:0;width:280px;height:100vh;background:var(--bg-alt);z-index:200;padding:0;display:flex;flex-direction:column;transform:translateX(100%);transition:transform 0.35s cubic-bezier(.4,0,.2,1);box-shadow:-4px 0 24px rgba(0,0,0,0.2);overflow-y:auto}.mobile-menu.open{transform:translateX(0)}.mobile-menu-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--border)}.mobile-menu-header img{height:40px}[data-theme="dark"] .mobile-menu-header img{filter:invert(1) sepia(1) saturate(3) hue-rotate(10deg) brightness(0.9)}.mobile-menu-close{width:32px;height:32px;border:none;background:none;cursor:pointer;font-size:20px;color:var(--text-sub);display:flex;align-items:center;justify-content:center;border-radius:6px;transition:background 0.2s}.mobile-menu-close:hover{background:var(--badge-bg)}.mobile-menu a{padding:16px 24px;font-size:14px;color:var(--text-sub);border-bottom:1px solid var(--border-light);transition:background 0.2s,color 0.2s}.mobile-menu a:hover{background:var(--badge-bg);color:var(--accent)}.mobile-menu a.cta-m{color:var(--accent);font-weight:500}.mobile-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:199;opacity:0;pointer-events:none;transition:opacity 0.35s}.mobile-overlay.open{opacity:1;pointer-events:auto}
+.page-hero{position:relative;height:480px;overflow:hidden}.page-hero img{width:100%;height:100%;object-fit:cover;filter:brightness(0.55)}.page-hero-overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:48px}.page-hero-overlay h1{color:#fff;text-shadow:0 2px 16px rgba(0,0,0,0.5)}.page-hero-overlay .eyebrow{color:var(--accent-light)}
+.content{padding:64px 0}.content-split{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;margin-top:40px;align-items:start}.content-split p+p{margin-top:16px}
+.highlights{background:var(--bg-alt);padding:64px 0}.highlights-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:40px}.highlight{background:var(--bg-card);border:1px solid var(--border-light);border-radius:12px;padding:28px;transition:transform 0.3s,border-color 0.3s}.highlight:hover{transform:translateY(-4px);border-color:var(--accent)}.highlight-icon{font-size:28px;color:var(--accent);margin-bottom:14px}.highlight h3{font-size:18px;margin-bottom:8px}.highlight p{font-size:13px}
+.other-dest-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:32px}.other-dest-card{border-radius:14px;overflow:hidden;position:relative;height:220px;background:#222;display:block}.other-dest-card img{width:100%;height:100%;object-fit:cover;filter:brightness(0.7);transition:transform 0.7s cubic-bezier(.25,.46,.45,.94),filter 0.5s}.other-dest-card:hover img{transform:scale(1.06);filter:brightness(0.95)}.other-dest-overlay{position:absolute;inset:0;display:flex;align-items:flex-end;padding:20px;color:#fff;background:linear-gradient(to top,rgba(0,0,0,0.65) 0%,rgba(0,0,0,0.1) 50%,transparent 100%)}.other-dest-name{font-family:var(--serif);font-size:18px;font-weight:400;text-shadow:0 1px 6px rgba(0,0,0,0.4)}
+.cta-banner{background:var(--bg-alt);border-top:1px solid var(--border);padding:64px 24px;text-align:center}.cta-banner h2{margin-bottom:12px}.cta-banner p{max-width:500px;margin:0 auto 24px}.btn-primary{background:var(--accent);color:var(--cta-btn-text);padding:14px 28px;border-radius:4px;font-size:13px;font-weight:500;letter-spacing:0.04em;transition:background 0.2s,transform 0.2s;display:inline-block}.btn-primary:hover{background:var(--accent-light);transform:translateY(-2px)}
+footer{background:var(--footer-bg);border-top:1px solid var(--border)}
+[data-theme="light"] footer{background:#2a2a2a}
+.footer-inner{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:40px;padding:48px 0 36px}
+.footer-link-icon{width:14px;height:14px;vertical-align:-2px;margin-right:8px;opacity:0.5;transition:opacity 0.2s}
+.footer-links a:hover .footer-link-icon{opacity:0.9}
+.footer-logo-row{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.footer-logo-row img{height:44px;width:auto;opacity:0.85}
+[data-theme="dark"] .footer-logo-row img{filter:invert(1) sepia(1) saturate(3) hue-rotate(10deg) brightness(0.9)}
+[data-theme="light"] .footer-logo-row img{filter:invert(1)}
+.footer-logo{font-family:var(--serif);font-size:22px;font-weight:300;color:#fff;letter-spacing:2px}
+[data-theme="dark"] .footer-logo{color:var(--accent)}
+.footer-desc{font-size:12px;color:rgba(255,255,255,0.4);line-height:1.8}
+.footer-col-title{font-size:11px;font-weight:500;color:rgba(255,255,255,0.6);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:14px}
+.footer-links{display:flex;flex-direction:column;gap:9px}
+.footer-links a{font-size:12.5px;color:rgba(255,255,255,0.4);transition:color 0.2s}
+.footer-links a:hover{color:rgba(255,255,255,0.9)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.08);padding:16px 0;display:flex;justify-content:space-between;align-items:center}
+.footer-bottom p{font-size:11px;color:rgba(255,255,255,0.28)}
+@media(max-width:900px){nav{padding:0 20px}.nav-links{display:none}.nav-hamburger{display:flex}.page-hero{height:340px}.content-split{grid-template-columns:1fr}.highlights-grid{grid-template-columns:1fr 1fr}.other-dest-grid{grid-template-columns:1fr 1fr}.footer-inner{grid-template-columns:1fr 1fr;gap:28px}.footer-bottom{flex-direction:column;gap:10px;text-align:center}}
+@media(max-width:560px){.highlights-grid{grid-template-columns:1fr}.other-dest-grid{grid-template-columns:1fr}.other-dest-card{height:180px}.footer-inner{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav id="navbar">
+  <a href="index.html" class="nav-logo"><img src="kizuna logo.png" alt="Kizuna" class="nav-logo-img"><span class="nav-logo-text">Kizuna</span></a>
+  <div class="nav-links"><a href="index.html" data-i18n="nav_home">Home</a><a href="travel.html" data-i18n="nav_travel">Japan Travel</a><a href="destinations.html" class="active" data-i18n="nav_destinations">Destinations</a><a href="services.html" data-i18n="nav_services">Services</a><a href="about.html" data-i18n="nav_about">About</a><a href="consulting.html" data-i18n="nav_consulting">Consulting</a><a href="contact.html" class="nav-cta-btn" data-i18n="nav_contact">Contact</a><div class="lang-toggle"><button class="lang-btn" onclick="setLang('en')">EN</button><button class="lang-btn active" onclick="setLang('tr')">TR</button></div><button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></button></div>
+  <div style="display:flex;align-items:center;gap:8px"><button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" style="display:none" id="mobileThemeBtn"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></button><div class="nav-hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Open menu"><span></span><span></span><span></span></div></div>
+</nav>
+<div class="mobile-overlay" id="mobileOverlay" onclick="toggleMenu()"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-header"><img src="kizuna logo.png" alt="Kizuna"><button class="mobile-menu-close" onclick="toggleMenu()" aria-label="Close menu">&times;</button></div>
+  <a href="index.html" onclick="toggleMenu()" data-i18n="nav_home">Home</a><a href="travel.html" onclick="toggleMenu()" data-i18n="nav_travel">Japan Travel</a><a href="destinations.html" onclick="toggleMenu()" data-i18n="nav_destinations">Destinations</a><a href="services.html" onclick="toggleMenu()" data-i18n="nav_services">Services</a><a href="about.html" onclick="toggleMenu()" data-i18n="nav_about">About</a><a href="consulting.html" onclick="toggleMenu()" data-i18n="nav_consulting">Consulting</a><a href="contact.html" class="cta-m" onclick="toggleMenu()" data-i18n="nav_contact">Contact</a>
+  <div style="padding:16px 24px;display:flex;gap:8px;"><button class="lang-btn" onclick="setLang('en')" style="border:1px solid var(--border);border-radius:4px;padding:8px 16px;">EN</button><button class="lang-btn active" onclick="setLang('tr')" style="border:1px solid var(--border);border-radius:4px;padding:8px 16px;">TR</button></div>
+</div>
+
+<div class="page-hero"><img src="https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=1600&h=900&fit=crop&q=85" alt="Osaka"><div class="page-hero-overlay"><div class="container"><div class="eyebrow">Destination</div><h1>Osaka</h1></div></div></div>
+
+<section class="content"><div class="container">
+  <div class="eyebrow">Japan's Kitchen</div>
+  <h2>Eat, play, and discover the soul of Kansai</h2>
+  <div class="rule"></div>
+  <div class="content-split">
+    <div>
+      <p>Osaka is Japan's third-largest city and its undisputed food capital. The local saying "kuidaore" — eat until you drop — captures the city's spirit perfectly. From sizzling takoyaki (octopus balls) on Dotonbori to refined Michelin-starred kappo cuisine, every meal here is an event.</p>
+      <p>But Osaka is far more than food. It's a city of warm, outgoing people (known across Japan for their friendliness and humour), a castle that tells the story of samurai power, a vibrant nightlife scene, and some of Japan's best shopping — from the neon arcades of Shinsaibashi to the vintage treasures of Amerikamura.</p>
+      <p>Osaka is also the gateway to Kansai — with Kyoto, Nara, and Kobe all within easy reach, it makes an ideal base for exploring western Japan.</p>
+    </div>
+    <div>
+      <h3>Best Time to Visit</h3>
+      <p>Spring (April) for castle cherry blossoms, Summer for festivals (Tenjin Matsuri is one of Japan's top three), Autumn for mild weather and colourful temples in nearby Minoo.</p>
+      <br>
+      <h3>Getting There</h3>
+      <p>Direct flights to Kansai International Airport, or 2.5 hours from Tokyo by shinkansen. We arrange airport transfers and JR rail passes.</p>
+    </div>
+  </div>
+</div></section>
+
+<section class="highlights"><div class="container">
+  <div class="eyebrow">Must-See Highlights</div>
+  <h2>What to experience in Osaka</h2>
+  <div class="rule"></div>
+  <div class="highlights-grid">
+    <div class="highlight"><div class="highlight-icon">&#127860;</div><h3>Dotonbori</h3><p>The neon-lit canal district that defines Osaka nightlife. Iconic signs, street food stalls, and the famous Glico Running Man — the city's energy at its peak.</p></div>
+    <div class="highlight"><div class="highlight-icon">&#127983;</div><h3>Osaka Castle</h3><p>Toyotomi Hideyoshi's magnificent fortress, surrounded by a moat and expansive park. The museum inside chronicles the dramatic history of Japan's unification.</p></div>
+    <div class="highlight"><div class="highlight-icon">&#127859;</div><h3>Street Food Tour</h3><p>Takoyaki, okonomiyaki, kushikatsu, gyoza — Osaka's street food scene is unmatched. We arrange guided food walks through the best local spots.</p></div>
+    <div class="highlight"><div class="highlight-icon">&#127923;</div><h3>Shinsekai</h3><p>The "new world" retro district with its Tsutenkaku Tower, kushikatsu alleys, and old-school arcade atmosphere. A fascinating window into Showa-era Japan.</p></div>
+    <div class="highlight"><div class="highlight-icon">&#128722;</div><h3>Shinsaibashi Shopping</h3><p>From high-end brands to underground vintage — Osaka's main shopping strip has it all. Nearby Amerikamura adds a youthful, alternative edge.</p></div>
+    <div class="highlight"><div class="highlight-icon">&#127754;</div><h3>Osaka Aquarium Kaiyukan</h3><p>One of the world's largest aquariums, featuring whale sharks, manta rays, and a Pacific Ring of Fire journey. Perfect for families and marine life enthusiasts.</p></div>
+  </div>
+</div></section>
+
+<section style="background:var(--bg);padding:64px 0;"><div class="container">
+  <div class="eyebrow">Explore More</div><h2>Other destinations</h2><div class="rule"></div>
+  <div class="other-dest-grid">
+    <a href="kyoto.html" class="other-dest-card"><img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=600&h=400&fit=crop&q=85" alt="Kyoto" loading="lazy"><div class="other-dest-overlay"><div class="other-dest-name">Kyoto</div></div></a>
+    <a href="tokyo.html" class="other-dest-card"><img src="https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?w=600&h=400&fit=crop&q=85" alt="Tokyo" loading="lazy"><div class="other-dest-overlay"><div class="other-dest-name">Tokyo</div></div></a>
+    <a href="fuji.html" class="other-dest-card"><img src="https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?w=600&h=400&fit=crop&q=85" alt="Mt. Fuji" loading="lazy"><div class="other-dest-overlay"><div class="other-dest-name">Mt. Fuji</div></div></a>
+    <a href="nara.html" class="other-dest-card"><img src="https://images.unsplash.com/photo-1624601573012-efb68931cc8f?w=600&h=400&fit=crop&q=85" alt="Nara" loading="lazy"><div class="other-dest-overlay"><div class="other-dest-name">Nara</div></div></a>
+    <a href="gotemba.html" class="other-dest-card"><img src="https://images.unsplash.com/photo-1528164344705-47542687000d?w=600&h=400&fit=crop&q=85" alt="Gotemba" loading="lazy"><div class="other-dest-overlay"><div class="other-dest-name">Gotemba</div></div></a>
+  </div>
+</div></section>
+
+<div class="cta-banner"><h2>Plan your Osaka trip</h2><p>From food tours to full Kansai itineraries, we'll make sure you experience the best of Osaka.</p><a href="contact.html" class="btn-primary">Get in touch</a></div>
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo-row">
+          <img src="kizuna logo.png" alt="Kizuna">
+          <div class="footer-logo">Kizuna</div>
+        </div>
+        <p class="footer-desc">Kizuna Turizm ve Dan&#305;&#351;manl&#305;k Ltd. &#350;ti.<br>Istanbul, Turkey<br><br>&#32070; &middot; Bond &middot; Ba&#287;</p>
+      </div>
+      <div>
+        <div class="footer-col-title" data-i18n="footer_company">Company</div>
+        <div class="footer-links">
+          <a href="about.html" data-i18n="footer_about">About Kizuna</a>
+          <a href="services.html" data-i18n="footer_services">Services</a>
+          <a href="destinations.html" data-i18n="footer_destinations">Destinations</a>
+          <a href="contact.html" data-i18n="footer_contact">Contact Us</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title" data-i18n="footer_connect">Connect</div>
+        <div class="footer-links">
+          <a href="https://wa.me/905557126048"><svg class="footer-link-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>WhatsApp</a>
+          <a href="tel:+905557126048"><svg class="footer-link-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg><span data-i18n="footer_phone">Phone</span></a>
+          <a href="https://www.instagram.com/kizuna.tr"><svg class="footer-link-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>@kizuna.tr</a>
+          <a href="mailto:info@kizuna.tr"><svg class="footer-link-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>info@kizuna.tr</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p data-i18n-html="footer_copy">&copy; 2025 Kizuna Turizm ve Dan&#305;&#351;manl&#305;k Ltd. &#350;ti. &middot; All rights reserved.</p>
+      <p data-i18n="footer_tags">Turizm &middot; Dan&#305;&#351;manl&#305;k &middot; Organizasyon &middot; D&#305;&#351; Ticaret &middot; K&uuml;lt&uuml;r</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleTheme(){const root=document.getElementById('root');const next=root.getAttribute('data-theme')==='dark'?'light':'dark';root.setAttribute('data-theme',next);localStorage.setItem('kizuna-theme',next)}
+(function(){const s=localStorage.getItem('kizuna-theme');if(s)document.getElementById('root').setAttribute('data-theme',s)})();
+function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open');document.getElementById('mobileOverlay').classList.toggle('open')}
+const mq=window.matchMedia('(max-width:900px)');function handleMq(e){document.getElementById('mobileThemeBtn').style.display=e.matches?'flex':'none'}mq.addEventListener('change',handleMq);handleMq(mq);
+window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>10)});
+const navTr={nav_home:'Ana Sayfa',nav_travel:'Japonya Seyahat',nav_destinations:'Destinasyonlar',nav_services:'Hizmetler',nav_about:'Hakkımızda',nav_consulting:'Danışmanlık',nav_contact:'İletişim',footer_company:'Şirket',footer_about:'Kizuna Hakkımızda',footer_services:'Hizmetler',footer_destinations:'Destinasyonlar',footer_contact:'İletişim',footer_connect:'Bize Ulaşın',footer_phone:'Telefon',footer_copy:'© 2025 Kizuna Turizm ve Danışmanlık Ltd. Şti. · Tüm hakları saklıdır.',footer_tags:'Turizm · Danışmanlık · Organizasyon · Dış Ticaret · Kültür'};
+const navEn={nav_home:'Home',nav_travel:'Japan Travel',nav_destinations:'Destinations',nav_services:'Services',nav_about:'About',nav_consulting:'Consulting',nav_contact:'Contact',footer_company:'Company',footer_about:'About Kizuna',footer_services:'Services',footer_destinations:'Destinations',footer_contact:'Contact Us',footer_connect:'Connect',footer_phone:'Phone',footer_copy:'© 2025 Kizuna Turizm ve Danışmanlık Ltd. Şti. · All rights reserved.',footer_tags:'Turizm · Danışmanlık · Organizasyon · Dış Ticaret · Kültür'};
+function setLang(lang){localStorage.setItem('kizuna-lang',lang);const t=lang==='tr'?navTr:navEn;document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');if(t[k])el.textContent=t[k]});document.querySelectorAll('[data-i18n-html]').forEach(el=>{const k=el.getAttribute('data-i18n-html');if(t[k])el.innerHTML=t[k]});document.querySelectorAll('.lang-btn').forEach(btn=>{btn.classList.toggle('active',btn.textContent.trim()===lang.toUpperCase())})}
+(function(){const s=localStorage.getItem('kizuna-lang')||'tr';setLang(s)})();</script>
+</body>
+</html>
