@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://kizuna.tr/</loc><priority>1.0</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://kizuna.tr/travel.html</loc><priority>0.9</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://kizuna.tr/destinations.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://kizuna.tr/services.html</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://kizuna.tr/about.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://kizuna.tr/consulting.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://kizuna.tr/contact.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://kizuna.tr/visa.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://kizuna.tr/transfers.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://kizuna.tr/business.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://kizuna.tr/tokyo.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://kizuna.tr/kyoto.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://kizuna.tr/osaka.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://kizuna.tr/nara.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://kizuna.tr/fuji.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://kizuna.tr/gotemba.html</loc><priority>0.6</priority><changefreq>monthly</changefreq></url>
+</urlset>
