@@ -159,6 +159,9 @@ footer{background:var(--footer-bg);border-top:1px solid var(--border)}
   .footer-inner{grid-template-columns:1fr}
 }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
 </head>
 <body>
 
@@ -346,5 +349,80 @@ const navTr={nav_home:'Ana Sayfa',nav_travel:'Japonya Seyahat',nav_destinations:
 const navEn={nav_home:'Home',nav_travel:'Japan Travel',nav_destinations:'Destinations',nav_services:'Services',nav_about:'About',nav_consulting:'Consulting',nav_contact:'Contact',visa_hero_eyebrow:'Kizuna Visa Support',visa_hero_title:'Visa Services',visa_section_eyebrow:'Visa Assistance',visa_section_title:'Hassle-free visa processing for Japan',visa_section_desc:'Navigating the Japanese visa system can be complex. Our team handles every detail — from document preparation to embassy coordination — so you can focus on planning your trip or business visit.',visa_c1_title:'Tourist Visa',visa_c1_desc:'Short-stay visa applications for individual travellers and families visiting Japan for tourism, cultural exploration, or attending events. We guide you through every requirement.',visa_c2_title:'Business Visa',visa_c2_desc:'Visa support for business travellers, conference attendees, and trade delegations. We prepare your documentation and coordinate with sponsoring organisations in Japan.',visa_c3_title:'Group Visa',visa_c3_desc:'Streamlined processing for tour groups, school trips, and institutional delegations. We manage the collective paperwork and ensure every member is covered.',visa_info_eyebrow:'What We Handle',visa_info_title:'End-to-end visa support',visa_why_title:'Why choose Kizuna?',visa_li1:'Document checklist preparation tailored to your visa type',visa_li2:'Application form assistance and review',visa_li3:'Invitation letter and itinerary coordination with Japan-side contacts',visa_li4:'Translation of documents (Turkish, Japanese, English)',visa_li5:'Embassy appointment scheduling and follow-up',visa_li6:'Travel insurance guidance and recommendations',visa_li7:'Pre-departure briefing on customs and entry procedures',visa_why_desc:'With 12+ years of experience processing Japan visas for Turkish citizens, we know the common pitfalls and how to avoid them. Our direct relationships with relevant institutions in both countries give us an edge in handling even complex cases.',visa_why_lang:'We support applications in <strong style="color:var(--accent)">Turkish, Japanese, and English</strong> — ensuring nothing is lost in translation.',visa_svc_eyebrow:'Explore Our Services',visa_svc_title:'More from Kizuna',osvc_travel:'Travel to Japan',osvc_consulting:'Consulting',osvc_transfers:'Transfers',osvc_business:'Business',visa_cta_title:'Need help with your Japan visa?',visa_cta_desc:'Reach out to us with your travel dates and purpose, and we''ll guide you through the entire process.',visa_cta_btn:'Start your application',footer_company:'Company',footer_about:'About Kizuna',footer_services:'Services',footer_destinations:'Destinations',footer_contact:'Contact Us',footer_connect:'Connect',footer_phone:'Phone',footer_copy:'© 2025 Kizuna Turizm ve Danışmanlık Ltd. Şti. · All rights reserved.',footer_tags:'Turizm · Danışmanlık · Organizasyon · Dış Ticaret · Kültür'};
 function setLang(lang){localStorage.setItem('kizuna-lang',lang);const t=lang==='tr'?navTr:navEn;document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');if(t[k])el.textContent=t[k]});document.querySelectorAll('[data-i18n-html]').forEach(el=>{const k=el.getAttribute('data-i18n-html');if(t[k])el.innerHTML=t[k]});document.querySelectorAll('.lang-btn').forEach(btn=>{btn.classList.toggle('active',btn.textContent.trim()===lang.toUpperCase())})}
 (function(){const s=localStorage.getItem('kizuna-lang')||'tr';setLang(s)})();</script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+const lenis=new Lenis({duration:1.4,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)),smoothWheel:true,touchMultiplier:1.5});
+lenis.on("scroll",ScrollTrigger.update);
+gsap.ticker.add(t=>lenis.raf(t*1000));
+gsap.ticker.lagSmoothing(0);
+
+/* ── PAGE LOAD: NAV + HERO ── */
+const loadTl=gsap.timeline({defaults:{ease:"power3.out"}});
+loadTl.from("nav",{y:-70,opacity:0,duration:0.8},0);
+if(document.querySelector(".page-hero")){
+  loadTl.from(".page-hero img",{scale:1.15,duration:1.4,ease:"power2.out"},0);
+  loadTl.from(".page-hero-overlay .eyebrow",{y:20,opacity:0,duration:0.6},0.4);
+  loadTl.from(".page-hero-overlay h1",{y:40,opacity:0,duration:0.9},0.5);
+  gsap.to(".page-hero img",{yPercent:-12,ease:"none",scrollTrigger:{trigger:".page-hero",start:"top top",end:"bottom top",scrub:true}});
+}
+
+/* ── SECTION CONTENT REVEALS ── */
+document.querySelectorAll(".content, section, .contact-section").forEach(sec=>{
+  const eyebrow=sec.querySelector(".eyebrow");
+  const h2=sec.querySelector("h2");
+  const rule=sec.querySelector(".rule");
+  const p=sec.querySelector("p");
+  if(!h2)return;
+  const tl=gsap.timeline({scrollTrigger:{trigger:sec,start:"top 80%",toggleActions:"play none none none"}});
+  if(eyebrow)tl.from(eyebrow,{y:20,opacity:0,duration:0.5},0);
+  tl.from(h2,{y:30,opacity:0,duration:0.6},0.1);
+  if(rule)tl.from(rule,{scaleX:0,transformOrigin:"left",duration:0.5},0.25);
+  if(p)tl.from(p,{y:20,opacity:0,duration:0.5},0.35);
+});
+
+/* ── STAGGERED CARD REVEALS ── */
+document.querySelectorAll(".content-grid, .content-cards, .dest-grid, .other-services-grid, .contact-grid, .clients-grid").forEach(grid=>{
+  const cards=grid.children;
+  if(!cards.length)return;
+  gsap.from(cards,{y:50,opacity:0,scale:0.96,duration:0.7,stagger:0.12,ease:"back.out(1.2)",
+    scrollTrigger:{trigger:grid,start:"top 82%",toggleActions:"play none none none"}});
+});
+
+/* ── CTA BANNER ── */
+if(document.querySelector(".cta-banner")){
+  const cta=document.querySelector(".cta-banner");
+  const ctaTl=gsap.timeline({scrollTrigger:{trigger:cta,start:"top 82%",toggleActions:"play none none none"}});
+  if(cta.querySelector("h2"))ctaTl.from(cta.querySelector("h2"),{y:30,opacity:0,duration:0.7},0);
+  if(cta.querySelector("p"))ctaTl.from(cta.querySelector("p"),{y:20,opacity:0,duration:0.5},0.15);
+  if(cta.querySelector(".btn-primary"))ctaTl.from(cta.querySelector(".btn-primary"),{y:20,opacity:0,scale:0.95,duration:0.5},0.3);
+}
+
+/* ── FOOTER ── */
+gsap.from(".footer-inner > div",{
+  scrollTrigger:{trigger:"footer",start:"top 90%",toggleActions:"play none none none"},
+  y:30,opacity:0,duration:0.6,stagger:0.15,ease:"power2.out"
+});
+
+/* ── IMAGE PARALLAX ON CARDS ── */
+document.querySelectorAll(".other-svc-card img, .dest-item img").forEach(img=>{
+  gsap.to(img,{yPercent:-8,ease:"none",
+    scrollTrigger:{trigger:img.closest("a")||img.parentElement,start:"top bottom",end:"bottom top",scrub:true}});
+});
+
+/* ── MAGNETIC HOVER ON BUTTONS ── */
+document.querySelectorAll(".btn-primary,.nav-cta-btn").forEach(btn=>{
+  btn.addEventListener("mousemove",e=>{
+    const r=btn.getBoundingClientRect();
+    const x=(e.clientX-r.left-r.width/2)*0.15;
+    const y=(e.clientY-r.top-r.height/2)*0.15;
+    gsap.to(btn,{x,y,duration:0.3,ease:"power2.out"});
+  });
+  btn.addEventListener("mouseleave",()=>{
+    gsap.to(btn,{x:0,y:0,duration:0.4,ease:"elastic.out(1,0.4)"});
+  });
+});
+
+/* ── REMOVE OLD FADE-IN ── */
+document.querySelectorAll(".fade-in").forEach(el=>el.classList.add("visible"));</script>
 </body>
 </html>

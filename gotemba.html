@@ -40,6 +40,9 @@ footer{background:var(--footer-bg);border-top:1px solid var(--border)}
 @media(max-width:900px){nav{padding:0 20px}.nav-links{display:none}.nav-hamburger{display:flex}.page-hero{height:340px}.content-split{grid-template-columns:1fr}.highlights-grid{grid-template-columns:1fr 1fr}.other-dest-grid{grid-template-columns:1fr 1fr}.footer-inner{grid-template-columns:1fr 1fr;gap:28px}.footer-bottom{flex-direction:column;gap:10px;text-align:center}}
 @media(max-width:560px){.highlights-grid{grid-template-columns:1fr}.other-dest-grid{grid-template-columns:1fr}.other-dest-card{height:180px}.footer-inner{grid-template-columns:1fr}}
 </style>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
 </head>
 <body>
 <nav id="navbar">
@@ -148,5 +151,80 @@ const navTr={nav_home:'Ana Sayfa',nav_travel:'Japonya Seyahat',nav_destinations:
 const navEn={nav_home:'Home',nav_travel:'Japan Travel',nav_destinations:'Destinations',nav_services:'Services',nav_about:'About',nav_consulting:'Consulting',nav_contact:'Contact',gt_hero_eyebrow:'Destination',gt_eyebrow:'Luxury Shopping Meets Nature',gt_title:'Shop with Mt. Fuji as your backdrop',gt_p1:'Gotemba is a small city in Shizuoka Prefecture best known for Gotemba Premium Outlets — Japan\'s largest outlet mall, featuring over 290 luxury and international brands at significant discounts. What makes it truly special is the stunning view of Mt. Fuji that towers over the shopping complex on clear days.',gt_p2:'But Gotemba offers much more than retail therapy. The surrounding area is a gateway to some of the Fuji region\'s finest natural attractions — from tranquil lakes and forest walks to hot springs and traditional Japanese inns where you can unwind after a day of shopping and sightseeing.',gt_p3:'For Turkish visitors especially, the combination of tax-free luxury shopping, dramatic natural scenery, and easy access from Tokyo makes Gotemba an irresistible stop on any Japan itinerary.',gt_best_time:'Best Time to Visit',gt_best_time_desc:'Winter and Spring offer the clearest Fuji views. January–February sales bring the deepest discounts. Avoid Golden Week (late April–early May) when domestic crowds peak.',gt_getting_there:'Getting There',gt_getting_there_desc:'90 minutes from Tokyo by direct bus, or by train to Gotemba Station + shuttle. We include Gotemba in our Fuji-area day trips with private transport.',gt_highlights_eyebrow:'Must-See Highlights',gt_highlights_title:'What to experience in Gotemba',gt_h1_title:'Gotemba Premium Outlets',gt_h1_desc:'290+ stores including Gucci, Prada, Balenciaga, Nike, and Japanese brands. Tax-free shopping for tourists with additional outlet discounts of 30–70%.',gt_h2_title:'Mt. Fuji Views',gt_h2_desc:'On clear days, the mountain looms directly behind the outlet mall — one of the most surreal shopping experiences in the world. Perfect for photography.',gt_h3_title:'Gotemba Onsen',gt_h3_desc:'Several excellent hot spring facilities in the area where you can relax after shopping. Some offer open-air baths with views of Mt. Fuji.',gt_h4_title:'Togeshita Park',gt_h4_desc:'A peaceful cherry blossom spot with Fuji views, popular with locals but off the tourist radar. Perfect for a quiet morning before the outlets open.',gt_h5_title:'Local Cuisine',gt_h5_desc:'Try Gotemba\'s specialty — mizukake-udon (chilled noodles with spring water) — and fresh wasabi products from the nearby Izu Peninsula.',gt_h6_title:'Fuji Safari Park',gt_h6_desc:'A drive-through safari park at the foot of Mt. Fuji with lions, elephants, and bears. A unique family experience combining African wildlife with Japanese landscapes.',gt_explore_eyebrow:'Explore More',gt_explore_title:'Other destinations',odest_kyoto:'Kyoto',odest_tokyo:'Tokyo',odest_fuji:'Mt. Fuji',odest_nara:'Nara',odest_osaka:'Osaka',gt_cta_title:'Plan your Gotemba trip',gt_cta_desc:'We\'ll combine shopping, sightseeing, and relaxation into the perfect Fuji-area day trip or overnight stay.',gt_cta_btn:'Get in touch',footer_company:'Company',footer_about:'About Kizuna',footer_services:'Services',footer_destinations:'Destinations',footer_contact:'Contact Us',footer_connect:'Connect',footer_phone:'Phone',footer_copy:'© 2025 Kizuna Turizm ve Danışmanlık Ltd. Şti. · All rights reserved.',footer_tags:'Turizm · Danışmanlık · Organizasyon · Dış Ticaret · Kültür'};
 function setLang(lang){localStorage.setItem('kizuna-lang',lang);const t=lang==='tr'?navTr:navEn;document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');if(t[k])el.textContent=t[k]});document.querySelectorAll('[data-i18n-html]').forEach(el=>{const k=el.getAttribute('data-i18n-html');if(t[k])el.innerHTML=t[k]});document.querySelectorAll('.lang-btn').forEach(btn=>{btn.classList.toggle('active',btn.textContent.trim()===lang.toUpperCase())})}
 (function(){const s=localStorage.getItem('kizuna-lang')||'tr';setLang(s)})();</script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+const lenis=new Lenis({duration:1.4,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)),smoothWheel:true,touchMultiplier:1.5});
+lenis.on("scroll",ScrollTrigger.update);
+gsap.ticker.add(t=>lenis.raf(t*1000));
+gsap.ticker.lagSmoothing(0);
+
+/* ── PAGE LOAD: NAV + HERO ── */
+const loadTl=gsap.timeline({defaults:{ease:"power3.out"}});
+loadTl.from("nav",{y:-70,opacity:0,duration:0.8},0);
+if(document.querySelector(".page-hero")){
+  loadTl.from(".page-hero img",{scale:1.15,duration:1.4,ease:"power2.out"},0);
+  loadTl.from(".page-hero-overlay .eyebrow",{y:20,opacity:0,duration:0.6},0.4);
+  loadTl.from(".page-hero-overlay h1",{y:40,opacity:0,duration:0.9},0.5);
+  gsap.to(".page-hero img",{yPercent:-12,ease:"none",scrollTrigger:{trigger:".page-hero",start:"top top",end:"bottom top",scrub:true}});
+}
+
+/* ── SECTION CONTENT REVEALS ── */
+document.querySelectorAll(".content, section, .contact-section").forEach(sec=>{
+  const eyebrow=sec.querySelector(".eyebrow");
+  const h2=sec.querySelector("h2");
+  const rule=sec.querySelector(".rule");
+  const p=sec.querySelector("p");
+  if(!h2)return;
+  const tl=gsap.timeline({scrollTrigger:{trigger:sec,start:"top 80%",toggleActions:"play none none none"}});
+  if(eyebrow)tl.from(eyebrow,{y:20,opacity:0,duration:0.5},0);
+  tl.from(h2,{y:30,opacity:0,duration:0.6},0.1);
+  if(rule)tl.from(rule,{scaleX:0,transformOrigin:"left",duration:0.5},0.25);
+  if(p)tl.from(p,{y:20,opacity:0,duration:0.5},0.35);
+});
+
+/* ── STAGGERED CARD REVEALS ── */
+document.querySelectorAll(".content-grid, .content-cards, .dest-grid, .other-services-grid, .contact-grid, .clients-grid").forEach(grid=>{
+  const cards=grid.children;
+  if(!cards.length)return;
+  gsap.from(cards,{y:50,opacity:0,scale:0.96,duration:0.7,stagger:0.12,ease:"back.out(1.2)",
+    scrollTrigger:{trigger:grid,start:"top 82%",toggleActions:"play none none none"}});
+});
+
+/* ── CTA BANNER ── */
+if(document.querySelector(".cta-banner")){
+  const cta=document.querySelector(".cta-banner");
+  const ctaTl=gsap.timeline({scrollTrigger:{trigger:cta,start:"top 82%",toggleActions:"play none none none"}});
+  if(cta.querySelector("h2"))ctaTl.from(cta.querySelector("h2"),{y:30,opacity:0,duration:0.7},0);
+  if(cta.querySelector("p"))ctaTl.from(cta.querySelector("p"),{y:20,opacity:0,duration:0.5},0.15);
+  if(cta.querySelector(".btn-primary"))ctaTl.from(cta.querySelector(".btn-primary"),{y:20,opacity:0,scale:0.95,duration:0.5},0.3);
+}
+
+/* ── FOOTER ── */
+gsap.from(".footer-inner > div",{
+  scrollTrigger:{trigger:"footer",start:"top 90%",toggleActions:"play none none none"},
+  y:30,opacity:0,duration:0.6,stagger:0.15,ease:"power2.out"
+});
+
+/* ── IMAGE PARALLAX ON CARDS ── */
+document.querySelectorAll(".other-svc-card img, .dest-item img").forEach(img=>{
+  gsap.to(img,{yPercent:-8,ease:"none",
+    scrollTrigger:{trigger:img.closest("a")||img.parentElement,start:"top bottom",end:"bottom top",scrub:true}});
+});
+
+/* ── MAGNETIC HOVER ON BUTTONS ── */
+document.querySelectorAll(".btn-primary,.nav-cta-btn").forEach(btn=>{
+  btn.addEventListener("mousemove",e=>{
+    const r=btn.getBoundingClientRect();
+    const x=(e.clientX-r.left-r.width/2)*0.15;
+    const y=(e.clientY-r.top-r.height/2)*0.15;
+    gsap.to(btn,{x,y,duration:0.3,ease:"power2.out"});
+  });
+  btn.addEventListener("mouseleave",()=>{
+    gsap.to(btn,{x:0,y:0,duration:0.4,ease:"elastic.out(1,0.4)"});
+  });
+});
+
+/* ── REMOVE OLD FADE-IN ── */
+document.querySelectorAll(".fade-in").forEach(el=>el.classList.add("visible"));</script>
 </body>
 </html>

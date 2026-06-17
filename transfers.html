@@ -157,6 +157,9 @@ footer{background:var(--footer-bg);border-top:1px solid var(--border)}
   .footer-inner{grid-template-columns:1fr}
 }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
 </head>
 <body>
 
@@ -343,5 +346,80 @@ const navTr={nav_home:'Ana Sayfa',nav_travel:'Japonya Seyahat',nav_destinations:
 const navEn={nav_home:'Home',nav_travel:'Japan Travel',nav_destinations:'Destinations',nav_services:'Services',nav_about:'About',nav_consulting:'Consulting',nav_contact:'Contact',trans_hero_eyebrow:'Kizuna Transfers',trans_hero_title:'Transfers',trans_section_eyebrow:'Transportation Services',trans_section_title:'Seamless transfers across Japan',trans_section_desc:'From airport pickups to intercity travel and full-day chauffeured tours, we coordinate all your ground transportation in Japan. Arrive relaxed, travel comfortably, and never worry about logistics.',trans_c1_title:'Airport Transfers',trans_c1_desc:'Private meet-and-greet service at Narita, Haneda, Kansai, and other major Japanese airports. Your driver will be waiting with your name, ready to take you directly to your hotel or destination — no queues, no confusion.',trans_c2_title:'Intercity Transfers',trans_c2_desc:'Comfortable private car transfers between cities and regions. Whether it''s Tokyo to Hakone, Osaka to Kyoto, or a multi-stop route through the countryside, we plan the most efficient journey for you.',trans_c3_title:'Full-Day Chauffeured Tours',trans_c3_desc:'Explore Japan at your own pace with a dedicated driver for the day. Ideal for families, VIP guests, and business travellers who want flexibility without the stress of navigating an unfamiliar road network.',trans_c4_title:'Group Transportation',trans_c4_desc:'Minibuses and coaches for tour groups, corporate delegations, and large parties. Coordinated with your itinerary and equipped with multilingual support to keep everything running on schedule.',trans_feat_eyebrow:'Why Kizuna Transfers',trans_feat_title:'What sets us apart',trans_f1_title:'Punctual &amp; Reliable',trans_f1_desc:'Japanese precision meets Turkish hospitality. We track flights in real time and adjust pickup times to match your actual arrival.',trans_f2_title:'Multilingual Drivers',trans_f2_desc:'Communication is never a problem. Our network includes Turkish, English, and Japanese-speaking drivers across all major cities.',trans_f3_title:'Premium Vehicles',trans_f3_desc:'Clean, modern, and comfortable vehicles ranging from luxury sedans to full-size coaches — all maintained to the highest standards.',trans_svc_eyebrow:'Explore Our Services',trans_svc_title:'More from Kizuna',osvc_travel:'Travel to Japan',osvc_consulting:'Consulting',osvc_visa:'Visa Services',osvc_business:'Business',trans_cta_title:'Book your transfer today',trans_cta_desc:'Tell us your travel dates, group size, and destination — we''ll arrange the rest.',trans_cta_btn:'Request a transfer',footer_company:'Company',footer_about:'About Kizuna',footer_services:'Services',footer_destinations:'Destinations',footer_contact:'Contact Us',footer_connect:'Connect',footer_phone:'Phone',footer_copy:'© 2025 Kizuna Turizm ve Danışmanlık Ltd. Şti. · All rights reserved.',footer_tags:'Turizm · Danışmanlık · Organizasyon · Dış Ticaret · Kültür'};
 function setLang(lang){localStorage.setItem('kizuna-lang',lang);const t=lang==='tr'?navTr:navEn;document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');if(t[k])el.textContent=t[k]});document.querySelectorAll('[data-i18n-html]').forEach(el=>{const k=el.getAttribute('data-i18n-html');if(t[k])el.innerHTML=t[k]});document.querySelectorAll('.lang-btn').forEach(btn=>{btn.classList.toggle('active',btn.textContent.trim()===lang.toUpperCase())})}
 (function(){const s=localStorage.getItem('kizuna-lang')||'tr';setLang(s)})();</script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+const lenis=new Lenis({duration:1.4,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)),smoothWheel:true,touchMultiplier:1.5});
+lenis.on("scroll",ScrollTrigger.update);
+gsap.ticker.add(t=>lenis.raf(t*1000));
+gsap.ticker.lagSmoothing(0);
+
+/* ── PAGE LOAD: NAV + HERO ── */
+const loadTl=gsap.timeline({defaults:{ease:"power3.out"}});
+loadTl.from("nav",{y:-70,opacity:0,duration:0.8},0);
+if(document.querySelector(".page-hero")){
+  loadTl.from(".page-hero img",{scale:1.15,duration:1.4,ease:"power2.out"},0);
+  loadTl.from(".page-hero-overlay .eyebrow",{y:20,opacity:0,duration:0.6},0.4);
+  loadTl.from(".page-hero-overlay h1",{y:40,opacity:0,duration:0.9},0.5);
+  gsap.to(".page-hero img",{yPercent:-12,ease:"none",scrollTrigger:{trigger:".page-hero",start:"top top",end:"bottom top",scrub:true}});
+}
+
+/* ── SECTION CONTENT REVEALS ── */
+document.querySelectorAll(".content, section, .contact-section").forEach(sec=>{
+  const eyebrow=sec.querySelector(".eyebrow");
+  const h2=sec.querySelector("h2");
+  const rule=sec.querySelector(".rule");
+  const p=sec.querySelector("p");
+  if(!h2)return;
+  const tl=gsap.timeline({scrollTrigger:{trigger:sec,start:"top 80%",toggleActions:"play none none none"}});
+  if(eyebrow)tl.from(eyebrow,{y:20,opacity:0,duration:0.5},0);
+  tl.from(h2,{y:30,opacity:0,duration:0.6},0.1);
+  if(rule)tl.from(rule,{scaleX:0,transformOrigin:"left",duration:0.5},0.25);
+  if(p)tl.from(p,{y:20,opacity:0,duration:0.5},0.35);
+});
+
+/* ── STAGGERED CARD REVEALS ── */
+document.querySelectorAll(".content-grid, .content-cards, .dest-grid, .other-services-grid, .contact-grid, .clients-grid").forEach(grid=>{
+  const cards=grid.children;
+  if(!cards.length)return;
+  gsap.from(cards,{y:50,opacity:0,scale:0.96,duration:0.7,stagger:0.12,ease:"back.out(1.2)",
+    scrollTrigger:{trigger:grid,start:"top 82%",toggleActions:"play none none none"}});
+});
+
+/* ── CTA BANNER ── */
+if(document.querySelector(".cta-banner")){
+  const cta=document.querySelector(".cta-banner");
+  const ctaTl=gsap.timeline({scrollTrigger:{trigger:cta,start:"top 82%",toggleActions:"play none none none"}});
+  if(cta.querySelector("h2"))ctaTl.from(cta.querySelector("h2"),{y:30,opacity:0,duration:0.7},0);
+  if(cta.querySelector("p"))ctaTl.from(cta.querySelector("p"),{y:20,opacity:0,duration:0.5},0.15);
+  if(cta.querySelector(".btn-primary"))ctaTl.from(cta.querySelector(".btn-primary"),{y:20,opacity:0,scale:0.95,duration:0.5},0.3);
+}
+
+/* ── FOOTER ── */
+gsap.from(".footer-inner > div",{
+  scrollTrigger:{trigger:"footer",start:"top 90%",toggleActions:"play none none none"},
+  y:30,opacity:0,duration:0.6,stagger:0.15,ease:"power2.out"
+});
+
+/* ── IMAGE PARALLAX ON CARDS ── */
+document.querySelectorAll(".other-svc-card img, .dest-item img").forEach(img=>{
+  gsap.to(img,{yPercent:-8,ease:"none",
+    scrollTrigger:{trigger:img.closest("a")||img.parentElement,start:"top bottom",end:"bottom top",scrub:true}});
+});
+
+/* ── MAGNETIC HOVER ON BUTTONS ── */
+document.querySelectorAll(".btn-primary,.nav-cta-btn").forEach(btn=>{
+  btn.addEventListener("mousemove",e=>{
+    const r=btn.getBoundingClientRect();
+    const x=(e.clientX-r.left-r.width/2)*0.15;
+    const y=(e.clientY-r.top-r.height/2)*0.15;
+    gsap.to(btn,{x,y,duration:0.3,ease:"power2.out"});
+  });
+  btn.addEventListener("mouseleave",()=>{
+    gsap.to(btn,{x:0,y:0,duration:0.4,ease:"elastic.out(1,0.4)"});
+  });
+});
+
+/* ── REMOVE OLD FADE-IN ── */
+document.querySelectorAll(".fade-in").forEach(el=>el.classList.add("visible"));</script>
 </body>
 </html>

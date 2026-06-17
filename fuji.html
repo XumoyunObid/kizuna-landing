@@ -40,6 +40,9 @@ footer{background:var(--footer-bg);border-top:1px solid var(--border)}
 @media(max-width:900px){nav{padding:0 20px}.nav-links{display:none}.nav-hamburger{display:flex}.page-hero{height:340px}.content-split{grid-template-columns:1fr}.highlights-grid{grid-template-columns:1fr 1fr}.other-dest-grid{grid-template-columns:1fr 1fr}.footer-inner{grid-template-columns:1fr 1fr;gap:28px}.footer-bottom{flex-direction:column;gap:10px;text-align:center}}
 @media(max-width:560px){.highlights-grid{grid-template-columns:1fr}.other-dest-grid{grid-template-columns:1fr}.other-dest-card{height:180px}.footer-inner{grid-template-columns:1fr}}
 </style>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
 </head>
 <body>
 <nav id="navbar">
@@ -148,5 +151,80 @@ const navTr={nav_home:'Ana Sayfa',nav_travel:'Japonya Seyahat',nav_destinations:
 const navEn={nav_home:'Home',nav_travel:'Japan Travel',nav_destinations:'Destinations',nav_services:'Services',nav_about:'About',nav_consulting:'Consulting',nav_contact:'Contact',fj_hero_eyebrow:'Destination',fj_hero_title:'Mt. Fuji &amp; Shizuoka',fj_eyebrow:'Japan\'s Sacred Peak',fj_title:'The icon that defines a nation',fj_p1:'Mt. Fuji (3,776m) is Japan\'s highest peak and its most recognizable symbol. A UNESCO World Heritage Site, it has inspired artists, poets, and pilgrims for centuries. The perfectly symmetrical volcanic cone dominates the skyline from dozens of vantage points across the Kanto and Chubu regions.',fj_p2:'The surrounding Shizuoka and Yamanashi prefectures are rich in natural beauty — the Five Lakes (Fuji Five Lakes) region offers stunning reflections of the mountain, while Hakone combines hot springs, art museums, and volcanic landscapes into one unforgettable day trip.',fj_p3:'Tea lovers will find paradise in Shizuoka\'s rolling green plantations, which produce over 40% of Japan\'s green tea. The region also offers excellent hiking, cycling, and traditional ryokan stays.',fj_best_time:'Best Time to Visit',fj_best_time_desc:'Clear views: winter (December–February). Climbing season: July–September. Cherry blossoms around Fuji\'s lakes: mid-April. Each season paints a different masterpiece.',fj_getting_there:'Getting There',fj_getting_there_desc:'2 hours from Tokyo by car or bus to the Five Lakes area. Shinkansen to Shizuoka takes just 1 hour. We coordinate transfers and multi-stop itineraries.',fj_highlights_eyebrow:'Must-See Highlights',fj_highlights_title:'What to experience around Mt. Fuji',fj_h1_title:'Fuji Five Lakes',fj_h1_desc:'Lake Kawaguchiko offers the most famous reflection views. Rent a boat, cycle the shore, or visit the Chureito Pagoda for the classic postcard shot.',fj_h2_title:'Hakone Hot Springs',fj_h2_desc:'Soak in natural onsen baths with views of Fuji. Hakone\'s volcanic valley, pirate ships on Lake Ashi, and the Open Air Museum make it a perfect day.',fj_h3_title:'Shizuoka Tea Plantations',fj_h3_desc:'Tour the rolling green tea fields, learn about traditional cultivation, and taste fresh matcha at the source. A peaceful counterpoint to the mountain\'s grandeur.',fj_h4_title:'Oshino Hakkai',fj_h4_desc:'Eight crystal-clear spring-fed ponds at the base of Mt. Fuji, surrounded by traditional thatched-roof farmhouses. A window into old Japan.',fj_h5_title:'Fuji Climbing',fj_h5_desc:'Summit Japan\'s highest peak during the official climbing season. We arrange guided climbs with mountain huts, gear advice, and transport coordination.',fj_h6_title:'Shiraito Falls',fj_h6_desc:'A 20-metre curtain of spring water cascading down a volcanic rock face. Designated a national natural monument and perfect for nature walks.',fj_explore_eyebrow:'Explore More',fj_explore_title:'Other destinations',odest_kyoto:'Kyoto',odest_tokyo:'Tokyo',odest_nara:'Nara',odest_osaka:'Osaka',odest_gotemba:'Gotemba',fj_cta_title:'Plan your Mt. Fuji trip',fj_cta_desc:'Whether you want a scenic day trip or a summit climb, we\'ll create the perfect Fuji experience for you.',fj_cta_btn:'Get in touch',footer_company:'Company',footer_about:'About Kizuna',footer_services:'Services',footer_destinations:'Destinations',footer_contact:'Contact Us',footer_connect:'Connect',footer_phone:'Phone',footer_copy:'© 2025 Kizuna Turizm ve Danışmanlık Ltd. Şti. · All rights reserved.',footer_tags:'Turizm · Danışmanlık · Organizasyon · Dış Ticaret · Kültür'};
 function setLang(lang){localStorage.setItem('kizuna-lang',lang);const t=lang==='tr'?navTr:navEn;document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');if(t[k])el.textContent=t[k]});document.querySelectorAll('[data-i18n-html]').forEach(el=>{const k=el.getAttribute('data-i18n-html');if(t[k])el.innerHTML=t[k]});document.querySelectorAll('.lang-btn').forEach(btn=>{btn.classList.toggle('active',btn.textContent.trim()===lang.toUpperCase())})}
 (function(){const s=localStorage.getItem('kizuna-lang')||'tr';setLang(s)})();</script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+const lenis=new Lenis({duration:1.4,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)),smoothWheel:true,touchMultiplier:1.5});
+lenis.on("scroll",ScrollTrigger.update);
+gsap.ticker.add(t=>lenis.raf(t*1000));
+gsap.ticker.lagSmoothing(0);
+
+/* ── PAGE LOAD: NAV + HERO ── */
+const loadTl=gsap.timeline({defaults:{ease:"power3.out"}});
+loadTl.from("nav",{y:-70,opacity:0,duration:0.8},0);
+if(document.querySelector(".page-hero")){
+  loadTl.from(".page-hero img",{scale:1.15,duration:1.4,ease:"power2.out"},0);
+  loadTl.from(".page-hero-overlay .eyebrow",{y:20,opacity:0,duration:0.6},0.4);
+  loadTl.from(".page-hero-overlay h1",{y:40,opacity:0,duration:0.9},0.5);
+  gsap.to(".page-hero img",{yPercent:-12,ease:"none",scrollTrigger:{trigger:".page-hero",start:"top top",end:"bottom top",scrub:true}});
+}
+
+/* ── SECTION CONTENT REVEALS ── */
+document.querySelectorAll(".content, section, .contact-section").forEach(sec=>{
+  const eyebrow=sec.querySelector(".eyebrow");
+  const h2=sec.querySelector("h2");
+  const rule=sec.querySelector(".rule");
+  const p=sec.querySelector("p");
+  if(!h2)return;
+  const tl=gsap.timeline({scrollTrigger:{trigger:sec,start:"top 80%",toggleActions:"play none none none"}});
+  if(eyebrow)tl.from(eyebrow,{y:20,opacity:0,duration:0.5},0);
+  tl.from(h2,{y:30,opacity:0,duration:0.6},0.1);
+  if(rule)tl.from(rule,{scaleX:0,transformOrigin:"left",duration:0.5},0.25);
+  if(p)tl.from(p,{y:20,opacity:0,duration:0.5},0.35);
+});
+
+/* ── STAGGERED CARD REVEALS ── */
+document.querySelectorAll(".content-grid, .content-cards, .dest-grid, .other-services-grid, .contact-grid, .clients-grid").forEach(grid=>{
+  const cards=grid.children;
+  if(!cards.length)return;
+  gsap.from(cards,{y:50,opacity:0,scale:0.96,duration:0.7,stagger:0.12,ease:"back.out(1.2)",
+    scrollTrigger:{trigger:grid,start:"top 82%",toggleActions:"play none none none"}});
+});
+
+/* ── CTA BANNER ── */
+if(document.querySelector(".cta-banner")){
+  const cta=document.querySelector(".cta-banner");
+  const ctaTl=gsap.timeline({scrollTrigger:{trigger:cta,start:"top 82%",toggleActions:"play none none none"}});
+  if(cta.querySelector("h2"))ctaTl.from(cta.querySelector("h2"),{y:30,opacity:0,duration:0.7},0);
+  if(cta.querySelector("p"))ctaTl.from(cta.querySelector("p"),{y:20,opacity:0,duration:0.5},0.15);
+  if(cta.querySelector(".btn-primary"))ctaTl.from(cta.querySelector(".btn-primary"),{y:20,opacity:0,scale:0.95,duration:0.5},0.3);
+}
+
+/* ── FOOTER ── */
+gsap.from(".footer-inner > div",{
+  scrollTrigger:{trigger:"footer",start:"top 90%",toggleActions:"play none none none"},
+  y:30,opacity:0,duration:0.6,stagger:0.15,ease:"power2.out"
+});
+
+/* ── IMAGE PARALLAX ON CARDS ── */
+document.querySelectorAll(".other-svc-card img, .dest-item img").forEach(img=>{
+  gsap.to(img,{yPercent:-8,ease:"none",
+    scrollTrigger:{trigger:img.closest("a")||img.parentElement,start:"top bottom",end:"bottom top",scrub:true}});
+});
+
+/* ── MAGNETIC HOVER ON BUTTONS ── */
+document.querySelectorAll(".btn-primary,.nav-cta-btn").forEach(btn=>{
+  btn.addEventListener("mousemove",e=>{
+    const r=btn.getBoundingClientRect();
+    const x=(e.clientX-r.left-r.width/2)*0.15;
+    const y=(e.clientY-r.top-r.height/2)*0.15;
+    gsap.to(btn,{x,y,duration:0.3,ease:"power2.out"});
+  });
+  btn.addEventListener("mouseleave",()=>{
+    gsap.to(btn,{x:0,y:0,duration:0.4,ease:"elastic.out(1,0.4)"});
+  });
+});
+
+/* ── REMOVE OLD FADE-IN ── */
+document.querySelectorAll(".fade-in").forEach(el=>el.classList.add("visible"));</script>
 </body>
 </html>

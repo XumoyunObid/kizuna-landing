@@ -165,6 +165,9 @@ footer{background:var(--footer-bg);border-top:1px solid var(--border)}
   .footer-inner{grid-template-columns:1fr}
 }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
 </head>
 <body>
 
@@ -369,5 +372,80 @@ const navTr={nav_home:'Ana Sayfa',nav_travel:'Japonya Seyahat',nav_destinations:
 const navEn={nav_home:'Home',nav_travel:'Japan Travel',nav_destinations:'Destinations',nav_services:'Services',nav_about:'About',nav_consulting:'Consulting',nav_contact:'Contact',about_hero_eyebrow:'Our Story',about_hero_title:'About Kizuna',about_who_eyebrow:'Who We Are',about_who_title:'Bridging Turkey and Japan since 2012',about_story_p1:'<strong style="color:var(--accent)">Kizuna</strong> (&#32070;) means "bond" in Japanese — the deep, unbreakable connections between people. Founded in Istanbul, we are a travel and consulting company dedicated to building lasting bridges between Turkey and Japan.',about_story_p2:'What started as a passion for Japanese culture and a handful of guided tours has grown into a full-service organisation covering travel, visa support, transportation, business consulting, and cross-border partnership development.',about_story_p3:'With over 12 years of hands-on experience, we bring together local expertise in both countries, fluency in Turkish, Japanese, and English, and a genuine commitment to every client we serve.',about_mission_title:'Our Mission',about_mission_desc:'To make Japan accessible, understandable, and rewarding for Turkish travellers, businesses, and institutions — and to bring the best of Turkey to Japan in return.',about_vision_title:'Our Vision',about_vision_desc:'To be the most trusted bridge between Turkey and Japan — the first name that comes to mind when anyone in either country thinks about connecting with the other.',about_stat1:'Years of experience',about_stat2:'Languages spoken',about_stat3:'Countries connected',about_stat4:'Successful projects',about_values_eyebrow:'What Drives Us',about_values_title:'Our values',about_v1_title:'Excellence',about_v1_desc:'Japanese precision meets Turkish warmth. We hold ourselves to the highest standards in everything we do — from the itinerary details to the follow-up call after your trip.',about_v2_title:'Authenticity',about_v2_desc:'We don\'t sell tourist traps. Every experience we design, every partner we recommend, and every piece of advice we give comes from genuine, first-hand knowledge.',about_v3_title:'Trust',about_v3_desc:'Kizuna means bond. We earn trust through transparency, reliability, and long-term commitment — not quick transactions. Many of our clients have been with us for years.',about_v4_title:'Cultural Sensitivity',about_v4_desc:'Understanding both Turkish and Japanese business culture gives us a unique ability to navigate nuances that others miss — from meeting etiquette to negotiation styles.',about_v5_title:'Adaptability',about_v5_desc:'Plans change, markets shift, and unexpected challenges arise. We stay flexible and responsive, adjusting our approach to deliver results no matter the circumstances.',about_v6_title:'Innovation',about_v6_desc:'From AI-powered consulting to modern travel design, we continuously adopt new tools and methods to serve our clients better and stay ahead of the curve.',about_svc_eyebrow:'Explore Our Services',about_svc_title:'What we can do for you',osvc_travel:'Travel to Japan',osvc_consulting:'Consulting',osvc_visa:'Visa Services',osvc_business:'Business',about_cta_title:'Want to work with us?',about_cta_desc:'Whether you have a specific project in mind or just want to explore the possibilities, we\'d love to hear from you.',about_cta_btn:'Get in touch',footer_company:'Company',footer_about:'About Kizuna',footer_services:'Services',footer_destinations:'Destinations',footer_contact:'Contact Us',footer_connect:'Connect',footer_phone:'Phone',footer_copy:'© 2025 Kizuna Turizm ve Danışmanlık Ltd. Şti. · All rights reserved.',footer_tags:'Turizm · Danışmanlık · Organizasyon · Dış Ticaret · Kültür'};
 function setLang(lang){localStorage.setItem('kizuna-lang',lang);const t=lang==='tr'?navTr:navEn;document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');if(t[k])el.textContent=t[k]});document.querySelectorAll('[data-i18n-html]').forEach(el=>{const k=el.getAttribute('data-i18n-html');if(t[k])el.innerHTML=t[k]});document.querySelectorAll('.lang-btn').forEach(btn=>{btn.classList.toggle('active',btn.textContent.trim()===lang.toUpperCase())})}
 (function(){const s=localStorage.getItem('kizuna-lang')||'tr';setLang(s)})();</script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+const lenis=new Lenis({duration:1.4,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)),smoothWheel:true,touchMultiplier:1.5});
+lenis.on("scroll",ScrollTrigger.update);
+gsap.ticker.add(t=>lenis.raf(t*1000));
+gsap.ticker.lagSmoothing(0);
+
+/* ── PAGE LOAD: NAV + HERO ── */
+const loadTl=gsap.timeline({defaults:{ease:"power3.out"}});
+loadTl.from("nav",{y:-70,opacity:0,duration:0.8},0);
+if(document.querySelector(".page-hero")){
+  loadTl.from(".page-hero img",{scale:1.15,duration:1.4,ease:"power2.out"},0);
+  loadTl.from(".page-hero-overlay .eyebrow",{y:20,opacity:0,duration:0.6},0.4);
+  loadTl.from(".page-hero-overlay h1",{y:40,opacity:0,duration:0.9},0.5);
+  gsap.to(".page-hero img",{yPercent:-12,ease:"none",scrollTrigger:{trigger:".page-hero",start:"top top",end:"bottom top",scrub:true}});
+}
+
+/* ── SECTION CONTENT REVEALS ── */
+document.querySelectorAll(".content, section, .contact-section").forEach(sec=>{
+  const eyebrow=sec.querySelector(".eyebrow");
+  const h2=sec.querySelector("h2");
+  const rule=sec.querySelector(".rule");
+  const p=sec.querySelector("p");
+  if(!h2)return;
+  const tl=gsap.timeline({scrollTrigger:{trigger:sec,start:"top 80%",toggleActions:"play none none none"}});
+  if(eyebrow)tl.from(eyebrow,{y:20,opacity:0,duration:0.5},0);
+  tl.from(h2,{y:30,opacity:0,duration:0.6},0.1);
+  if(rule)tl.from(rule,{scaleX:0,transformOrigin:"left",duration:0.5},0.25);
+  if(p)tl.from(p,{y:20,opacity:0,duration:0.5},0.35);
+});
+
+/* ── STAGGERED CARD REVEALS ── */
+document.querySelectorAll(".content-grid, .content-cards, .dest-grid, .other-services-grid, .contact-grid, .clients-grid").forEach(grid=>{
+  const cards=grid.children;
+  if(!cards.length)return;
+  gsap.from(cards,{y:50,opacity:0,scale:0.96,duration:0.7,stagger:0.12,ease:"back.out(1.2)",
+    scrollTrigger:{trigger:grid,start:"top 82%",toggleActions:"play none none none"}});
+});
+
+/* ── CTA BANNER ── */
+if(document.querySelector(".cta-banner")){
+  const cta=document.querySelector(".cta-banner");
+  const ctaTl=gsap.timeline({scrollTrigger:{trigger:cta,start:"top 82%",toggleActions:"play none none none"}});
+  if(cta.querySelector("h2"))ctaTl.from(cta.querySelector("h2"),{y:30,opacity:0,duration:0.7},0);
+  if(cta.querySelector("p"))ctaTl.from(cta.querySelector("p"),{y:20,opacity:0,duration:0.5},0.15);
+  if(cta.querySelector(".btn-primary"))ctaTl.from(cta.querySelector(".btn-primary"),{y:20,opacity:0,scale:0.95,duration:0.5},0.3);
+}
+
+/* ── FOOTER ── */
+gsap.from(".footer-inner > div",{
+  scrollTrigger:{trigger:"footer",start:"top 90%",toggleActions:"play none none none"},
+  y:30,opacity:0,duration:0.6,stagger:0.15,ease:"power2.out"
+});
+
+/* ── IMAGE PARALLAX ON CARDS ── */
+document.querySelectorAll(".other-svc-card img, .dest-item img").forEach(img=>{
+  gsap.to(img,{yPercent:-8,ease:"none",
+    scrollTrigger:{trigger:img.closest("a")||img.parentElement,start:"top bottom",end:"bottom top",scrub:true}});
+});
+
+/* ── MAGNETIC HOVER ON BUTTONS ── */
+document.querySelectorAll(".btn-primary,.nav-cta-btn").forEach(btn=>{
+  btn.addEventListener("mousemove",e=>{
+    const r=btn.getBoundingClientRect();
+    const x=(e.clientX-r.left-r.width/2)*0.15;
+    const y=(e.clientY-r.top-r.height/2)*0.15;
+    gsap.to(btn,{x,y,duration:0.3,ease:"power2.out"});
+  });
+  btn.addEventListener("mouseleave",()=>{
+    gsap.to(btn,{x:0,y:0,duration:0.4,ease:"elastic.out(1,0.4)"});
+  });
+});
+
+/* ── REMOVE OLD FADE-IN ── */
+document.querySelectorAll(".fade-in").forEach(el=>el.classList.add("visible"));</script>
 </body>
 </html>

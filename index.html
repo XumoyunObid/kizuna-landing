@@ -76,6 +76,11 @@ body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
 
 .fade-in{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease}
 .fade-in.visible{opacity:1;transform:translateY(0)}
+.split-word{display:inline-block;overflow:hidden;vertical-align:top}
+.split-word .word-inner{display:inline-block}
+.reveal-line{overflow:hidden}
+.reveal-line .line-inner{display:block}
+.golden-rule{transform-origin:left;}
 
 /* ── NAV ── */
 nav{display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:68px;
@@ -263,6 +268,9 @@ footer{background:var(--footer-bg);border-top:1px solid var(--border)}
   h2{font-size:26px}
 }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
 </head>
 <body>
 
@@ -593,6 +601,110 @@ cacheEnglish();
   const savedLang=localStorage.getItem('kizuna-lang')||'tr';
   setLang(savedLang);
 })();
+</script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+const lenis=new Lenis({duration:1.4,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)),smoothWheel:true,touchMultiplier:1.5});
+lenis.on("scroll",ScrollTrigger.update);
+gsap.ticker.add(t=>lenis.raf(t*1000));
+gsap.ticker.lagSmoothing(0);
+
+/* ── PAGE LOAD SEQUENCE ── */
+const heroTl=gsap.timeline({defaults:{ease:'power3.out'}});
+heroTl
+  .from('nav',{y:-70,opacity:0,duration:0.8},0)
+  .from('.exp-badge',{scale:0.8,opacity:0,duration:0.7},0.3)
+  .from('.hero-header .eyebrow',{y:20,opacity:0,duration:0.6},0.5)
+  .from('.hero-h1',{y:40,opacity:0,duration:0.9},0.6)
+  .from('.hero-header .rule',{scaleX:0,transformOrigin:'left',duration:0.6},0.9)
+  .from('.hero-sub',{y:20,opacity:0,duration:0.7},1.0);
+
+/* ── HERO GRID STAGGERED REVEAL ── */
+heroTl.from('.hero-grid-top .hero-svc-card',{
+  y:60,opacity:0,scale:0.95,duration:0.8,stagger:0.15,ease:'power2.out'
+},1.1);
+heroTl.from('.hero-grid-bottom .hero-svc-card',{
+  y:60,opacity:0,scale:0.95,duration:0.8,stagger:0.12,ease:'power2.out'
+},1.4);
+
+/* ── SECTION REVEALS WITH SCROLL TRIGGER ── */
+function revealSection(trigger,elements){
+  const tl=gsap.timeline({scrollTrigger:{trigger,start:'top 80%',toggleActions:'play none none none'}});
+  elements.forEach(({sel,props,pos})=>{
+    tl.from(trigger+' '+sel,{opacity:0,y:30,duration:0.7,ease:'power2.out',...props},pos||'>-0.3');
+  });
+  return tl;
+}
+
+/* ── SERVICES SECTION ── */
+const svcTl=gsap.timeline({scrollTrigger:{trigger:'.services-section',start:'top 75%',toggleActions:'play none none none'}});
+svcTl.from('.services-section .eyebrow',{y:20,opacity:0,duration:0.5},0)
+  .from('.services-section h2',{y:30,opacity:0,duration:0.6},0.15)
+  .from('.services-section .rule',{scaleX:0,transformOrigin:'left',duration:0.5},0.3)
+  .from('.services-section p',{y:20,opacity:0,duration:0.5},0.4)
+  .from('.services-col-header',{x:-30,opacity:0,duration:0.5,stagger:0.2},0.5)
+  .from('.svc-card',{y:40,opacity:0,duration:0.6,stagger:0.08,ease:'power2.out'},0.6);
+
+/* ── ABOUT SECTION ── */
+const aboutTl=gsap.timeline({scrollTrigger:{trigger:'.about-strip',start:'top 75%',toggleActions:'play none none none'}});
+aboutTl.from('.about-strip .eyebrow',{y:20,opacity:0,duration:0.5},0)
+  .from('.about-h2',{y:30,opacity:0,duration:0.6},0.15)
+  .from('.about-strip .rule',{scaleX:0,transformOrigin:'left',duration:0.5},0.3)
+  .from('.about-body',{y:25,opacity:0,duration:0.6,stagger:0.15},0.4)
+  .from('.about-quote',{x:30,opacity:0,duration:0.7,ease:'power2.out'},0.5)
+  .from('.about-attr',{opacity:0,duration:0.5},0.7)
+  .from('.about-exp',{y:20,opacity:0,scale:0.97,duration:0.6},0.8)
+  .from('.about-mv',{y:20,opacity:0,duration:0.6},0.9);
+
+gsap.from('.about-deco',{
+  scrollTrigger:{trigger:'.about-strip',start:'top bottom',end:'bottom top',scrub:1},
+  rotate:-15,scale:0.8,opacity:0
+});
+
+/* ── CLIENTS SECTION ── */
+const clientsTl=gsap.timeline({scrollTrigger:{trigger:'.clients-section',start:'top 75%',toggleActions:'play none none none'}});
+clientsTl.from('.clients-section .eyebrow',{y:20,opacity:0,duration:0.5},0)
+  .from('.clients-section h2',{y:30,opacity:0,duration:0.6},0.15)
+  .from('.clients-section .rule',{scaleX:0,transformOrigin:'left',duration:0.5},0.3)
+  .from('.client-card',{y:50,opacity:0,scale:0.95,duration:0.7,stagger:0.12,ease:'back.out(1.2)'},0.4);
+
+/* ── CTA BANNER ── */
+const ctaTl=gsap.timeline({scrollTrigger:{trigger:'.cta-banner',start:'top 80%',toggleActions:'play none none none'}});
+ctaTl.from('.cta-banner .eyebrow',{y:20,opacity:0,duration:0.5},0)
+  .from('.cta-banner h2',{y:30,opacity:0,duration:0.7},0.15)
+  .from('.cta-banner .rule',{scaleX:0,transformOrigin:'center',duration:0.5},0.3)
+  .from('.cta-banner p',{y:20,opacity:0,duration:0.5},0.4)
+  .from('.cta-banner .btn-primary',{y:20,opacity:0,scale:0.95,duration:0.5},0.55);
+
+/* ── FOOTER ── */
+gsap.from('.footer-inner > div',{
+  scrollTrigger:{trigger:'footer',start:'top 90%',toggleActions:'play none none none'},
+  y:30,opacity:0,duration:0.6,stagger:0.15,ease:'power2.out'
+});
+
+/* ── PARALLAX ON HERO CARD IMAGES ── */
+document.querySelectorAll('.hero-svc-card img').forEach(img=>{
+  gsap.to(img,{
+    yPercent:-8,ease:'none',
+    scrollTrigger:{trigger:img.closest('.hero-svc-card'),start:'top bottom',end:'bottom top',scrub:true}
+  });
+});
+
+/* ── MAGNETIC HOVER ON CTA BUTTONS ── */
+document.querySelectorAll('.btn-primary,.nav-cta-btn').forEach(btn=>{
+  btn.addEventListener('mousemove',e=>{
+    const r=btn.getBoundingClientRect();
+    const x=(e.clientX-r.left-r.width/2)*0.15;
+    const y=(e.clientY-r.top-r.height/2)*0.15;
+    gsap.to(btn,{x,y,duration:0.3,ease:'power2.out'});
+  });
+  btn.addEventListener('mouseleave',()=>{
+    gsap.to(btn,{x:0,y:0,duration:0.4,ease:'elastic.out(1,0.4)'});
+  });
+});
+
+/* ── REMOVE OLD FADE-IN (GSAP now handles all) ── */
+document.querySelectorAll('.fade-in').forEach(el=>el.classList.add('visible'));
 </script>
 </body>
 </html>
