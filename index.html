@@ -34,8 +34,6 @@ body{font-family:'DM Sans',sans-serif;line-height:1.7;-webkit-font-smoothing:ant
   --about-em:var(--accent);--about-exp-bg:rgba(255,255,255,0.04);
   --client-card-bg:rgba(255,255,255,0.03);--client-card-border:rgba(255,255,255,0.06);
   --client-red:var(--accent);
-  --form-input-bg:rgba(255,255,255,0.06);--form-input-border:rgba(255,255,255,0.15);
-  --form-placeholder:rgba(255,255,255,0.35);--form-focus-bg:rgba(255,255,255,0.1);
   --footer-bg:#0d0d0d;
   --theme-icon-sun:none;--theme-icon-moon:block;
 }
@@ -56,8 +54,6 @@ body{font-family:'DM Sans',sans-serif;line-height:1.7;-webkit-font-smoothing:ant
   --about-em:var(--accent);--about-exp-bg:#fff;
   --client-card-bg:#F5F5F5;--client-card-border:#E8E8E8;
   --client-red:var(--accent);
-  --form-input-bg:rgba(255,255,255,0.06);--form-input-border:rgba(255,255,255,0.15);
-  --form-placeholder:rgba(255,255,255,0.35);--form-focus-bg:rgba(255,255,255,0.1);
   --footer-bg:#3D3D3D;
   --theme-icon-sun:block;--theme-icon-moon:none;
 }
@@ -215,29 +211,10 @@ nav.scrolled{box-shadow:0 1px 20px rgba(0,0,0,0.15)}
 .client-title{font-family:var(--serif);font-size:16px;font-weight:400;color:var(--text);margin-bottom:6px}
 .client-desc{font-size:12px;color:var(--text-sub);line-height:1.7}
 
-/* ── CONTACT ── */
-.contact-section{background:var(--bg-mid);color:#fff;padding:72px 24px;border-top:1px solid var(--border)}
-[data-theme="light"] .contact-section{background:#3D3D3D}
-.contact-inner{max-width:640px;margin:0 auto;text-align:center}
-.contact-section h2{color:#fff;margin-bottom:14px}
-.contact-section .eyebrow{color:var(--accent)}
-.contact-section>.contact-inner>p{color:rgba(255,255,255,0.5);max-width:480px;margin:0 auto 32px;font-size:14px}
-.contact-form{display:flex;flex-direction:column;gap:14px;text-align:left}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.form-input,.form-textarea{width:100%;padding:14px 16px;border-radius:6px;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.06);
-  color:#fff;font-family:var(--sans);font-size:14px;transition:border-color 0.3s,background 0.3s;outline:none}
-.form-input::placeholder,.form-textarea::placeholder{color:rgba(255,255,255,0.35)}
-.form-input:focus,.form-textarea:focus{border-color:var(--accent);background:rgba(255,255,255,0.1)}
-.form-textarea{resize:vertical;min-height:120px}
-.form-submit{background:var(--accent);color:var(--cta-btn-text);border:none;padding:14px 32px;border-radius:6px;cursor:pointer;font-family:var(--sans);font-size:14px;font-weight:500;
-  letter-spacing:0.04em;transition:background 0.2s,transform 0.2s;align-self:center}
-[data-theme="light"] .form-submit{color:#fff}
-.form-submit:hover{background:var(--accent-light);transform:translateY(-2px)}
-.form-success{display:none;padding:16px;border-radius:8px;background:rgba(46,204,113,0.15);border:1px solid rgba(46,204,113,0.3);color:#2ecc71;text-align:center;font-size:14px}
-.form-success.show{display:block}
-.form-social{margin-top:24px}
-.form-social a{color:rgba(255,255,255,0.6);font-size:13px;transition:color 0.2s}
-.form-social a:hover{color:var(--accent)}
+/* ── CTA BANNER ── */
+.cta-banner{background:var(--bg-alt);border-top:1px solid var(--border);padding:72px 24px;text-align:center}
+.cta-banner h2{margin-bottom:14px}
+.cta-banner p{max-width:520px;margin:0 auto 32px;font-size:14px}
 
 /* ── FOOTER ── */
 footer{background:var(--footer-bg);border-top:1px solid var(--border)}
@@ -276,8 +253,6 @@ footer{background:var(--footer-bg);border-top:1px solid var(--border)}
   .footer-inner{grid-template-columns:1fr 1fr;gap:28px}
   .footer-bottom{flex-direction:column;gap:10px;text-align:center}
   .section{padding:52px 0}
-  .contact-section{padding:52px 20px}
-  .form-row{grid-template-columns:1fr}
 }
 @media(max-width:560px){
   .clients-grid{grid-template-columns:1fr}
@@ -457,25 +432,16 @@ footer{background:var(--footer-bg);border-top:1px solid var(--border)}
   </div>
 </section>
 
-<!-- ── CONTACT ── -->
-<section class="contact-section" id="contact">
-  <div class="contact-inner fade-in">
+<!-- ── CTA BANNER ── -->
+<div class="cta-banner" id="contact">
+  <div class="fade-in">
+    <div class="eyebrow" data-i18n="cta_eyebrow">Get In Touch</div>
     <h2 data-i18n="cta_title">Ready to build your bond with Japan?</h2>
-    <p data-i18n="cta_desc">Whether you are planning a personal journey or a business expansion — we are here to make it happen. Send us a message and let us craft something meaningful together.</p>
-    <form class="contact-form" id="contactForm" action="https://formsubmit.co/ajax/hilal.jpn@gmail.com" method="POST">
-      <input type="hidden" name="_subject" value="New message from Kizuna website">
-      <input type="hidden" name="_template" value="table">
-      <div class="form-row">
-        <input type="text" name="name" class="form-input" placeholder="Your name" data-i18n-placeholder="form_name" required>
-        <input type="email" name="email" class="form-input" placeholder="Your email" data-i18n-placeholder="form_email" required>
-      </div>
-      <textarea name="message" class="form-textarea" placeholder="Your message..." data-i18n-placeholder="form_message" required></textarea>
-      <button type="submit" class="form-submit" data-i18n="form_send">Send Message</button>
-    </form>
-    <div class="form-success" id="formSuccess" data-i18n="form_success">Thank you! Your message has been sent successfully.</div>
-    <div class="form-social"><a href="https://www.instagram.com/kizuna.tr" data-i18n="cta_instagram">@kizuna.tr on Instagram</a></div>
+    <div class="rule" style="margin:18px auto"></div>
+    <p data-i18n="cta_desc">Whether you are planning a personal journey or a business expansion — we are here to make it happen. Reach out and let us craft something meaningful together.</p>
+    <a href="contact.html" class="btn-primary" data-i18n="cta_btn">Contact Us</a>
   </div>
-</section>
+</div>
 
 <!-- ── FOOTER ── -->
 <footer>
@@ -494,7 +460,7 @@ footer{background:var(--footer-bg);border-top:1px solid var(--border)}
           <a href="#about" data-i18n="footer_about">About Kizuna</a>
           <a href="#about" data-i18n="footer_mission">Mission &amp; Vision</a>
           <a href="#services" data-i18n="footer_who">Who We Serve</a>
-          <a href="#contact" data-i18n="footer_contact">Contact Us</a>
+          <a href="contact.html" data-i18n="footer_contact">Contact Us</a>
         </div>
       </div>
       <div>
@@ -551,18 +517,6 @@ const observer=new IntersectionObserver(entries=>{
 },{threshold:0.15});
 document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
 
-/* ── CONTACT FORM ── */
-document.getElementById('contactForm').addEventListener('submit',function(e){
-  e.preventDefault();
-  const form=this,btn=form.querySelector('.form-submit'),orig=btn.textContent;
-  btn.textContent='...';btn.disabled=true;
-  fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}})
-    .then(r=>r.json()).then(data=>{
-      if(data.success){form.style.display='none';document.getElementById('formSuccess').classList.add('show')}
-      else{btn.textContent=orig;btn.disabled=false}
-    }).catch(()=>{btn.textContent=orig;btn.disabled=false});
-});
-
 /* ── i18n ── */
 const translations={
   tr:{
@@ -607,11 +561,10 @@ const translations={
     client_2_title:'Gruplar ve Topluluklar',client_2_desc:'Tur grupları, okul gezileri, hac ve umre organizasyonları ile tam lojistik destekli topluluk kültür turları.',
     client_3_title:'Şirketler',client_3_desc:'Japonya pazarına açılan Türk şirketleri, Türk iş ortağı arayan Japon firmaları ve uzman desteğine ihtiyaç duyan sınır ötesi ticaret firmaları.',
     client_4_title:'Kurumlar ve STK\'lar',client_4_desc:'Japonya-Türkiye iş birliği ve etkinlik desteği arayan kültür kuruluşları, elçilikler, vakıflar ve sivil toplum kuruluşları.',
+    cta_eyebrow:'İletişime Geçin',
     cta_title:'Japonya ile bağınızı kurmaya hazır mısınız?',
-    cta_desc:'İster kişisel bir yolculuk ister işinizi büyütmeyi planlıyor olun — bunu gerçeğe dönüştürmek için buradayız. Bize bir mesaj gönderin, birlikte anlamlı bir şeyler yaratalım.',
-    form_name:'Adınız',form_email:'E-posta adresiniz',form_message:'Mesajınız...',
-    form_send:'Mesaj Gönder',form_success:'Teşekkürler! Mesajınız başarıyla gönderildi.',
-    cta_instagram:'Instagram\'da @kizuna.tr',
+    cta_desc:'İster kişisel bir yolculuk ister işinizi büyütmeyi planlıyor olun — bunu gerçeğe dönüştürmek için buradayız. Bize ulaşın, birlikte anlamlı bir şeyler yaratalım.',
+    cta_btn:'Bize Ulaşın',
     footer_company:'Şirket',footer_about:'Kizuna Hakkında',footer_mission:'Misyon ve Vizyon',
     footer_who:'Kimlere Hizmet Veriyoruz',footer_contact:'İletişim',footer_connect:'Bize Ulaşın',footer_phone:'Telefon',
     footer_copy:'© 2025 Kizuna Turizm ve Danışmanlık Ltd. Şti. · Tüm hakları saklıdır.',
