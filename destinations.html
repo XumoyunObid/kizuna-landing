@@ -272,7 +272,7 @@ footer{background:var(--footer-bg);border-top:1px solid var(--border)}
           <img src="kizuna logo.png" alt="Kizuna">
           <div class="footer-logo">Kizuna</div>
         </div>
-        <p class="footer-desc">Kizuna Turizm ve Dan&#305;&#351;manl&#305;k Ltd. &#350;ti.<br>Istanbul, Turkey<br><br>&#32070; &middot; Bond &middot; Ba&#287;</p>
+        <p class="footer-desc">Kizuna Turizm ve Dan&#305;&#351;manl&#305;k Ltd. &#350;ti.<br>Istanbul, Türkiye<br><br>&#32070; &middot; Bond &middot; Ba&#287;</p>
       </div>
       <div>
         <div class="footer-col-title" data-i18n="footer_company">Company</div>
@@ -321,78 +321,39 @@ function setLang(lang){localStorage.setItem('kizuna-lang',lang);const t=lang==='
 (function(){const s=localStorage.getItem('kizuna-lang')||'tr';setLang(s)})();</script>
 <script>
 gsap.registerPlugin(ScrollTrigger);
-const lenis=new Lenis({duration:1.4,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)),smoothWheel:true,touchMultiplier:1.5});
+const lenis=new Lenis({duration:1.2,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)),smoothWheel:true});
 lenis.on("scroll",ScrollTrigger.update);
 gsap.ticker.add(t=>lenis.raf(t*1000));
 gsap.ticker.lagSmoothing(0);
 
-/* ── PAGE LOAD: NAV + HERO ── */
-const loadTl=gsap.timeline({defaults:{ease:"power3.out"}});
-loadTl.from("nav",{y:-70,opacity:0,duration:0.8},0);
+/* ── PAGE LOAD ── */
+gsap.from("nav",{y:-40,opacity:0,duration:0.6,ease:"power2.out"});
 if(document.querySelector(".page-hero")){
-  loadTl.from(".page-hero img",{scale:1.15,duration:1.4,ease:"power2.out"},0);
-  loadTl.from(".page-hero-overlay .eyebrow",{y:20,opacity:0,duration:0.6},0.4);
-  loadTl.from(".page-hero-overlay h1",{y:40,opacity:0,duration:0.9},0.5);
-  gsap.to(".page-hero img",{yPercent:-12,ease:"none",scrollTrigger:{trigger:".page-hero",start:"top top",end:"bottom top",scrub:true}});
+  gsap.from(".page-hero img",{scale:1.08,duration:1,ease:"power2.out"});
+  gsap.from(".page-hero-overlay .eyebrow",{y:15,opacity:0,duration:0.5,delay:0.3,ease:"power2.out"});
+  gsap.from(".page-hero-overlay h1",{y:25,opacity:0,duration:0.6,delay:0.4,ease:"power2.out"});
 }
 
-/* ── SECTION CONTENT REVEALS ── */
+/* ── SCROLL REVEALS ── */
 document.querySelectorAll(".content, section, .contact-section").forEach(sec=>{
-  const eyebrow=sec.querySelector(".eyebrow");
-  const h2=sec.querySelector("h2");
-  const rule=sec.querySelector(".rule");
-  const p=sec.querySelector("p");
-  if(!h2)return;
-  const tl=gsap.timeline({scrollTrigger:{trigger:sec,start:"top 80%",toggleActions:"play none none none"}});
-  if(eyebrow)tl.from(eyebrow,{y:20,opacity:0,duration:0.5},0);
-  tl.from(h2,{y:30,opacity:0,duration:0.6},0.1);
-  if(rule)tl.from(rule,{scaleX:0,transformOrigin:"left",duration:0.5},0.25);
-  if(p)tl.from(p,{y:20,opacity:0,duration:0.5},0.35);
+  const children=sec.querySelectorAll("h2, .eyebrow, .rule, p, .content-grid, .content-cards, .dest-grid, .other-services-grid, .contact-grid");
+  if(!children.length)return;
+  gsap.from(children,{y:25,opacity:0,duration:0.5,stagger:0.08,ease:"power2.out",
+    scrollTrigger:{trigger:sec,start:"top 82%",toggleActions:"play none none none"}});
 });
 
-/* ── STAGGERED CARD REVEALS ── */
-document.querySelectorAll(".content-grid, .content-cards, .dest-grid, .other-services-grid, .contact-grid, .clients-grid").forEach(grid=>{
-  const cards=grid.children;
-  if(!cards.length)return;
-  gsap.from(cards,{y:50,opacity:0,scale:0.96,duration:0.7,stagger:0.12,ease:"back.out(1.2)",
-    scrollTrigger:{trigger:grid,start:"top 82%",toggleActions:"play none none none"}});
+/* ── STAGGERED CARDS ── */
+document.querySelectorAll(".content-grid, .dest-grid, .other-services-grid, .contact-grid, .clients-grid").forEach(grid=>{
+  gsap.from(grid.children,{y:25,opacity:0,duration:0.5,stagger:0.08,ease:"power2.out",
+    scrollTrigger:{trigger:grid,start:"top 85%",toggleActions:"play none none none"}});
 });
 
-/* ── CTA BANNER ── */
+/* ── CTA + FOOTER ── */
 if(document.querySelector(".cta-banner")){
-  const cta=document.querySelector(".cta-banner");
-  const ctaTl=gsap.timeline({scrollTrigger:{trigger:cta,start:"top 82%",toggleActions:"play none none none"}});
-  if(cta.querySelector("h2"))ctaTl.from(cta.querySelector("h2"),{y:30,opacity:0,duration:0.7},0);
-  if(cta.querySelector("p"))ctaTl.from(cta.querySelector("p"),{y:20,opacity:0,duration:0.5},0.15);
-  if(cta.querySelector(".btn-primary"))ctaTl.from(cta.querySelector(".btn-primary"),{y:20,opacity:0,scale:0.95,duration:0.5},0.3);
+  gsap.from(".cta-banner",{y:20,opacity:0,duration:0.6,ease:"power2.out",
+    scrollTrigger:{trigger:".cta-banner",start:"top 85%",toggleActions:"play none none none"}});
 }
+gsap.from(".footer-inner > div",{y:20,opacity:0,duration:0.5,stagger:0.1,ease:"power2.out",
+  scrollTrigger:{trigger:"footer",start:"top 90%",toggleActions:"play none none none"}});
 
-/* ── FOOTER ── */
-gsap.from(".footer-inner > div",{
-  scrollTrigger:{trigger:"footer",start:"top 90%",toggleActions:"play none none none"},
-  y:30,opacity:0,duration:0.6,stagger:0.15,ease:"power2.out"
-});
-
-/* ── IMAGE PARALLAX ON CARDS ── */
-document.querySelectorAll(".other-svc-card img, .dest-item img").forEach(img=>{
-  gsap.to(img,{yPercent:-8,ease:"none",
-    scrollTrigger:{trigger:img.closest("a")||img.parentElement,start:"top bottom",end:"bottom top",scrub:true}});
-});
-
-/* ── MAGNETIC HOVER ON BUTTONS ── */
-document.querySelectorAll(".btn-primary,.nav-cta-btn").forEach(btn=>{
-  btn.addEventListener("mousemove",e=>{
-    const r=btn.getBoundingClientRect();
-    const x=(e.clientX-r.left-r.width/2)*0.15;
-    const y=(e.clientY-r.top-r.height/2)*0.15;
-    gsap.to(btn,{x,y,duration:0.3,ease:"power2.out"});
-  });
-  btn.addEventListener("mouseleave",()=>{
-    gsap.to(btn,{x:0,y:0,duration:0.4,ease:"elastic.out(1,0.4)"});
-  });
-});
-
-/* ── REMOVE OLD FADE-IN ── */
-document.querySelectorAll(".fade-in").forEach(el=>el.classList.add("visible"));</script>
-</body>
-</html>
+document.querySelectorAll(".fade-in").forEach(el=>el.classList.add("visible"));
