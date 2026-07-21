@@ -151,6 +151,19 @@ nav.scrolled{box-shadow:0 1px 20px rgba(0,0,0,0.15)}
 .btn-submit:hover{background:var(--accent-light);transform:translateY(-1px)}
 .btn-submit:disabled{opacity:0.6;cursor:not-allowed;transform:none}
 .form-status{margin-top:14px;font-size:13px;text-align:center;min-height:20px;line-height:1.5}
+.form-success{display:none}
+.form-success.show{display:block;animation:fadeUp 0.5s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.tour-form.success-card{text-align:center;padding:52px 32px}
+.success-icon{width:76px;height:76px;border-radius:50%;background:var(--badge-bg);border:1px solid var(--accent);display:flex;align-items:center;justify-content:center;margin:0 auto 24px}
+.success-icon svg{width:36px;height:36px;color:var(--accent);stroke-dasharray:32;stroke-dashoffset:32;animation:drawCheck 0.6s ease 0.25s forwards}
+@keyframes drawCheck{to{stroke-dashoffset:0}}
+.success-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.form-success h2{font-size:clamp(26px,3.6vw,34px);margin-bottom:14px}
+.form-success p{font-size:15px;max-width:460px;margin:0 auto 28px}
+.success-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-outline{background:transparent;color:var(--accent);border:1px solid var(--accent);padding:13px 26px;border-radius:4px;font-size:13px;font-weight:500;letter-spacing:0.04em;transition:background 0.2s,transform 0.2s;display:inline-flex;align-items:center;gap:8px}
+.btn-outline:hover{background:var(--badge-bg);transform:translateY(-1px)}
 
 .other-services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:32px}
 .other-svc-card{border-radius:14px;overflow:hidden;position:relative;height:220px;background:#222;display:block}
@@ -393,6 +406,19 @@ footer{background:var(--footer-bg);border-top:1px solid var(--border)}
         <button type="submit" class="btn-submit" data-i18n="ot_btn_send">Send Request</button>
         <div class="form-status" id="formStatus"></div>
       </form>
+
+      <div class="tour-form form-success success-card" id="formSuccess" role="status" aria-live="polite">
+        <div class="success-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        </div>
+        <div class="success-eyebrow" data-i18n="ot_success_eyebrow">Request Received</div>
+        <h2 data-i18n="ot_success_title">Thank you — your request is on its way!</h2>
+        <p data-i18n="ot_success_msg">Our specialists will review your preferences and get back to you with a personalised itinerary and quote, usually within 1–2 business days.</p>
+        <div class="success-actions">
+          <a href="index.html" class="btn-primary" data-i18n="ot_success_home">Back to home</a>
+          <a href="https://wa.me/905557126048" class="btn-outline" target="_blank" rel="noopener" data-i18n="ot_success_wa">Message us on WhatsApp</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -486,7 +512,7 @@ document.getElementById('tourForm').addEventListener('submit',function(ev){
   }
   const interests=[...this.querySelectorAll('input[name="interest"]:checked')].map(c=>c.value).join(', ');
   btn.textContent=t.ot_status_sending;btn.disabled=true;status.textContent='';
-  fetch('https://formsubmit.co/ajax/hilal.jpn@gmail.com',{
+  fetch('https://formsubmit.co/ajax/kizuna.turkiye@gmail.com',{
     method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
     body:JSON.stringify({
       _subject:'Yeni Özel Tur Talebi — Kizuna',
@@ -505,17 +531,22 @@ document.getElementById('tourForm').addEventListener('submit',function(ev){
     })
   }).then(r=>r.json()).then(data=>{
     if(data.success){
-      status.style.color='var(--accent)';
-      status.textContent=t.ot_status_success;
       this.reset();
+      this.style.display='none';
+      const card=document.getElementById('formSuccess');
+      card.classList.add('show');
+      const y=document.querySelector('.form-wrap').getBoundingClientRect().top+window.pageYOffset-100;
+      try{if(typeof lenis!=='undefined'&&lenis.scrollTo){lenis.scrollTo(y);}else{window.scrollTo({top:y,behavior:'smooth'});}}catch(e){window.scrollTo(0,y);}
     }else{
       status.style.color='#e74c3c';
       status.textContent=t.ot_status_error;
+      btn.textContent=t.ot_btn_send;btn.disabled=false;
     }
   }).catch(()=>{
     status.style.color='#e74c3c';
     status.textContent=t.ot_status_network;
-  }).finally(()=>{btn.textContent=t.ot_btn_send;btn.disabled=false});
+    btn.textContent=t.ot_btn_send;btn.disabled=false;
+  });
 });
 
 const navTr={nav_home:'Ana Sayfa',nav_travel:'Japonya Seyahat',nav_destinations:'Rotalar',nav_services:'Hizmetler',nav_about:'Hakkımızda',nav_consulting:'Danışmanlık',nav_custom:'Özel Tur',nav_contact:'İletişim',
@@ -541,6 +572,7 @@ ot_label_notes:'Özel İstekler veya Notlar (opsiyonel)',ot_ph_notes:'Diyet terc
 ot_consent:'Kişisel verilerimin, talebimin değerlendirilmesi amacıyla işlenmesini kabul ediyorum.',
 ot_btn_send:'Talebi Gönder',
 ot_status_sending:'Gönderiliyor...',ot_status_success:'Talebiniz alındı! Uzman ekibimiz en kısa sürede size özel programınızla dönüş yapacaktır.',ot_status_error:'Bir sorun oluştu. Lütfen tekrar deneyin veya bize doğrudan ulaşın.',ot_status_network:'Bağlantı hatası. Lütfen tekrar deneyin veya WhatsApp üzerinden bize ulaşın.',ot_status_dates:'Bitiş tarihi başlangıç tarihinden önce olamaz.',
+ot_success_eyebrow:'Talebiniz Alındı',ot_success_title:'Teşekkürler — talebiniz bize ulaştı!',ot_success_msg:'Uzman ekibimiz tercihlerinizi inceleyip size özel bir rota ve fiyat teklifiyle dönüş yapacak. Genellikle 1–2 iş günü içinde yanıt veriyoruz.',ot_success_home:'Ana sayfaya dön',ot_success_wa:'WhatsApp\'tan yazın',
 ot_svc_eyebrow:'Hizmetlerimizi Keşfedin',ot_svc_title:'Kizuna\'dan daha fazlası',
 osvc_travel:'Japonya Seyahati',osvc_routes:'Rotalar',osvc_visa:'Vize Hizmetleri',osvc_transfers:'Transferler',
 footer_company:'Şirket',footer_about:'Kizuna Hakkımızda',footer_services:'Hizmetler',footer_destinations:'Rotalar',footer_custom:'Özel Tur',footer_contact:'İletişim',footer_connect:'Bize Ulaşın',footer_phone:'Telefon',footer_copy:'© 2025 Kizuna Turizm ve Danışmanlık Ltd. Şti. · Tüm hakları saklıdır.',footer_tags:'Turizm · Danışmanlık · Organizasyon · Dış Ticaret · Kültür'};
@@ -567,6 +599,7 @@ ot_label_notes:'Special Requests or Notes (optional)',ot_ph_notes:'Dietary prefe
 ot_consent:'I consent to the processing of my personal data for the purpose of evaluating my request.',
 ot_btn_send:'Send Request',
 ot_status_sending:'Sending...',ot_status_success:'Your request has been received! Our team will get back to you soon with your custom itinerary.',ot_status_error:'Something went wrong. Please try again or contact us directly.',ot_status_network:'Network error. Please try again or reach us via WhatsApp.',ot_status_dates:'End date cannot be before the start date.',
+ot_success_eyebrow:'Request Received',ot_success_title:'Thank you — your request is on its way!',ot_success_msg:'Our specialists will review your preferences and get back to you with a personalised itinerary and quote, usually within 1–2 business days.',ot_success_home:'Back to home',ot_success_wa:'Message us on WhatsApp',
 ot_svc_eyebrow:'Explore Our Services',ot_svc_title:'More from Kizuna',
 osvc_travel:'Travel to Japan',osvc_routes:'Routes',osvc_visa:'Visa Services',osvc_transfers:'Transfers',
 footer_company:'Company',footer_about:'About Kizuna',footer_services:'Services',footer_destinations:'Routes',footer_custom:'Custom Tour',footer_contact:'Contact Us',footer_connect:'Connect',footer_phone:'Phone',footer_copy:'© 2025 Kizuna Turizm ve Danışmanlık Ltd. Şti. · All rights reserved.',footer_tags:'Turizm · Danışmanlık · Organizasyon · Dış Ticaret · Kültür'};
