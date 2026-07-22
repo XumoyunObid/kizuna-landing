@@ -327,12 +327,11 @@ footer{background:var(--footer-bg);border-top:1px solid var(--border)}
   <div class="nav-links">
     <a href="index.html" class="active" data-i18n="nav_home">Home</a>
     <a href="travel.html" data-i18n="nav_travel">Japan Travel</a>
-    <a href="destinations.html" data-i18n="nav_destinations">Routes</a>
     <a href="services.html" data-i18n="nav_services">Services</a>
     <a href="about.html" data-i18n="nav_about">About</a>
-    <a href="consulting.html" data-i18n="nav_consulting">Consulting</a>
     <a href="blog.html">Blog</a>
-    <a href="contact.html" class="nav-cta-btn" data-i18n="nav_contact">Contact</a>
+    <a href="contact.html" data-i18n="nav_contact">Contact</a>
+    <a href="ozel-tur-talebi.html" class="nav-cta-btn" data-i18n="nav_custom">Custom Tour</a>
     <div class="lang-toggle">
       <button class="lang-btn" onclick="setLang('en')">EN</button>
       <button class="lang-btn active" onclick="setLang('tr')">TR</button>
@@ -360,12 +359,11 @@ footer{background:var(--footer-bg);border-top:1px solid var(--border)}
   </div>
   <a href="index.html" onclick="toggleMenu()" data-i18n="nav_home">Home</a>
   <a href="travel.html" onclick="toggleMenu()" data-i18n="nav_travel">Japan Travel</a>
-  <a href="destinations.html" onclick="toggleMenu()" data-i18n="nav_destinations">Routes</a>
   <a href="services.html" onclick="toggleMenu()" data-i18n="nav_services">Services</a>
   <a href="about.html" onclick="toggleMenu()" data-i18n="nav_about">About</a>
-  <a href="consulting.html" onclick="toggleMenu()" data-i18n="nav_consulting">Consulting</a>
   <a href="blog.html" onclick="toggleMenu()">Blog</a>
-  <a href="contact.html" class="cta-m" onclick="toggleMenu()" data-i18n="nav_contact">Contact</a>
+  <a href="contact.html" onclick="toggleMenu()" data-i18n="nav_contact">Contact</a>
+  <a href="ozel-tur-talebi.html" class="cta-m" onclick="toggleMenu()" data-i18n="nav_custom">Custom Tour</a>
   <div style="padding:16px 24px;display:flex;gap:8px;">
     <button class="lang-btn" onclick="setLang('en')" style="border:1px solid var(--border);border-radius:4px;padding:8px 16px;">EN</button>
     <button class="lang-btn active" onclick="setLang('tr')" style="border:1px solid var(--border);border-radius:4px;padding:8px 16px;">TR</button>
@@ -560,7 +558,7 @@ document.querySelectorAll('.nav-links a,.mobile-menu a').forEach(a=>{
 const translations={
   tr:{
     nav_home:'Ana Sayfa',nav_travel:'Japonya Seyahati',nav_destinations:'Rotalar',nav_services:'Hizmetler',
-    nav_about:'Hakkımızda',nav_consulting:'Danışmanlık',nav_contact:'İletişim',
+    nav_about:'Hakkımızda',nav_consulting:'Danışmanlık',nav_contact:'İletişim',nav_custom:'Özel Tur Talebi',
     hero_exp_badge:'Yıllık<br>Tecrübe',hero_eyebrow:'Türkiye · Japonya · Dünya',
     hero_title:'<em>Güvenli</em> ve anlamlı<br>bir şekilde Japonya\'yı<br>keşfetmek isteyenler için.',
     hero_sub:'12 yılı aşkın deneyimimizle, meraklı gezginlerden büyümeyi hedefleyen şirketlere kadar kişiye özel seyahat deneyimi ve sınır ötesi danışmanlık sunuyoruz. Japonya ile kuracağınız bağ burada başlıyor.',

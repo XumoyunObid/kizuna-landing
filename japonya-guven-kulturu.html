@@ -200,12 +200,11 @@ footer{background:var(--footer-bg);border-top:1px solid var(--border)}
   <div class="nav-links">
     <a href="index.html" data-i18n="nav_home">Home</a>
     <a href="travel.html" data-i18n="nav_travel">Japan Travel</a>
-    <a href="destinations.html" data-i18n="nav_destinations">Routes</a>
     <a href="services.html" data-i18n="nav_services">Services</a>
     <a href="about.html" data-i18n="nav_about">About</a>
-    <a href="consulting.html" data-i18n="nav_consulting">Consulting</a>
     <a href="blog.html" class="active">Blog</a>
-    <a href="contact.html" class="nav-cta-btn" data-i18n="nav_contact">Contact</a>
+    <a href="contact.html" data-i18n="nav_contact">Contact</a>
+    <a href="ozel-tur-talebi.html" class="nav-cta-btn" data-i18n="nav_custom">Custom Tour</a>
     <div class="lang-toggle"><button class="lang-btn" onclick="setLang('en')">EN</button><button class="lang-btn active" onclick="setLang('tr')">TR</button></div>
     <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
       <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
@@ -230,12 +229,11 @@ footer{background:var(--footer-bg);border-top:1px solid var(--border)}
   </div>
   <a href="index.html" onclick="toggleMenu()" data-i18n="nav_home">Home</a>
   <a href="travel.html" onclick="toggleMenu()" data-i18n="nav_travel">Japan Travel</a>
-  <a href="destinations.html" onclick="toggleMenu()" data-i18n="nav_destinations">Routes</a>
   <a href="services.html" onclick="toggleMenu()" data-i18n="nav_services">Services</a>
   <a href="about.html" onclick="toggleMenu()" data-i18n="nav_about">About</a>
-  <a href="consulting.html" onclick="toggleMenu()" data-i18n="nav_consulting">Consulting</a>
   <a href="blog.html" onclick="toggleMenu()">Blog</a>
-  <a href="contact.html" class="cta-m" onclick="toggleMenu()" data-i18n="nav_contact">Contact</a>
+  <a href="contact.html" onclick="toggleMenu()" data-i18n="nav_contact">Contact</a>
+  <a href="ozel-tur-talebi.html" class="cta-m" onclick="toggleMenu()" data-i18n="nav_custom">Custom Tour</a>
   <div style="padding:16px 24px;display:flex;gap:8px;"><button class="lang-btn" onclick="setLang('en')" style="border:1px solid var(--border);border-radius:4px;padding:8px 16px;">EN</button><button class="lang-btn active" onclick="setLang('tr')" style="border:1px solid var(--border);border-radius:4px;padding:8px 16px;">TR</button></div>
 </div>
 
@@ -359,7 +357,7 @@ const mq=window.matchMedia('(max-width:900px)');
 function handleMq(e){document.getElementById('mobileThemeBtn').style.display=e.matches?'flex':'none'}
 mq.addEventListener('change',handleMq);handleMq(mq);
 window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>10)});
-const navTr={nav_home:'Ana Sayfa',nav_travel:'Japonya Seyahat',nav_destinations:'Rotalar',nav_services:'Hizmetler',nav_about:'Hakkımızda',nav_consulting:'Danışmanlık',nav_contact:'İletişim',
+const navTr={nav_home:'Ana Sayfa',nav_travel:'Japonya Seyahat',nav_destinations:'Rotalar',nav_services:'Hizmetler',nav_about:'Hakkımızda',nav_consulting:'Danışmanlık',nav_contact:'İletişim',nav_custom:'Özel Tur Talebi',
 post_hero_eyebrow:'Blog · Kültür',post_hero_title:'Japonya\'nın en büyük gücü teknolojisi değil, güvendir',post_hero_date:'21 Temmuz 2026',post_kanji_gloss:'güven · trust',
 post_intro:'Japonya denildiğinde çoğu kişinin aklına hızlı trenler, robotlar ve ileri teknoloji gelir. Oysa bu ülkeyi gerçekten güçlü kılan şey, çoğu zaman gözle görülmez: güven.',
 post_quote:'Çünkü güçlü toplumlar önce güven inşa eder. Diğer her şey ise onun üzerine yükselir.',
@@ -379,7 +377,7 @@ post_tag_japan:'#japonya',post_tag_trust:'#güven',post_tag_culture:'#kültür',
 post_back:'Tüm yazılara dön',
 post_cta_title:'Japonya\'yı değerleriyle keşfedin',post_cta_desc:'Sıradan bir tur değil — güven üzerine kurulu, gerçek bir Japonya deneyimi için buradayız. Yolculuğunuzu birlikte planlayalım.',post_cta_btn:'İletişime geçin',
 footer_company:'Şirket',footer_about:'Kizuna Hakkımızda',footer_services:'Hizmetler',footer_destinations:'Rotalar',footer_custom:'Özel Tur',footer_contact:'İletişim',footer_connect:'Bize Ulaşın',footer_phone:'Telefon',footer_copy:'© 2025 Kizuna Turizm ve Danışmanlık Ltd. Şti. · Tüm hakları saklıdır.',footer_tags:'Turizm · Danışmanlık · Organizasyon · Dış Ticaret · Kültür'};
-const navEn={nav_home:'Home',nav_travel:'Japan Travel',nav_destinations:'Routes',nav_services:'Services',nav_about:'About',nav_consulting:'Consulting',nav_contact:'Contact',
+const navEn={nav_home:'Home',nav_travel:'Japan Travel',nav_destinations:'Routes',nav_services:'Services',nav_about:'About',nav_consulting:'Consulting',nav_contact:'Contact',nav_custom:'Custom Tour',
 post_hero_eyebrow:'Blog · Culture',post_hero_title:'Japan\'s greatest strength is not its technology — it is trust',post_hero_date:'July 21, 2026',post_kanji_gloss:'trust · güven',
 post_intro:'When people think of Japan, bullet trains, robots, and advanced technology usually come to mind. Yet what truly makes this country strong is often invisible to the eye: trust.',
 post_quote:'Because strong societies build trust first. And everything else rises upon it.',
