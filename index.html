@@ -235,6 +235,15 @@ nav.scrolled{box-shadow:0 1px 20px rgba(0,0,0,0.15)}
 .cta-banner{background:var(--bg-alt);border-top:1px solid var(--border);padding:72px 24px;text-align:center}
 .cta-banner h2{margin-bottom:14px}
 .cta-banner p{max-width:520px;margin:0 auto 32px;font-size:14px}
+.custom-band{background:linear-gradient(135deg,var(--accent) 0%,var(--accent-dark) 100%);padding:72px 24px;text-align:center;position:relative;overflow:hidden}
+.custom-band::before{content:"\7D46";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:clamp(180px,32vw,320px);font-family:var(--serif);color:rgba(255,255,255,0.07);line-height:1;pointer-events:none;user-select:none}
+.custom-band .custom-inner{position:relative;z-index:1;max-width:620px;margin:0 auto}
+.custom-band .eyebrow{color:rgba(255,255,255,0.7)}
+.custom-band h2{color:#fff;margin-bottom:14px}
+.custom-band .rule{background:rgba(255,255,255,0.6);margin:18px auto}
+.custom-band p{color:rgba(255,255,255,0.9);max-width:540px;margin:0 auto 32px;font-size:14.5px}
+.btn-on-accent{background:#fff;color:var(--accent-dark);padding:14px 30px;border-radius:4px;font-size:13px;font-weight:600;letter-spacing:0.04em;transition:transform 0.2s,box-shadow 0.2s;display:inline-block}
+.btn-on-accent:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.22)}
 
 /* ── FOOTER ── */
 footer{background:var(--footer-bg);border-top:1px solid var(--border)}
@@ -383,6 +392,7 @@ footer{background:var(--footer-bg);border-top:1px solid var(--border)}
         <h1 class="hero-h1" data-i18n-html="hero_title">For those who want to<br>explore Japan with<br><em>confidence</em> &amp; purpose.</h1>
         <div class="rule rule-center"></div>
         <p class="hero-sub" data-i18n="hero_sub">With over 12 years of expertise, we deliver bespoke travel experience and cross-border consulting for curious travellers and ambitious businesses alike. Your bond with Japan starts here.</p>
+        <a href="ozel-tur-talebi.html" class="btn-primary" data-i18n="hero_custom_btn">Request a Custom Tour</a>
       </div>
       <div class="hero-grid-top">
         <a href="travel.html" class="hero-svc-card"><img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=1200&h=800&fit=crop&q=85" alt="Japonya'da kiraz çiçekleri açan tapınak — Kizuna Japonya tur paketleri" loading="lazy"><div class="hero-svc-overlay"><div class="hero-svc-icon">&#9992;</div><div class="hero-svc-name" data-i18n="hero_svc_travel">Travel to Japan</div></div></a>
@@ -426,6 +436,17 @@ footer{background:var(--footer-bg);border-top:1px solid var(--border)}
 </section>
 
 <!-- ── ABOUT ── -->
+<!-- ── CUSTOM TOUR BAND ── -->
+<div class="custom-band">
+  <div class="custom-inner">
+    <div class="eyebrow" data-i18n="custom_eyebrow">Tailor-made travel</div>
+    <h2 data-i18n="custom_title">Want a Japan route made just for you?</h2>
+    <div class="rule"></div>
+    <p data-i18n="custom_desc">Tell us your dates, interests and budget — and we will design a bespoke Japan itinerary around them, from temples and cherry blossoms to hidden local corners. No obligation, no cost.</p>
+    <a href="ozel-tur-talebi.html" class="btn-on-accent" data-i18n="custom_btn">Request a Custom Tour</a>
+  </div>
+</div>
+
 <section class="section about-strip" id="about">
   <img src="kizuna-logo.png" class="about-deco" alt="Kizuna logo decoration">
   <div class="container">
@@ -598,6 +619,11 @@ const translations={
     client_2_title:'Gruplar ve Topluluklar',client_2_desc:'Tur grupları, okul gezileri, hac ve umre organizasyonları ile tam lojistik destekli topluluk kültür turları.',
     client_3_title:'Şirketler',client_3_desc:'Japonya pazarına açılan Türk şirketleri, Türk iş ortağı arayan Japon firmaları ve uzman desteğine ihtiyaç duyan sınır ötesi ticaret firmaları.',
     client_4_title:'Kurumlar ve STK\'lar',client_4_desc:'Japonya-Türkiye iş birliği ve etkinlik desteği arayan kültür kuruluşları, elçilikler, vakıflar ve sivil toplum kuruluşları.',
+    hero_custom_btn:'Özel Tur Talebi Oluştur',
+    custom_eyebrow:'Size Özel Seyahat',
+    custom_title:'Size özel bir Japonya rotası mı istiyorsunuz?',
+    custom_desc:'Tarihlerinizi, ilgi alanlarınızı ve bütçenizi bize iletin — tapınaklardan kiraz çiçeklerine, saklı yerel köşelere kadar tamamen size özel bir Japonya rotası tasarlayalım. Ücretsiz ve hiçbir yükümlülük yok.',
+    custom_btn:'Özel Tur Talebi Oluştur',
     cta_eyebrow:'İletişime Geçin',
     cta_title:'Japonya ile bağınızı kurmaya hazır mısınız?',
     cta_desc:'İster kişisel bir yolculuk ister işinizi büyütmeyi planlıyor olun — bunu gerçeğe dönüştürmek için buradayız. Bize ulaşın, birlikte anlamlı bir şeyler yaratalım.',
@@ -645,7 +671,7 @@ gsap.from('.hero-grid-top .hero-svc-card',{y:40,opacity:0,duration:0.6,stagger:0
 gsap.from('.hero-grid-bottom .hero-svc-card',{y:40,opacity:0,duration:0.6,stagger:0.1,delay:0.6,ease:'power2.out'});
 
 /* ── SCROLL REVEALS ── */
-document.querySelectorAll('.services-section, .about-strip, .clients-section, .cta-banner').forEach(sec=>{
+document.querySelectorAll('.services-section, .custom-band, .about-strip, .clients-section, .cta-banner').forEach(sec=>{
   gsap.from(sec.children,{y:30,opacity:0,duration:0.6,stagger:0.1,ease:'power2.out',
     scrollTrigger:{trigger:sec,start:'top 80%',toggleActions:'play none none none'}});
 });
