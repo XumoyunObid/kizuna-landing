@@ -119,16 +119,16 @@ nav.scrolled{box-shadow:0 1px 20px rgba(0,0,0,0.15)}
 .nav-cta-btn:hover{background:var(--accent-light) !important;transform:translateY(-1px)}
 
 .nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
-.nav-hamburger span{width:22px;height:1.5px;background:var(--text);opacity:0.7;display:block;transition:all 0.3s}
+.nav-hamburger span{width:22px;height:1.5px;background:var(--text);opacity:0.7;display:block;transition:transform 0.3s,opacity 0.3s}
 
 .lang-toggle{display:flex;border:1px solid var(--border);border-radius:4px;overflow:hidden;height:32px}
-.lang-btn{background:none;border:none;cursor:pointer;font-size:11px;font-weight:500;letter-spacing:0.06em;padding:6px 12px;color:var(--text-muted);font-family:var(--sans);transition:all 0.2s}
+.lang-btn{background:none;border:none;cursor:pointer;font-size:11px;font-weight:500;letter-spacing:0.06em;padding:6px 12px;color:var(--text-muted);font-family:var(--sans);transition:color 0.2s,background 0.2s}
 .lang-btn.active{background:var(--accent);color:var(--cta-btn-text)}
 .lang-btn:hover:not(.active){color:var(--text)}
 
 /* ── THEME TOGGLE ── */
 .theme-toggle{width:36px;height:36px;border:1px solid var(--border);border-radius:50%;background:none;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;margin-left:10px;transition:all 0.3s;flex-shrink:0}
+  display:flex;align-items:center;justify-content:center;margin-left:10px;transition:border-color 0.3s,background 0.3s,color 0.3s;flex-shrink:0}
 .theme-toggle:hover{border-color:var(--accent);background:var(--badge-bg)}
 .theme-toggle svg{width:16px;height:16px;color:var(--accent)}
 .theme-toggle .sun{display:var(--theme-icon-sun)}
@@ -157,7 +157,7 @@ nav.scrolled{box-shadow:0 1px 20px rgba(0,0,0,0.15)}
 .hero-sub{font-size:15px;color:var(--text-sub);line-height:1.85;max-width:560px;margin:0 auto 28px}
 .btn-primary{background:var(--accent);color:var(--cta-btn-text);padding:13px 26px;border-radius:4px;font-size:13px;font-weight:500;letter-spacing:0.04em;transition:background 0.2s,transform 0.2s,box-shadow 0.2s;display:inline-block}
 .btn-primary:hover{background:var(--accent-light);transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,0.15)}
-.btn-outline{border:1px solid var(--border);color:var(--text-sub);padding:13px 26px;border-radius:4px;font-size:13px;font-weight:400;letter-spacing:0.04em;transition:all 0.2s;display:inline-block}
+.btn-outline{border:1px solid var(--border);color:var(--text-sub);padding:13px 26px;border-radius:4px;font-size:13px;font-weight:400;letter-spacing:0.04em;transition:border-color 0.2s,color 0.2s,transform 0.2s;display:inline-block}
 .btn-outline:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
 
 .exp-badge{display:inline-flex;align-items:center;gap:10px;background:var(--badge-bg);border:1px solid var(--badge-border);border-radius:50px;padding:8px 18px 8px 12px;margin-bottom:20px;width:fit-content}
@@ -291,6 +291,22 @@ footer{background:var(--footer-bg);border-top:1px solid var(--border)}
   h1{font-size:34px}
   h2{font-size:26px}
 }
+
+/* motion-polish v1 */
+:root{--ease-out:cubic-bezier(0.23,1,0.32,1);--ease-in-out:cubic-bezier(0.77,0,0.175,1)}
+/* Fix 5: strong ease-out on primary interactive elements */
+.btn-primary,.btn-outline,.btn-on-accent,.btn-submit,.nav-cta-btn,.btn,.svc-card,.client-card,.blog-card,.process-card,.value-card,.who-card,.content-card{transition-timing-function:var(--ease-out)}
+/* Fix 3: press feedback */
+.btn-primary:active,.btn-outline:active,.btn-on-accent:active,.btn-submit:active,.nav-cta-btn:active,.btn:active,button[type=submit]:active,.chip label:active,.theme-toggle:active,.lang-btn:active,.mobile-menu a:active{transform:scale(0.97);transition:transform 0.14s var(--ease-out)}
+/* Fix 2: neutralize sticky hover/zoom on touch devices */
+@media (hover:none){
+.blog-card:hover,.btn-on-accent:hover,.btn-outline:hover,.btn-primary:hover,.btn-submit:hover,.btn:hover,.client-card:hover,.content-card:hover,.highlight:hover,.nav-cta-btn:hover,.process-card:hover,.sector:hover,.svc-card:hover,.value-card:hover,.who-card:hover,.dest-card:hover,.dest-item:hover,.other-dest-card:hover,.other-svc-card:hover{transform:none;box-shadow:none}
+.blog-card:hover .blog-card-img img,.dest-card:hover img,.dest-item:hover img,.hero-svc-card:hover img,.other-dest-card:hover img,.other-svc-card:hover img,.svc-link:hover img{transform:none}
+}
+/* Fix 1: respect reduced-motion preference */
+@media (prefers-reduced-motion:reduce){
+*,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important;scroll-behavior:auto!important}
+}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
@@ -422,14 +438,12 @@ footer{background:var(--footer-bg);border-top:1px solid var(--border)}
         <div class="svc-card"><div class="svc-icon">&#10022;</div><div class="svc-title" data-i18n="svc_t1_title">Group Tours</div><p class="svc-desc" data-i18n="svc_t1_desc">We provide logistics, guidance, accommodation and cultural briefing throughout organised group travel, Hajj, Umrah and cultural tours for both communities and tour operators.</p><div class="svc-tags"><span class="tag tag-b2c">B2C</span><span class="tag tag-b2b">B2B</span></div></div>
         <div class="svc-card"><div class="svc-icon">&#10022;</div><div class="svc-title" data-i18n="svc_t2_title">VIP Private Tours</div><p class="svc-desc" data-i18n="svc_t2_desc">We design bespoke tours with private guides, luxury accommodation and curated cultural experiences.</p><div class="svc-tags"><span class="tag tag-b2c">B2C</span></div></div>
         <div class="svc-card"><div class="svc-icon">&#10022;</div><div class="svc-title" data-i18n="svc_t3_title">Event Organisation</div><p class="svc-desc" data-i18n="svc_t3_desc">We meticulously manage a range of events including corporate events, cultural exchange programmes, MICE travel and institutional delegations from Istanbul to Tokyo and beyond.</p><div class="svc-tags"><span class="tag tag-both">B2C &middot; B2B</span></div></div>
-        <div class="svc-card"><div class="svc-icon">&#10022;</div><div class="svc-title" data-i18n="svc_t4_title">Cultural Partnerships</div><p class="svc-desc" data-i18n="svc_t4_desc">We forge long-term institutional partnerships that bring together Turkish and Japanese organisations — embassies, foundations, universities and corporations.</p><div class="svc-tags"><span class="tag tag-b2b">B2B</span></div></div>
       </div>
       <div id="consulting">
         <div class="services-col-header pink"><span class="services-col-icon" style="color:var(--sakura)">&#10022;</span><span class="services-col-title" data-i18n="svc_col_biz">Business &amp; Consulting</span></div>
-        <div class="svc-card b2b"><div class="svc-icon pink">&#10022;</div><div class="svc-title" data-i18n="svc_b1_title">Market Entry &amp; Business Development</div><p class="svc-desc" data-i18n="svc_b1_desc">Gateway service for Japan market entry — market research, partner identification, business meetings, and delegation management through a specialist network.</p><div class="svc-tags"><span class="tag tag-b2b">B2B</span></div></div>
+        <div class="svc-card b2b"><div class="svc-icon pink">&#10022;</div><div class="svc-title" data-i18n="svc_t4_title">Cultural Partnerships</div><p class="svc-desc" data-i18n="svc_t4_desc">We forge long-term institutional partnerships that bring together Turkish and Japanese organisations — embassies, foundations, universities and corporations.</p><div class="svc-tags"><span class="tag tag-b2b">B2B</span></div></div>
         <div class="svc-card b2b"><div class="svc-icon pink">&#10022;</div><div class="svc-title" data-i18n="svc_b2_title">Strategy &amp; Advisory</div><p class="svc-desc" data-i18n="svc_b2_desc">Commercial strategy and operational performance improvement focused on measurable results — from market entry planning to CEO-level guidance using proven methodology.</p><div class="svc-tags"><span class="tag tag-b2b">B2B</span></div></div>
-        <div class="svc-card b2b"><div class="svc-icon pink">&#10022;</div><div class="svc-title" data-i18n="svc_b3_title">AI Integration</div><p class="svc-desc" data-i18n="svc_b3_desc">Process optimisation preceding technology adoption — identifying where AI generates genuine business leverage for organisations, from initial sprint to ongoing transformation.</p><div class="svc-tags"><span class="tag tag-b2b">B2B</span></div></div>
-        <div class="svc-card b2b"><div class="svc-icon pink">&#10022;</div><div class="svc-title" data-i18n="svc_b4_title">Speaking, Coaching &amp; Workshops</div><p class="svc-desc" data-i18n="svc_b4_desc">Leadership development through keynotes and personalised coaching on AI in business, cross-cultural communication, and professional growth across multiple languages.</p><div class="svc-tags"><span class="tag tag-b2b">B2B</span></div></div>
+        <div class="svc-card b2b"><div class="svc-icon pink">&#10022;</div><div class="svc-title" data-i18n="svc_b1_title">Market Entry &amp; Business Development</div><p class="svc-desc" data-i18n="svc_b1_desc">Gateway service for Japan market entry — market research, partner identification, business meetings, and delegation management through a specialist network.</p><div class="svc-tags"><span class="tag tag-b2b">B2B</span></div></div>
       </div>
     </div>
   </div>
@@ -581,8 +595,8 @@ const translations={
     nav_home:'Ana Sayfa',nav_travel:'Japonya Seyahati',nav_destinations:'Rotalar',nav_services:'Hizmetler',
     nav_about:'Hakkımızda',nav_consulting:'Danışmanlık',nav_contact:'İletişim',nav_custom:'Özel Tur Talebi',
     hero_exp_badge:'Yıllık<br>Tecrübe',hero_eyebrow:'Türkiye · Japonya · Dünya',
-    hero_title:'<em>Güvenli</em> ve anlamlı<br>bir şekilde Japonya\'yı<br>keşfetmek isteyenler için.',
-    hero_sub:'12 yılı aşkın deneyimimizle, meraklı gezginlerden büyümeyi hedefleyen şirketlere kadar kişiye özel seyahat deneyimi ve sınır ötesi danışmanlık sunuyoruz. Japonya ile kuracağınız bağ burada başlıyor.',
+    hero_title:'Japonya\'yı <em>her yönüyle</em> keşfetmek<br>isteyenler için, seyahat deneyiminin<br>ötesinde bir tercih.',
+    hero_sub:'12 yılı aşkın tecrübeyle; keşfetmeyi seven gezginlerden, sınır ötesine açılmak isteyen şirketlere kadar birçok kişiye ve kuruluşa Japonya\'yla bağ kurma fırsatı tanıyoruz.',
     hero_btn_explore:'Japonya turlarını keşfedin',hero_btn_business:'Kurumsal hizmetler',
     hero_svc_travel:'Japonya Seyahati',hero_svc_consulting:'Danışmanlık',hero_svc_visa:'Vize Hizmetleri',hero_svc_transfers:'Transferler',hero_svc_business:'İş Birlikleri',
     trust_1_title:'Japonya uzmanları',trust_1_sub:'Yerel bilgi, küresel hizmet',
@@ -590,14 +604,14 @@ const translations={
     trust_3_title:'B2C ve B2B çözümler',trust_3_sub:'Bireyler ve kurumlar için',
     trust_4_title:'12+ yıllık deneyim',trust_4_sub:'Güven odaklı yaklaşım',
     svc_eyebrow:'Neler yapıyoruz',svc_title:'Seyahat, danışmanlık ve dahası.',
-    svc_intro:'Bireysel gezilerden sınır ötesi iş stratejilerine kadar, Japonya rotanızda size destek oluyoruz.',
+    svc_intro:'Bireysel gezilerden toplu gezilere, sınır ötesi fuarlardan sektörel seyahat ve sempozyumlara kadar geniş bir yelpazede Japonya\'da sizlere destek sağlıyoruz.',
     svc_col_travel:'Seyahat ve Deneyimler',svc_col_biz:'İş ve Danışmanlık',
-    svc_t1_title:'Grup Turları',svc_t1_desc:'Hem topluluklar hem de tur operatörleri için organize grup seyahatleri, Hac, Umre ve kültür turları boyunca lojistik, rehberlik, konaklama ve kültürel bilgilendirme sunuyoruz.',
-    svc_t2_title:'VIP Özel Turlar',svc_t2_desc:'Özel rehberler, lüks konaklama ve özenle seçilmiş kültürel deneyimler eşliğinde kişiye özel turlar tasarlıyoruz.',
-    svc_t3_title:'Etkinlik Organizasyonu',svc_t3_desc:'Kurumsal etkinlikler, kültürel değişim programları, MICE seyahatleri ve resmi heyet organizasyonları gibi farklı etkinlikleri İstanbul\'dan Tokyo\'ya ve ötesine özenle yönetiyoruz.',
-    svc_t4_title:'Kültürel İş Birlikleri',svc_t4_desc:'Türk ve Japon kurumlarını; elçilikleri, vakıfları, üniversiteleri ve şirketleri bir araya getiren uzun vadeli kurumsal iş birliklerine imza atıyoruz.',
-    svc_b1_title:'Pazara Giriş ve İş Geliştirme',svc_b1_desc:'Japonya pazarına giriş için kapı hizmeti — pazar araştırması, iş ortağı bulma, iş görüşmeleri ve uzman ağımız aracılığıyla heyet yönetimi.',
-    svc_b2_title:'Strateji ve Danışmanlık',svc_b2_desc:'Ölçülebilir sonuçlara odaklı ticari strateji ve operasyonel performans iyileştirme — pazara giriş planlamasından CEO düzeyinde danışmanlığa kadar, kanıtlanmış yöntemlerle.',
+    svc_t1_title:'Grup Turları',svc_t1_desc:'Seyahat acentaları, tur operatörleri ve topluluklar için her şey dahil organize turların yanında, isteğe bağlı olarak özel tur programları da sunmaktayız.',
+    svc_t2_title:'Özel Turlar',svc_t2_desc:'Türkçe rehberler, konforlu konaklama ve özenle seçilmiş kültürel programlar eşliğinde kişilere, çiftlere ya da 7 kişiden daha küçük gruplara özel turlar tasarlamaktayız.',
+    svc_t3_title:'Etkinlik Organizasyonu',svc_t3_desc:'Kurumsal etkinlikler, kültürel değişim programları, MICE seyahatleri ve resmi heyet organizasyonları gibi çeşitli etkinlikleri İstanbul\'dan Tokyo\'ya ve hatta daha ötesine kadar özenle tasarlıyor ve yönetiyoruz.',
+    svc_t4_title:'Kültürel İş Birlikleri',svc_t4_desc:'Türk - Japon kurum ve kuruluşlarını; elçilikler, üniversiteler, vakıflar ve şirketler nezdinde bir araya getiriyor ve bu noktada uzun vadeli iş birliklerinin oluşmasına zemin hazırlıyoruz.',
+    svc_b1_title:'İş Geliştirme ve Pazar Hizmetleri',svc_b1_desc:'Japonya pazarına girmek isteyen kuruluşlar için; pazar araştırması, yerel iş ortağı bulma, yer ve mekân sağlama gibi iş geliştirme hizmetlerini sunmaktayız.',
+    svc_b2_title:'Danışmanlık',svc_b2_desc:'Japonya\'yla ilgili iş ve iş ortaklığı konularında uzman kadrolarımız ve 12 yılı aşkın tecrübemizle hizmetinizdeyiz.',
     svc_b3_title:'Yapay Zeka Entegrasyonu',svc_b3_desc:'Teknolojiye geçmeden önce süreç optimizasyonu — yapay zekanın kurumunuza gerçek katma değer sağlayacağı alanları belirliyoruz; ilk adımdan kapsamlı dönüşüme kadar.',
     svc_b4_title:'Konuşma, Koçluk ve Atölyeler',svc_b4_desc:'İş dünyasında yapay zeka, kültürler arası iletişim ve profesyonel gelişim üzerine açılış konuşmaları ve birden çok dilde kişiye özel koçlukla liderlik gelişimi.',
     dest_eyebrow:'Japonya\'yı Keşfedin',dest_title:'Popüler Rotalar',
@@ -614,15 +628,15 @@ const translations={
     about_quote:'"Güçlü bağlar mesafeleri eritir ve gerçek fırsatları gün yüzüne çıkarır."',
     about_exp_label:'<strong>Yıllık Deneyim</strong><br>Türkiye, Japonya ve dünya arasında köprü',
     about_mission_vision:'<strong>Misyonumuz:</strong> İnsanları, kültürleri ve fırsatları bir araya getirmek; güvene dayalı, kalıcı ilişkiler kurarak faaliyet gösterdiğimiz her alanda yüksek standartlı hizmet ve sürdürülebilir değer sunmak.<br><br><strong>Vizyonumuz:</strong> Güveni, iş birliğini ve kültürel etkileşimi temsil eden öncü bir küresel marka olmak — insanları ve kurumları sınırların ötesinde birbirine bağlamak.',
-    clients_eyebrow:'Müşterilerimiz',clients_title:'Kimlere hizmet veriyoruz',
-    client_1_title:'Bireysel Gezginler',client_1_desc:'Türkiye\'den ve dünyanın dört bir yanından Japon kültürü meraklıları, ilk kez ziyaret edenler, macera arayanlar ve tek başına seyahat edenler.',
-    client_2_title:'Gruplar ve Topluluklar',client_2_desc:'Tur grupları, okul gezileri, hac ve umre organizasyonları ile tam lojistik destekli topluluk kültür turları.',
-    client_3_title:'Şirketler',client_3_desc:'Japonya pazarına açılan Türk şirketleri, Türk iş ortağı arayan Japon firmaları ve uzman desteğine ihtiyaç duyan sınır ötesi ticaret firmaları.',
-    client_4_title:'Kurumlar ve STK\'lar',client_4_desc:'Japonya-Türkiye iş birliği ve etkinlik desteği arayan kültür kuruluşları, elçilikler, vakıflar ve sivil toplum kuruluşları.',
+    clients_eyebrow:'Paydaşlarımız',clients_title:'Kimlere hizmet veriyoruz',
+    client_1_title:'Küçük Gruplar ve Bireysel Gezginler',client_1_desc:'Türkiye\'den ve dünyanın dört bir yanından Japon kültürü meraklıları, ilk kez ziyaret edenler, macera arayanlar, tek başına seyahat edenler ve küçük gruplar.',
+    client_2_title:'Büyük Gruplar ve Topluluklar',client_2_desc:'Tur grupları, kurumsal ekipler ve okul toplulukları için tam lojistik destekli, özel olarak tasarlanmış kültür turları sunuyoruz.',
+    client_3_title:'Acenteler ve Şirketler',client_3_desc:'Japonya seyahati planlayan tur operatörleri ve seyahat acentelerine tam kapsamlı tur programlarının yanında, gerekli görülen DMC hizmeti yerel uzman ekiplerimiz tarafından sağlanmaktadır. Ayrıca Japonya pazarına girmek isteyen şirketler için de çeşitli hizmetler verilmektedir.',
+    client_4_title:'Kurumlar ve STK\'lar',client_4_desc:'Japonya-Türkiye iş birliği kapsamında etkinlik desteği arayan kültür kuruluşları, elçilikler, vakıflar ve sivil toplum kuruluşları için profesyonel çözümler sunuyoruz.',
     hero_custom_btn:'Özel Tur Talebi Oluştur',
     custom_eyebrow:'Size Özel Seyahat',
-    custom_title:'Size özel bir Japonya rotası mı istiyorsunuz?',
-    custom_desc:'Tarihlerinizi, ilgi alanlarınızı ve bütçenizi bize iletin — tapınaklardan kiraz çiçeklerine, saklı yerel köşelere kadar tamamen size özel bir Japonya rotası tasarlayalım. Ücretsiz ve hiçbir yükümlülük yok.',
+    custom_title:'Size özel bir Japonya seyahati mi planlıyorsunuz?',
+    custom_desc:'Bırakın Kizuna sizin için planlasın. Bunun için seyahat tarihini, ilgi alanlarınızı ve bütçenizi bizimle paylaşmanız yeterli. Bu doğrultuda en uygun teklifi en kısa sürede sizinle paylaşıyor olacağız.',
     custom_btn:'Özel Tur Talebi Oluştur',
     cta_eyebrow:'İletişime Geçin',
     cta_title:'Japonya ile bağınızı kurmaya hazır mısınız?',
@@ -658,7 +672,7 @@ cacheEnglish();
 })();
 </script>
 <script>
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger);/*rm-guard*/if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){var _gf=gsap.from.bind(gsap);gsap.from=function(t,v){v=Object.assign({},v,{duration:0,delay:0,stagger:0});delete v.scrollTrigger;return _gf(t,v);};}
 const lenis=new Lenis({duration:1.2,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)),smoothWheel:true});
 lenis.on("scroll",ScrollTrigger.update);
 gsap.ticker.add(t=>lenis.raf(t*1000));

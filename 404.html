@@ -20,6 +20,22 @@ a.btn:hover{background:#D4B87A;transform:translateY(-2px)}
 .sub-links{margin-top:24px;display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
 .sub-links a{font-size:13px;color:rgba(255,255,255,0.4);text-decoration:none;transition:color 0.2s}
 .sub-links a:hover{color:#C4A265}
+
+/* motion-polish v1 */
+:root{--ease-out:cubic-bezier(0.23,1,0.32,1);--ease-in-out:cubic-bezier(0.77,0,0.175,1)}
+/* Fix 5: strong ease-out on primary interactive elements */
+.btn-primary,.btn-outline,.btn-on-accent,.btn-submit,.nav-cta-btn,.btn,.svc-card,.client-card,.blog-card,.process-card,.value-card,.who-card,.content-card{transition-timing-function:var(--ease-out)}
+/* Fix 3: press feedback */
+.btn-primary:active,.btn-outline:active,.btn-on-accent:active,.btn-submit:active,.nav-cta-btn:active,.btn:active,button[type=submit]:active,.chip label:active,.theme-toggle:active,.lang-btn:active,.mobile-menu a:active{transform:scale(0.97);transition:transform 0.14s var(--ease-out)}
+/* Fix 2: neutralize sticky hover/zoom on touch devices */
+@media (hover:none){
+.blog-card:hover,.btn-on-accent:hover,.btn-outline:hover,.btn-primary:hover,.btn-submit:hover,.btn:hover,.client-card:hover,.content-card:hover,.highlight:hover,.nav-cta-btn:hover,.process-card:hover,.sector:hover,.svc-card:hover,.value-card:hover,.who-card:hover,.dest-card:hover,.dest-item:hover,.other-dest-card:hover,.other-svc-card:hover{transform:none;box-shadow:none}
+.blog-card:hover .blog-card-img img,.dest-card:hover img,.dest-item:hover img,.hero-svc-card:hover img,.other-dest-card:hover img,.other-svc-card:hover img,.svc-link:hover img{transform:none}
+}
+/* Fix 1: respect reduced-motion preference */
+@media (prefers-reduced-motion:reduce){
+*,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important;scroll-behavior:auto!important}
+}
 </style>
 </head>
 <body>

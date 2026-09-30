@@ -82,13 +82,13 @@ nav.scrolled{box-shadow:0 1px 20px rgba(0,0,0,0.15)}
 .nav-cta-btn::after{display:none !important}
 .nav-cta-btn:hover{background:var(--accent-light) !important;transform:translateY(-1px)}
 .nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
-.nav-hamburger span{width:22px;height:1.5px;background:var(--text);opacity:0.7;display:block;transition:all 0.3s}
+.nav-hamburger span{width:22px;height:1.5px;background:var(--text);opacity:0.7;display:block;transition:transform 0.3s,opacity 0.3s}
 .lang-toggle{display:flex;border:1px solid var(--border);border-radius:4px;overflow:hidden;height:32px}
-.lang-btn{background:none;border:none;cursor:pointer;font-size:11px;font-weight:500;letter-spacing:0.06em;padding:6px 12px;color:var(--text-muted);font-family:var(--sans);transition:all 0.2s}
+.lang-btn{background:none;border:none;cursor:pointer;font-size:11px;font-weight:500;letter-spacing:0.06em;padding:6px 12px;color:var(--text-muted);font-family:var(--sans);transition:color 0.2s,background 0.2s}
 .lang-btn.active{background:var(--accent);color:var(--cta-btn-text)}
 .lang-btn:hover:not(.active){color:var(--text)}
 .theme-toggle{width:36px;height:36px;border:1px solid var(--border);border-radius:50%;background:none;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;margin-left:10px;transition:all 0.3s;flex-shrink:0}
+  display:flex;align-items:center;justify-content:center;margin-left:10px;transition:border-color 0.3s,background 0.3s,color 0.3s;flex-shrink:0}
 .theme-toggle:hover{border-color:var(--accent);background:var(--badge-bg)}
 .theme-toggle svg{width:16px;height:16px;color:var(--accent)}
 .theme-toggle .sun{display:var(--theme-icon-sun)}
@@ -167,6 +167,22 @@ footer{background:var(--footer-bg);border-top:1px solid var(--border)}
 @media(max-width:560px){
   .blog-grid{grid-template-columns:1fr}
   .footer-inner{grid-template-columns:1fr}
+}
+
+/* motion-polish v1 */
+:root{--ease-out:cubic-bezier(0.23,1,0.32,1);--ease-in-out:cubic-bezier(0.77,0,0.175,1)}
+/* Fix 5: strong ease-out on primary interactive elements */
+.btn-primary,.btn-outline,.btn-on-accent,.btn-submit,.nav-cta-btn,.btn,.svc-card,.client-card,.blog-card,.process-card,.value-card,.who-card,.content-card{transition-timing-function:var(--ease-out)}
+/* Fix 3: press feedback */
+.btn-primary:active,.btn-outline:active,.btn-on-accent:active,.btn-submit:active,.nav-cta-btn:active,.btn:active,button[type=submit]:active,.chip label:active,.theme-toggle:active,.lang-btn:active,.mobile-menu a:active{transform:scale(0.97);transition:transform 0.14s var(--ease-out)}
+/* Fix 2: neutralize sticky hover/zoom on touch devices */
+@media (hover:none){
+.blog-card:hover,.btn-on-accent:hover,.btn-outline:hover,.btn-primary:hover,.btn-submit:hover,.btn:hover,.client-card:hover,.content-card:hover,.highlight:hover,.nav-cta-btn:hover,.process-card:hover,.sector:hover,.svc-card:hover,.value-card:hover,.who-card:hover,.dest-card:hover,.dest-item:hover,.other-dest-card:hover,.other-svc-card:hover{transform:none;box-shadow:none}
+.blog-card:hover .blog-card-img img,.dest-card:hover img,.dest-item:hover img,.hero-svc-card:hover img,.other-dest-card:hover img,.other-svc-card:hover img,.svc-link:hover img{transform:none}
+}
+/* Fix 1: respect reduced-motion preference */
+@media (prefers-reduced-motion:reduce){
+*,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important;scroll-behavior:auto!important}
 }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
@@ -354,7 +370,7 @@ const navEn={nav_home:'Home',nav_travel:'Japan Travel',nav_destinations:'Routes'
 function setLang(lang){localStorage.setItem('kizuna-lang',lang);const t=lang==='tr'?navTr:navEn;document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');if(t[k])el.textContent=t[k]});document.querySelectorAll('[data-i18n-html]').forEach(el=>{const k=el.getAttribute('data-i18n-html');if(t[k])el.innerHTML=t[k]});document.querySelectorAll('.lang-btn').forEach(btn=>{btn.classList.toggle('active',btn.textContent.trim()===lang.toUpperCase())})}
 (function(){const s=localStorage.getItem('kizuna-lang')||'tr';setLang(s)})();</script>
 <script>
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger);/*rm-guard*/if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){var _gf=gsap.from.bind(gsap);gsap.from=function(t,v){v=Object.assign({},v,{duration:0,delay:0,stagger:0});delete v.scrollTrigger;return _gf(t,v);};}
 const lenis=new Lenis({duration:1.2,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)),smoothWheel:true});
 lenis.on("scroll",ScrollTrigger.update);
 gsap.ticker.add(t=>lenis.raf(t*1000));
